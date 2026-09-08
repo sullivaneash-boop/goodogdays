@@ -21,7 +21,7 @@ Service copy, pricing placeholders, links, service-area language, process steps,
 2. Copy `.env.example` to `.env.local`.
 3. Replace the placeholder with the Formspree endpoint.
 
-Without an endpoint, the form runs in preview mode and shows the intended success state without sending data.
+Without an endpoint, the form fails visibly so a production launch cannot silently lose inquiries.
 
 ## Deployment
 

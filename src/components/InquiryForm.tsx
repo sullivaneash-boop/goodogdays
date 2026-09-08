@@ -14,7 +14,7 @@ export function InquiryForm() {
     setStatus("sending");
 
     if (!siteConfig.formspreeEndpoint) {
-      window.setTimeout(() => setStatus("success"), 450);
+      setStatus("error");
       return;
     }
 
@@ -86,7 +86,13 @@ export function InquiryForm() {
         </button>
         <p>Simple first step. No commitment, no long application.</p>
       </div>
-      {status === "error" ? <p className="form-error" role="alert">Something didn’t go through. Please try again or use the contact link below.</p> : null}
+      {status === "error" ? (
+        <p className="form-error" role="alert">
+          {siteConfig.formspreeEndpoint
+            ? "Something didn’t go through. Please try again or use the contact link below."
+            : "The inquiry form isn’t connected yet. Add the Formspree endpoint before launch."}
+        </p>
+      ) : null}
     </form>
   );
 }
