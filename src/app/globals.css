@@ -114,6 +114,7 @@ h1 { margin: 0; max-width: 9.5ch; font-family: var(--display); font-size: clamp(
 .proof-card:hover .proof-media img { transform: scale(1.025); }
 .tiktok-poster { position: relative; width: 100%; aspect-ratio: 4 / 5; display: block; overflow: hidden; border: 0; padding: 0; background: var(--navy-deep); cursor: pointer; }
 .tiktok-poster img { object-fit: contain; }
+.proof-card:nth-child(2) .tiktok-poster img { object-fit: cover; object-position: center 42%; }
 .tiktok-poster:focus-visible { outline: 4px solid var(--accent); outline-offset: -4px; }
 .poster-play { position: absolute; left: 18px; bottom: 18px; z-index: 2; display: flex; align-items: center; gap: 9px; padding: 12px 14px; background: var(--accent); color: var(--ink); font-size: .7rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; box-shadow: 0 8px 28px rgba(0,0,0,.26); }
 .poster-play i { font-style: normal; font-size: .66rem; }
