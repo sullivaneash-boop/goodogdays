@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import "@fontsource-variable/bricolage-grotesque";
 import "@fontsource-variable/dm-sans";
-import "@fontsource-variable/oswald";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";

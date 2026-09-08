@@ -17,8 +17,15 @@ export default function Home() {
       <a className="skip-link" href="#main-content">Skip to content</a>
 
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Good Dog Days home">
-          GOOD DOG DAYS
+        <a className="brand-lockup" href="#top" aria-label="Good Dog Days home">
+          <Image
+            src="/brand/logo-primary.svg"
+            alt="Good Dog Days — Better days for good dogs"
+            width={376}
+            height={220}
+            priority
+            unoptimized
+          />
         </a>
         <nav className="desktop-nav" aria-label="Main navigation">
           {navigation.map((item) => <a href={item.href} key={item.href}>{item.label}</a>)}
@@ -37,7 +44,17 @@ export default function Home() {
             sizes="100vw"
           />
           <div className="hero-shade" />
+          <Image
+            className="hero-brand-mark"
+            src="/brand/mark-primary.svg"
+            alt=""
+            width={347}
+            height={248}
+            aria-hidden="true"
+            unoptimized
+          />
           <div className="hero-content shell">
+            <p className="status-note">TODAY’S PLAN: TRAIL + SWIM</p>
             <p className="eyebrow">Cumming + Forsyth County, Georgia</p>
             <h1 id="hero-title">Better days<br />for good dogs.</h1>
             <p className="hero-copy">
@@ -56,16 +73,24 @@ export default function Home() {
 
         <div className="field-note" aria-hidden="true">
           <div className="field-note-track">
-            <span>MOVE</span><i>•</i><span>SNIFF</span><i>•</i><span>PLAY</span><i>•</i><span>EXPLORE</span><i>•</i><span>RESET</span><i>•</i>
-            <span>MOVE</span><i>•</i><span>SNIFF</span><i>•</i><span>PLAY</span><i>•</i><span>EXPLORE</span><i>•</i><span>RESET</span><i>•</i>
+            <span>RUN</span><i>•</i><span>SNIFF</span><i>•</i><span>SWIM</span><i>•</i><span>PLAY</span><i>•</i><span>EXPLORE</span><i>•</i><span>NAP</span><i>•</i>
+            <span>RUN</span><i>•</i><span>SNIFF</span><i>•</i><span>SWIM</span><i>•</i><span>PLAY</span><i>•</i><span>EXPLORE</span><i>•</i><span>NAP</span><i>•</i>
           </div>
         </div>
 
         <section className="positioning section-pad" aria-labelledby="positioning-title">
           <div className="shell position-grid">
-            <div>
+            <div className="position-title">
               <p className="section-index">THE IDEA / 01</p>
               <h2 id="positioning-title">More than a walk around the block.</h2>
+              <Image
+                className="same-good-energy"
+                src="/brand/same-good-energy.svg"
+                alt="Same good energy"
+                width={412}
+                height={260}
+                unoptimized
+              />
             </div>
             <div className="position-copy">
               <p className="lead">Different dogs light up in different ways.</p>
@@ -160,6 +185,7 @@ export default function Home() {
               </a>
             </div>
             <div className="story-image story-image-small">
+              <p className="story-status">CURRENT STATUS: ABSOLUTELY COOKED</p>
               <video controls preload="none" playsInline poster="/media/sully-with-lylah.jpg" aria-label="Sully walking Lylah on a boardwalk">
                 <source src="/media/lylah-walking-above.mp4" type="video/mp4" />
                 Your browser does not support this video.
@@ -255,7 +281,14 @@ export default function Home() {
       <footer className="footer">
         <div className="shell footer-top">
           <div>
-            <p className="footer-wordmark">GOOD DOG DAYS</p>
+            <Image
+              className="footer-logo"
+              src="/brand/logo-primary.svg"
+              alt="Good Dog Days — Better days for good dogs"
+              width={376}
+              height={220}
+              unoptimized
+            />
             <p>{siteConfig.tagline}</p>
           </div>
           <p>{siteConfig.location}</p>
