@@ -64,8 +64,9 @@ export const proofStories = [
     label: "Shelter Adventure Day / Cumming, GA",
     description:
       "Red traded a day inside the shelter for exploration, new people, good treats and the kind of focused enrichment that lets a dog’s personality come through.",
-    image: "/media/red-trail-opt.jpg",
-    alt: "Red exploring a sunny trail while wearing an Adopt Me harness",
+    cover: "/media/red-cover.png",
+    alt: "Cover artwork for Red’s Adventure Day through the Humane Society of Forsyth County",
+    videoId: "7676155682902543629",
     href: "https://www.tiktok.com/@sullyeash/video/7676155682902543629",
     cta: "Watch Red’s Adventure Day",
   },
@@ -74,8 +75,9 @@ export const proofStories = [
     label: "Shelter Adventure Day / Cumming, GA",
     description:
       "Savannah’s day mixed water, trail exploration, activity around town and plenty of attention from people—a full change of pace from shelter life.",
-    image: "/media/savannah-trail-opt.jpg",
-    alt: "Savannah standing on a red-clay trail in a pink adventure harness",
+    cover: "/media/savannah-cover.png",
+    alt: "Cover artwork for Savannah’s Adventure Day through the Humane Society of Forsyth County",
+    videoId: "7681492434601200909",
     href: "https://www.tiktok.com/@sullyeash/video/7681492434601200909",
     cta: "Watch Savannah’s Adventure Day",
   },

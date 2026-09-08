@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { InquiryForm } from "@/components/InquiryForm";
+import { TikTokEmbed } from "@/components/TikTokEmbed";
 import {
   faqItems,
   navigation,
@@ -29,8 +30,8 @@ export default function Home() {
         <section className="hero" id="top" aria-labelledby="hero-title">
           <Image
             className="hero-image"
-            src="/media/savannah-trail-opt.jpg"
-            alt="Savannah, a white and brown shelter dog, ready for a trail adventure"
+            src="/media/sully-with-lylah.jpg"
+            alt="Sully walking Lylah across a wooden boardwalk"
             fill
             priority
             sizes="100vw"
@@ -50,7 +51,7 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <p className="photo-label">Savannah / Adventure Day</p>
+          <p className="photo-label">Sully + Lylah / On the move</p>
         </section>
 
         <div className="field-note" aria-hidden="true">
@@ -120,20 +121,13 @@ export default function Home() {
             {proofStories.map((story, index) => (
               <article className="proof-card" key={story.name}>
                 <div className="proof-media">
-                  {index === 1 ? (
-                    <video
-                      controls
-                      preload="none"
-                      playsInline
-                      poster="/media/adventure-day-poster.png"
-                      aria-label="Savannah’s Adventure Day video"
-                    >
-                      <source src="/media/adventure-day-web.mp4" type="video/mp4" />
-                      Your browser does not support this video.
-                    </video>
-                  ) : (
-                    <Image src={story.image} alt={story.alt} fill sizes="(min-width: 900px) 50vw, 100vw" />
-                  )}
+                  <TikTokEmbed
+                    name={story.name}
+                    videoId={story.videoId}
+                    href={story.href}
+                    cover={story.cover}
+                    alt={story.alt}
+                  />
                   <span className="proof-count">0{index + 1}</span>
                 </div>
                 <div className="proof-content">
@@ -153,7 +147,7 @@ export default function Home() {
         <section className="story section-pad" id="story" aria-labelledby="story-title">
           <div className="story-collage shell-wide">
             <div className="story-image story-image-main">
-              <Image src="/media/savannah-portrait-opt.jpg" alt="An adoptable dog relaxing after a day out" fill sizes="(min-width: 900px) 52vw, 100vw" />
+              <Image src="/media/lylah-lake.jpg" alt="Lylah standing ready beside the lake in her pink adventure harness" fill sizes="(min-width: 900px) 52vw, 100vw" />
             </div>
             <div className="story-content">
               <p className="section-index inverted">THE START / 04</p>
@@ -166,7 +160,10 @@ export default function Home() {
               </a>
             </div>
             <div className="story-image story-image-small">
-              <Image src="/media/red-play-opt.jpg" alt="A happy dog holding a favorite toy after an outing" fill sizes="(min-width: 900px) 24vw, 46vw" />
+              <video controls preload="none" playsInline poster="/media/sully-with-lylah.jpg" aria-label="Sully walking Lylah on a boardwalk">
+                <source src="/media/lylah-walking-above.mp4" type="video/mp4" />
+                Your browser does not support this video.
+              </video>
             </div>
           </div>
         </section>
@@ -182,8 +179,8 @@ export default function Home() {
               <a className="button button-dark" href="#inquiry">Tell me about your dog</a>
             </div>
             <div className="founder-gallery" aria-label="Dogs on outings with Sully">
-              <div className="founder-photo founder-photo-a"><Image src="/media/red-portrait-opt.jpg" alt="Red sitting alert in the back seat before an outing" fill sizes="(min-width: 900px) 32vw, 60vw" /></div>
-              <div className="founder-photo founder-photo-b"><Image src="/media/adventure-day-poster.png" alt="Sully holding Savannah’s leash on a boardwalk" fill sizes="(min-width: 900px) 22vw, 42vw" /></div>
+              <div className="founder-photo founder-photo-a"><Image src="/media/sully-with-savannah.jpg" alt="Sully walking Savannah during her shelter Adventure Day" fill sizes="(min-width: 900px) 32vw, 60vw" /></div>
+              <div className="founder-photo founder-photo-b"><Image src="/media/sully-with-lylah.jpg" alt="Sully walking Lylah across a wooden boardwalk" fill sizes="(min-width: 900px) 22vw, 42vw" /></div>
               <p>Individual attention.<br />No autopilot.</p>
             </div>
           </div>

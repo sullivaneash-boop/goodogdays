@@ -18,13 +18,11 @@ export const metadata: Metadata = {
     description: "Personalized exercise, enrichment, sitting and adventures for dogs in Cumming and Forsyth County.",
     type: "website",
     locale: "en_US",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Good Dog Days — Better days for good dogs" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Good Dog Days | Better days for good dogs",
     description: "Personalized exercise, enrichment, sitting and adventures for dogs in Cumming and Forsyth County.",
-    images: ["/og.png"],
   },
 };
 
