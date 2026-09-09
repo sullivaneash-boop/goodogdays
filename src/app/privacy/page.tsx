@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -32,7 +32,7 @@ export default function PrivacyPage() {
         <p>Form submissions may be processed by Formspree, and site traffic may be measured with Google Analytics when configured. Those providers process information according to their own policies.</p>
 
         <h2>Your choices</h2>
-        <p>You may ask what information is held about you or request its deletion by emailing <a href={siteConfig.social.email}>{siteConfig.email}</a>.</p>
+        <p>You may ask what information is held about you or request its deletion through the <Link href="/#inquiry">availability request form</Link>.</p>
 
         <h2>Policy changes</h2>
         <p>This policy may be updated as the website or business systems change. The revision date above identifies the current version.</p>

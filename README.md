@@ -19,8 +19,8 @@ Service and pricing details live in `src/data/services.ts`. Site links, service-
 
 The inquiry form is connected to Formspree form `xbgjqyyz` using `@formspree/react`. It preserves service-prefilled links, includes a honeypot, records referrer/UTM attribution and redirects successful requests to `/thank-you`.
 
-To enable Google Analytics, add a GA4 measurement ID in `NEXT_PUBLIC_GA_MEASUREMENT_ID`. Conversion events for service CTAs, inquiry starts/submissions, email clicks and Adventure story clicks are pushed through the shared analytics adapter.
+To enable Google Analytics, add a GA4 measurement ID in `NEXT_PUBLIC_GA_MEASUREMENT_ID`. Conversion events for service CTAs, inquiry starts/submissions and Adventure story clicks are pushed through the shared analytics adapter.
 
 ## Deployment
 
-The app is ready for a standard Vercel Next.js deployment. Set `NEXT_PUBLIC_SITE_URL` to the canonical production origin and optionally `NEXT_PUBLIC_GA_MEASUREMENT_ID` for analytics. The legacy `goodogdays.vercel.app` hostname permanently redirects to `https://gooddogdays.com`.
+The app is ready for a standard Vercel Next.js deployment at `https://goodogdays.vercel.app`. Set `NEXT_PUBLIC_SITE_URL` to that canonical production origin and optionally set `NEXT_PUBLIC_GA_MEASUREMENT_ID` for analytics.

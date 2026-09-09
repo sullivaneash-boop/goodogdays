@@ -19,13 +19,7 @@ export function SiteFooter() {
         </div>
         <div className="footer-contact">
           <p>{siteConfig.serviceArea}</p>
-          <a
-            href={siteConfig.social.email}
-            data-track-event="email_click"
-            data-track-label="footer_email"
-          >
-            {siteConfig.email}
-          </a>
+          <Link href="/#inquiry">Request availability</Link>
         </div>
       </div>
       <div className="shell footer-bottom">

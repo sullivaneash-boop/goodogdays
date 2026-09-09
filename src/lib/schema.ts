@@ -11,7 +11,6 @@ export const organizationSchema = {
   logo: absoluteUrl("/brand/logo-primary.svg"),
   description:
     "Personalized dog walking, enrichment and in-home dog care in Cumming and Forsyth County, Georgia.",
-  email: siteConfig.email,
   areaServed: {
     "@type": "AdministrativeArea",
     name: "Cumming and Forsyth County, Georgia",

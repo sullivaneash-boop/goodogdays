@@ -3,11 +3,7 @@ export const siteConfig = {
   tagline: "Better days for good dogs.",
   location: "Cumming + Forsyth County, Georgia",
   serviceArea: "Cumming and select areas of Central, West and North Forsyth County",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://gooddogdays.com",
-  email: "hello@gooddogdays.com",
-  social: {
-    email: "mailto:hello@gooddogdays.com",
-  },
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://goodogdays.vercel.app",
 } as const;
 
 export const navigation = [
