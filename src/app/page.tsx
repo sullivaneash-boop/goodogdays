@@ -1,14 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
+import { Suspense } from "react";
 import { InquiryForm } from "@/components/InquiryForm";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
 import { TikTokEmbed } from "@/components/TikTokEmbed";
+import { serviceCategories } from "@/data/services";
 import {
   faqItems,
-  navigation,
   principles,
   processSteps,
   proofStories,
-  services,
-  siteConfig,
 } from "@/data/site";
 
 export default function Home() {
@@ -16,22 +18,7 @@ export default function Home() {
     <main>
       <a className="skip-link" href="#main-content">Skip to content</a>
 
-      <header className="site-header">
-        <a className="brand-lockup" href="#top" aria-label="Good Dog Days home">
-          <Image
-            src="/brand/logo-primary.svg"
-            alt="Good Dog Days — Better days for good dogs"
-            width={376}
-            height={220}
-            priority
-            unoptimized
-          />
-        </a>
-        <nav className="desktop-nav" aria-label="Main navigation">
-          {navigation.map((item) => <a href={item.href} key={item.href}>{item.label}</a>)}
-        </nav>
-        <a className="nav-cta" href="#inquiry">Request a Good Dog Day</a>
-      </header>
+      <SiteHeader />
 
       <div id="main-content">
         <section className="hero" id="top" aria-labelledby="hero-title">
@@ -124,24 +111,23 @@ export default function Home() {
           <div className="shell section-heading row-heading">
             <div>
               <p className="section-index inverted">SERVICES / 02</p>
-              <h2 id="services-title">Built for the dog<br />in front of me.</h2>
+              <h2 id="services-title">Pick their kind<br />of good day.</h2>
             </div>
-            <p>Three ways to give your dog a better day, from reliable everyday help to a full change of scenery.</p>
+            <p>Some dogs just need a walk around the neighborhood. Some need to run, sniff, explore or get completely out of the house. Good Dog Days gives you a few simple ways to get them what they need.</p>
           </div>
 
-          <div className="shell service-list">
-            {services.map((service) => (
-              <article className="service-row" key={service.name}>
-                <div className="service-number">{service.number}</div>
-                <div className="service-title">
-                  <p>{service.kicker}</p>
-                  <h3>{service.name}</h3>
+          <div className="shell service-family-list">
+            {serviceCategories.map((category) => (
+              <article className="service-family" key={category.id}>
+                <p className="service-number">{category.number}</p>
+                <div className="service-family-name">
+                  <h3>{category.name}</h3>
+                  <p>Starting at <strong>{category.startingPrice}</strong></p>
                 </div>
-                <div className="service-copy">
-                  <p>{service.description}</p>
-                  <p className="service-detail">{service.details}</p>
-                  <span className="service-price">{service.price}</span>
-                </div>
+                <p className="service-family-copy">{category.description}</p>
+                <Link className="arrow-link light-link" href={`/services#${category.id}`}>
+                  See Services &amp; Pricing <span aria-hidden="true">↗</span>
+                </Link>
               </article>
             ))}
           </div>
@@ -242,6 +228,16 @@ export default function Home() {
                 </li>
               ))}
             </ol>
+            <aside className="adventure-prerequisite">
+              <div>
+                <p>Planning an Adventure?</p>
+                <h3>Let’s meet before we hit the trail.</h3>
+              </div>
+              <div>
+                <p>Dogs complete at least one standard Good Dog Session before their first Adventure. We’d rather learn who is on the other end of the leash before we’re halfway down a trail together.</p>
+                <Link className="button button-accent" href="/?service=good-dog-session#inquiry">Start With a Good Dog Session</Link>
+              </div>
+            </aside>
           </div>
         </section>
 
@@ -267,7 +263,9 @@ export default function Home() {
               <h2 id="inquiry-title">Give your dog something to look forward to.</h2>
               <p>Tell me the basics. I’ll check your location, learn what you need and see whether Good Dog Days is the right fit.</p>
             </div>
-            <InquiryForm />
+            <Suspense fallback={<div className="form-loading" aria-hidden="true" />}>
+              <InquiryForm />
+            </Suspense>
           </div>
         </section>
 
@@ -290,31 +288,7 @@ export default function Home() {
         </section>
       </div>
 
-      <footer className="footer">
-        <div className="shell footer-top">
-          <div>
-            <Image
-              className="footer-logo"
-              src="/brand/logo-primary.svg"
-              alt="Good Dog Days — Better days for good dogs"
-              width={376}
-              height={220}
-              unoptimized
-            />
-            <p>{siteConfig.tagline}</p>
-          </div>
-          <p>{siteConfig.location}</p>
-        </div>
-        <div className="shell footer-bottom">
-          <p>© {new Date().getFullYear()} Good Dog Days</p>
-          <nav aria-label="Social links">
-            <a href={siteConfig.social.instagram}>Instagram</a>
-            <a href={siteConfig.social.tiktok} target="_blank" rel="noreferrer">TikTok</a>
-            <a href={siteConfig.social.email}>Contact</a>
-          </nav>
-          <a href="#top">Back to top ↑</a>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

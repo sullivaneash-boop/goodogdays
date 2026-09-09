@@ -1,12 +1,21 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { serviceInterests, siteConfig } from "@/data/site";
+import { useSearchParams } from "next/navigation";
+import { serviceInterestOptions } from "@/data/services";
+import { siteConfig } from "@/data/site";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
 export function InquiryForm() {
+  const searchParams = useSearchParams();
   const [status, setStatus] = useState<FormStatus>("idle");
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const requestedService = searchParams.get("service");
+  const defaultService = requestedService && serviceInterestOptions.some((service) => service.id === requestedService)
+    ? requestedService
+    : "not-sure";
+  const activeService = selectedService ?? defaultService;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -50,35 +59,69 @@ export function InquiryForm() {
           <input name="ownerName" autoComplete="name" required placeholder="Your name" />
         </label>
         <label>
-          <span>Phone or email</span>
-          <input name="contact" autoComplete="email" required placeholder="Best way to reach you" />
+          <span>Email</span>
+          <input name="email" type="email" autoComplete="email" required placeholder="you@example.com" />
+        </label>
+        <label>
+          <span>Phone</span>
+          <input name="phone" type="tel" autoComplete="tel" required placeholder="(470) 555-0123" />
         </label>
         <label>
           <span>Neighborhood or ZIP code</span>
           <input name="location" autoComplete="postal-code" required placeholder="30040" />
         </label>
         <label>
-          <span>How often are you looking for help?</span>
-          <input name="frequency" required placeholder="A few times a week, occasionally…" />
+          <span>Dog name</span>
+          <input name="dogName" required placeholder="Your dog’s name" />
+        </label>
+        <label>
+          <span>Dog age</span>
+          <input name="dogAge" required placeholder="3 years" />
+        </label>
+        <label>
+          <span>Dog size / approximate weight</span>
+          <input name="dogSize" required placeholder="About 45 pounds" />
         </label>
       </div>
 
       <label className="full-field">
-        <span>Dog’s name and short description</span>
-        <textarea name="dog" required rows={4} placeholder="Tell me a little about your dog—their age, energy, personality and favorite things." />
+        <span>Short description of your dog</span>
+        <textarea name="dogDescription" required rows={4} placeholder="Tell me about their energy, personality, routine and favorite things." />
       </label>
 
       <fieldset>
         <legend>What are you interested in?</legend>
         <div className="interest-grid">
-          {serviceInterests.map((interest, index) => (
-            <label className="radio-choice" key={interest}>
-              <input type="radio" name="service" value={interest} defaultChecked={index === 0} />
-              <span>{interest}</span>
+          {serviceInterestOptions.map((service) => (
+            <label className="radio-choice" key={service.id}>
+              <input
+                type="radio"
+                name="service"
+                value={service.name}
+                checked={activeService === service.id}
+                onChange={() => setSelectedService(service.id)}
+              />
+              <span>{service.name}</span>
             </label>
           ))}
         </div>
       </fieldset>
+
+      <div className="field-grid form-followup-grid">
+        <label>
+          <span>Desired frequency</span>
+          <input name="frequency" required placeholder="A few times a week, occasionally…" />
+        </label>
+        <label>
+          <span>Preferred days / times</span>
+          <input name="preferredTimes" required placeholder="Weekday mornings, flexible…" />
+        </label>
+      </div>
+
+      <label className="full-field">
+        <span>Anything important we should know?</span>
+        <textarea name="importantNotes" rows={3} placeholder="Share anything useful for this first conversation." />
+      </label>
 
       <div className="form-submit-row">
         <button className="button button-accent" type="submit" disabled={status === "sending"}>
