@@ -1,54 +1,65 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+import { HeroMedia } from "@/components/HeroMedia";
 import { InquiryForm } from "@/components/InquiryForm";
+import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { TikTokEmbed } from "@/components/TikTokEmbed";
 import { serviceCategories } from "@/data/services";
 import {
   faqItems,
-  principles,
   processSteps,
   proofStories,
+  safetyFacts,
+  trustFacts,
 } from "@/data/site";
+import { organizationSchema } from "@/lib/schema";
 
-const lylahStoryImages = [
-  "/media/lylah-adoption-day.jpg",
-  "/media/lylah-trail-selfie.jpg",
-  "/media/lylah-mountain-overlook.jpg",
-  "/media/lylah-rock-trail.jpg",
+export const metadata: Metadata = {
+  title: { absolute: "Dog Walking & In-Home Dog Care in Cumming, GA | Good Dog Days" },
+  alternates: { canonical: "/" },
+};
+
+const processProof = [
+  {
+    label: "One consistent handler",
+    title: "Care starts with paying attention.",
+    body: "I learn your dog’s routine, energy and preferences before deciding what a useful session looks like.",
+    image: "/media/sully-with-lylah.jpg",
+    alt: "Sully walking Lylah across a wooden boardwalk",
+  },
+  {
+    label: "A plan that can adapt",
+    title: "The dog in front of me sets the pace.",
+    body: "A session may mean movement, sniffing, play, enrichment or simple companionship—never activity for activity’s sake.",
+    image: "/media/lylah-mountain-overlook.jpg",
+    alt: "Lylah standing at a mountain overlook",
+  },
 ] as const;
 
 export default function Home() {
+  const featuredStory = proofStories[0];
+
   return (
     <main>
+      <JsonLd data={organizationSchema} />
       <a className="skip-link" href="#main-content">Skip to content</a>
-
       <SiteHeader />
 
       <div id="main-content">
         <section className="hero" id="top" aria-labelledby="hero-title">
           <Image
-            className="hero-image hero-fallback"
+            className="hero-image"
             src="/media/sully-with-lylah.jpg"
             alt="Sully walking Lylah across a wooden boardwalk"
             fill
             priority
+            loading="eager"
             sizes="100vw"
           />
-          <video
-            className="hero-video"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/media/sully-with-lylah.jpg"
-            aria-hidden="true"
-          >
-            <source src="/media/good-dog-days-bgvideo.mp4" type="video/mp4" />
-          </video>
+          <HeroMedia />
           <div className="hero-shade" />
           <Image
             className="hero-brand-mark"
@@ -60,19 +71,25 @@ export default function Home() {
             unoptimized
           />
           <div className="hero-content shell">
-            <p className="status-note">TODAY’S PLAN: TRAIL + SWIM</p>
-            <p className="eyebrow">Cumming + Forsyth County, Georgia</p>
+            <p className="eyebrow">Dog walking + personalized dog care / Cumming, GA</p>
             <h1 id="hero-title">Better days<br />for good dogs.</h1>
             <p className="hero-copy">
-              Personalized exercise, enrichment, sitting and adventures for dogs
-              in Cumming and Forsyth County.
+              Personalized dog walking, enrichment and in-home care in Cumming and Forsyth County.
             </p>
             <div className="hero-actions">
-              <a className="button button-accent" href="#inquiry">Request a Good Dog Day</a>
-              <a className="text-link light-link" href="#adventures">
-                See what a Good Dog Day looks like <span aria-hidden="true">↓</span>
+              <a
+                className="button button-accent"
+                href="#inquiry"
+                data-track-event="service_cta_click"
+                data-track-label="hero_request"
+              >
+                Request availability
               </a>
+              <Link className="text-link light-link" href="/services">
+                Explore services + pricing <span aria-hidden="true">↗</span>
+              </Link>
             </div>
+            <p className="hero-note">Tell me about your dog—no commitment.</p>
           </div>
           <p className="photo-label">Sully + Lylah / On the move</p>
         </section>
@@ -84,32 +101,14 @@ export default function Home() {
           </div>
         </div>
 
-        <section className="positioning section-pad" aria-labelledby="positioning-title">
-          <div className="shell position-grid">
-            <div className="position-title">
-              <p className="section-index">THE IDEA / 01</p>
-              <h2 id="positioning-title">More than a walk around the block.</h2>
-              <Image
-                className="same-good-energy"
-                src="/brand/same-good-energy.svg"
-                alt="Same good energy"
-                width={412}
-                height={260}
-                unoptimized
-              />
-            </div>
-            <div className="position-copy">
-              <p className="lead">Different dogs light up in different ways.</p>
-              <p>Some need to run. Some want a slow, sniff-heavy walk. Some live for fetch or tug. Others need enrichment, a new environment or simply someone’s undivided attention.</p>
-              <p>Good Dog Days builds the activity around the dog instead of forcing every dog into the same service.</p>
-            </div>
-          </div>
-          <div className="shell principle-list">
-            {principles.map((principle, index) => (
-              <div className="principle" key={principle}>
+        <section className="trust-strip" aria-label="Why choose Good Dog Days">
+          <div className="shell trust-grid">
+            {trustFacts.map((fact, index) => (
+              <article key={fact.title}>
                 <span>0{index + 1}</span>
-                <p>{principle}</p>
-              </div>
+                <h2>{fact.title}</h2>
+                <p>{fact.body}</p>
+              </article>
             ))}
           </div>
         </section>
@@ -117,10 +116,10 @@ export default function Home() {
         <section className="services section-pad" id="services" aria-labelledby="services-title">
           <div className="shell section-heading row-heading">
             <div>
-              <p className="section-index inverted">SERVICES / 02</p>
-              <h2 id="services-title">Pick their kind<br />of good day.</h2>
+              <p className="section-index inverted">Services + pricing / 01</p>
+              <h2 id="services-title">The right kind<br />of good day.</h2>
             </div>
-            <p>Some dogs just need a walk around the neighborhood. Some need to run, sniff, explore or get completely out of the house. Good Dog Days gives you a few simple ways to get them what they need.</p>
+            <p>Clear options, transparent starting prices and a plan built around the dog—not a one-size-fits-all routine.</p>
           </div>
 
           <div className="shell service-family-list">
@@ -128,102 +127,41 @@ export default function Home() {
               <article className="service-family" key={category.id}>
                 <p className="service-number">{category.number}</p>
                 <div className="service-family-name">
+                  <p className="service-brand-label">{category.brandLabel}</p>
                   <h3>{category.name}</h3>
                   <p>Starting at <strong>{category.startingPrice}</strong></p>
                 </div>
                 <p className="service-family-copy">{category.description}</p>
-                <Link className="arrow-link light-link" href={`/services#${category.id}`}>
-                  See Services &amp; Pricing <span aria-hidden="true">↗</span>
+                <Link
+                  className="arrow-link light-link"
+                  href={`/services#${category.id}`}
+                  data-track-event="service_cta_click"
+                  data-track-label={category.id}
+                >
+                  Services + pricing <span aria-hidden="true">↗</span>
                 </Link>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="adventures section-pad" id="adventures" aria-labelledby="adventures-title">
-          <div className="shell adventure-intro">
-            <p className="section-index">PROOF / 03</p>
-            <h2 id="adventures-title">What does a Good Dog Day actually look like?</h2>
-            <p>Real dogs. Real places. A little room to be curious.</p>
+        <section className="process-proof section-pad" aria-labelledby="proof-title">
+          <div className="shell proof-heading">
+            <p className="section-index">Process proof / 02</p>
+            <h2 id="proof-title">Personal care.<br />Made visible.</h2>
+            <p>While Good Dog Days builds its customer review history, the proof is in a clear, repeatable process and real days with real dogs.</p>
           </div>
-
-          <div className="proof-grid shell-wide">
-            {proofStories.map((story, index) => (
-              <article className="proof-card" key={story.name}>
-                <div className="proof-media">
-                  <TikTokEmbed
-                    name={story.name}
-                    videoId={story.videoId}
-                    href={story.href}
-                    cover={story.cover}
-                    alt={story.alt}
-                  />
-                  <span className="proof-count">0{index + 1}</span>
+          <div className="shell proof-process-grid">
+            {processProof.map((item) => (
+              <article className="process-proof-card" key={item.title}>
+                <div className="process-proof-image">
+                  <Image src={item.image} alt={item.alt} fill sizes="(min-width: 760px) 48vw, 100vw" />
                 </div>
-                <div className="proof-content">
-                  <p className="proof-label">{story.label}</p>
-                  <h3>{story.name}</h3>
-                  <p>{story.description}</p>
-                  <a className="arrow-link" href={story.href} target="_blank" rel="noreferrer">
-                    {story.cta} <span aria-hidden="true">↗</span>
-                  </a>
-                </div>
+                <p className="proof-label">{item.label}</p>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
               </article>
             ))}
-          </div>
-          <p className="shelter-note shell">Red and Savannah were adoptable shelter dogs taken on outings through the Humane Society of Forsyth County. No organizational endorsement is implied.</p>
-        </section>
-
-        <section className="story section-pad" id="story" aria-labelledby="story-title">
-          <div className="story-collage shell-wide">
-            <div
-              className="story-slideshow"
-              role="img"
-              aria-label="Sully and Lylah together on adoption day and outdoor adventures"
-            >
-              {lylahStoryImages.map((src) => (
-                <Image
-                  className="story-slide"
-                  src={src}
-                  alt=""
-                  fill
-                  sizes="(min-width: 980px) 58vw, 100vw"
-                  key={src}
-                />
-              ))}
-              <div className="story-slide-meta" aria-hidden="true">
-                <span>LYLAH / THEN + NOW</span>
-                <span>01—04</span>
-              </div>
-            </div>
-            <div className="story-content">
-              <p className="section-index inverted">THE START / 04</p>
-              <h2 id="story-title">It started with one very good dog.</h2>
-              <p>Sully adopted Lylah from the Hall County Animal Shelter in September 2025. Since then, walks, trails, swimming, outdoor adventures and exploring new places together have become a major part of their lives.</p>
-              <p>Seeing what the right mix of exercise, stimulation and new experiences means to Lylah is part of the inspiration behind Good Dog Days.</p>
-              <blockquote>“Dogs spend a lot of their lives waiting on us. Good Dog Days gives them something to look forward to.”</blockquote>
-              <a className="arrow-link light-link" href="https://www.tiktok.com/@sullyeash/photo/7592808399943765303?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7602050129038804511" target="_blank" rel="noreferrer">
-                Learn more about Lylah and me <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <section className="founder section-pad" aria-labelledby="founder-title">
-          <div className="shell founder-grid">
-            <div className="founder-copy">
-              <p className="section-index">MEET SULLY / 05</p>
-              <h2 id="founder-title">Hey, I’m Sully.</h2>
-              <p className="lead">I’ve spent my life around dogs—and I know “active” means something different for every one of them.</p>
-              <p>My experience spans high-energy dogs, senior dogs, different breeds and temperaments, my own active dog, and time with adoptable shelter dogs through Adventure Day outings with the Humane Society of Forsyth County.</p>
-              <p>I’m local to Forsyth County, comfortable changing the plan to suit the dog in front of me, and serious about earning trust before taking over the leash.</p>
-              <a className="button button-dark" href="#inquiry">Tell me about your dog</a>
-            </div>
-            <div className="founder-gallery" aria-label="Dogs on outings with Sully">
-              <div className="founder-photo founder-photo-a"><Image src="/media/sully-with-savannah.jpg" alt="Sully walking Savannah during her shelter Adventure Day" fill sizes="(min-width: 900px) 32vw, 60vw" /></div>
-              <div className="founder-photo founder-photo-b"><Image src="/media/sully-with-lylah.jpg" alt="Sully walking Lylah across a wooden boardwalk" fill sizes="(min-width: 900px) 22vw, 42vw" /></div>
-              <p>Individual attention.<br />No autopilot.</p>
-            </div>
           </div>
         </section>
 
@@ -231,10 +169,10 @@ export default function Home() {
           <div className="shell">
             <div className="section-heading row-heading">
               <div>
-                <p className="section-index inverted">THE PLAN / 06</p>
-                <h2 id="how-title">Here’s how<br />it works.</h2>
+                <p className="section-index inverted">How it works / 03</p>
+                <h2 id="how-title">Simple<br />on purpose.</h2>
               </div>
-              <p>Simple on purpose. We start with fit, then build from there.</p>
+              <p>Start with fit. Meet first. Build the plan from there.</p>
             </div>
             <ol className="steps">
               {processSteps.map((step, index) => (
@@ -245,53 +183,91 @@ export default function Home() {
                 </li>
               ))}
             </ol>
-            <aside className="adventure-prerequisite">
-              <div>
-                <p>Planning an Adventure?</p>
-                <h3>Let’s meet before we hit the trail.</h3>
-              </div>
-              <div>
-                <p>Dogs complete at least one standard Good Dog Session before their first Adventure. We’d rather learn who is on the other end of the leash before we’re halfway down a trail together.</p>
-                <Link className="button button-accent" href="/?service=good-dog-session#inquiry">Start With a Good Dog Session</Link>
-              </div>
-            </aside>
           </div>
         </section>
 
-        <section className="area section-pad" aria-labelledby="area-title">
+        <section className="care-safety section-pad" id="care-safety" aria-labelledby="safety-title">
+          <div className="shell care-grid">
+            <div className="care-intro">
+              <p className="section-index">Care + safety / 04</p>
+              <h2 id="safety-title">Trust starts before the leash changes hands.</h2>
+              <p>These are current operating practices—not badges, certifications or claims that don’t exist yet.</p>
+            </div>
+            <div className="safety-list">
+              {safetyFacts.map((fact, index) => (
+                <article key={fact.title}>
+                  <span>0{index + 1}</span>
+                  <div>
+                    <h3>{fact.title}</h3>
+                    <p>{fact.body}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="area section-pad" id="service-area" aria-labelledby="area-title">
           <div className="shell area-grid">
             <div>
-              <p className="section-index">SERVICE AREA / 07</p>
+              <p className="section-index">Service area / 05</p>
               <h2 id="area-title">Starting close to home.</h2>
             </div>
             <div className="area-copy">
-              <p className="lead">Good Dog Days currently serves Cumming and select areas of Central, West and North Forsyth County.</p>
-              <p>Keeping the initial service area intentionally focused means less time sitting in traffic and more time spent with your dog.</p>
-              <a className="arrow-link" href="#inquiry">Check your neighborhood <span aria-hidden="true">↓</span></a>
+              <p className="lead">Serving Cumming and select areas of Central, West and North Forsyth County.</p>
+              <p>Share your ZIP code in the inquiry form. If you’re near the edge of the current area, send it anyway and I’ll confirm.</p>
+              <a className="arrow-link" href="#inquiry">Check your location <span aria-hidden="true">↓</span></a>
             </div>
           </div>
           <div className="map-type" aria-hidden="true"><span>CUMMING</span><span>FORSYTH</span></div>
         </section>
 
-        <section className="inquiry section-pad" id="inquiry" aria-labelledby="inquiry-title">
-          <div className="shell inquiry-grid">
-            <div className="inquiry-intro">
-              <p className="section-index inverted">SAY HELLO / 08</p>
-              <h2 id="inquiry-title">Give your dog something to look forward to.</h2>
-              <p>Tell me the basics. I’ll check your location, learn what you need and see whether Good Dog Days is the right fit.</p>
+        <section className="about section-pad" id="about" aria-labelledby="about-title">
+          <div className="shell about-grid">
+            <div className="about-image">
+              <Image src="/media/sully-with-savannah.jpg" alt="Sully walking Savannah during her shelter Adventure Day" fill sizes="(min-width: 900px) 48vw, 100vw" />
             </div>
-            <Suspense fallback={<div className="form-loading" aria-hidden="true" />}>
-              <InquiryForm />
-            </Suspense>
+            <div className="about-copy">
+              <p className="section-index inverted">Meet Sully + Lylah / 06</p>
+              <h2 id="about-title">One good dog started all of this.</h2>
+              <p className="lead">I’ve spent my life around dogs—and I know “active” means something different for every one of them.</p>
+              <p>After adopting Lylah in 2025, the right mix of walks, trails, swimming, stimulation and new environments became a major part of our life together. Good Dog Days grew from that simple idea: pay attention to the dog in front of you.</p>
+              <p>I’m local to Forsyth County, comfortable adapting the plan, and serious about earning trust before taking over the leash.</p>
+              <a className="button button-accent" href="#inquiry">Tell me about your dog</a>
+            </div>
+          </div>
+        </section>
+
+        <section className="real-days section-pad" aria-labelledby="real-days-title">
+          <div className="shell real-days-grid">
+            <div className="real-days-image">
+              <Image src={featuredStory.cover} alt={featuredStory.alt} fill sizes="(min-width: 900px) 40vw, 100vw" />
+            </div>
+            <div>
+              <p className="section-index">Real days / real dogs</p>
+              <h2 id="real-days-title">See Good Dog Days in action.</h2>
+              <p>Neighborhood time, outdoor sessions and shelter Adventure Days are a window into how curiosity, movement and focused attention can change a dog’s day.</p>
+              <a
+                className="arrow-link"
+                href={featuredStory.href}
+                target="_blank"
+                rel="noreferrer"
+                data-track-event="adventure_story_click"
+                data-track-label={featuredStory.name}
+              >
+                Watch Red’s Adventure Day <span aria-hidden="true">↗</span>
+              </a>
+              <p className="shelter-note">Red was an adoptable shelter dog taken on an outing through the Humane Society of Forsyth County. No organizational endorsement is implied.</p>
+            </div>
           </div>
         </section>
 
         <section className="faq section-pad" id="faq" aria-labelledby="faq-title">
           <div className="shell faq-grid">
             <div className="faq-heading">
-              <p className="section-index">FAQ / 09</p>
+              <p className="section-index">FAQ / 07</p>
               <h2 id="faq-title">Good questions.</h2>
-              <p>Still wondering about something? Send an inquiry and ask away.</p>
+              <p>Clear answers before you hand over the leash—or the house key.</p>
             </div>
             <div className="faq-list">
               {faqItems.map((item, index) => (
@@ -301,6 +277,25 @@ export default function Home() {
                 </details>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="inquiry section-pad" id="inquiry" aria-labelledby="inquiry-title">
+          <div className="shell inquiry-grid">
+            <div className="inquiry-intro">
+              <p className="section-index inverted">Request availability / 08</p>
+              <h2 id="inquiry-title">Tell me the basics.</h2>
+              <p>I’ll check your location, what you need and whether Good Dog Days is the right fit.</p>
+              <ol className="next-steps">
+                <li><span>1</span>I check location + fit.</li>
+                <li><span>2</span>I reach out.</li>
+                <li><span>3</span>I meet your dog.</li>
+                <li><span>4</span>Care gets scheduled.</li>
+              </ol>
+            </div>
+            <Suspense fallback={<div className="form-loading" aria-hidden="true" />}>
+              <InquiryForm />
+            </Suspense>
           </div>
         </section>
       </div>

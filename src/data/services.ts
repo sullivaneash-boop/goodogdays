@@ -22,6 +22,7 @@ export type Service = {
 export type ServiceCategory = {
   id: ServiceCategoryId;
   name: string;
+  brandLabel: string;
   number: string;
   startingPrice: string;
   description: string;
@@ -30,21 +31,24 @@ export type ServiceCategory = {
 export const serviceCategories: readonly ServiceCategory[] = [
   {
     id: "everyday",
-    name: "Everyday",
+    name: "Dog Walking + Enrichment",
+    brandLabel: "Everyday",
     number: "01",
     startingPrice: "$30",
-    description: "Reliable movement close to home or a personalized session built around the dog in front of us.",
+    description: "Reliable movement close to home or a personalized session built around the dog in front of me.",
   },
   {
     id: "away",
-    name: "While You’re Away",
+    name: "In-Home Dog Care",
+    brandLabel: "While You’re Away",
     number: "02",
     startingPrice: "$95/day",
     description: "In-home visits and stays that keep dogs close to their normal surroundings and routine.",
   },
   {
     id: "bigger-days",
-    name: "Bigger Days",
+    name: "Adventure Outings",
+    brandLabel: "Bigger Days",
     number: "03",
     startingPrice: "$175",
     description: "Two hours, half a day or the full flagship experience—planned around the individual dog.",
@@ -242,7 +246,7 @@ export const serviceInterestOptions = [
 export const bookingBasics = [
   "New bookings require at least 24 hours’ notice.",
   "Services are paid in advance.",
-  "A short introduction is required before a dog is left in our care.",
+  "A short introduction is required before a dog is left in my care.",
   "Sitting clients require a meet-and-greet.",
   "Adventure dogs must first complete a Good Dog Session.",
   "Activity may be adjusted for weather, safety or the dog’s comfort.",

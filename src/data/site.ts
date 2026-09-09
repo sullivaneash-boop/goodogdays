@@ -2,27 +2,62 @@ export const siteConfig = {
   name: "Good Dog Days",
   tagline: "Better days for good dogs.",
   location: "Cumming + Forsyth County, Georgia",
-  formspreeEndpoint: process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "",
+  serviceArea: "Cumming and select areas of Central, West and North Forsyth County",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://gooddogdays.com",
+  email: "hello@gooddogdays.com",
   social: {
-    instagram: "#",
-    tiktok: "https://www.tiktok.com/@sullyeash",
     email: "mailto:hello@gooddogdays.com",
   },
 } as const;
 
 export const navigation = [
-  { label: "Services", href: "/services" },
-  { label: "Adventure Days", href: "/#adventures" },
-  { label: "Our Story", href: "/#story" },
+  { label: "Services & Pricing", href: "/services" },
   { label: "How It Works", href: "/#how-it-works" },
+  { label: "Service Area", href: "/#service-area" },
+  { label: "About", href: "/#about" },
   { label: "FAQ", href: "/#faq" },
 ] as const;
 
-export const principles = [
-  "Personalized activity",
-  "One or two dogs at a time",
-  "Photo + recap after sessions",
-  "Built around temperament, energy + routine",
+export const trustFacts = [
+  {
+    title: "One or two dogs at a time",
+    body: "Personal attention—not a giant group walk.",
+  },
+  {
+    title: "Built around your dog",
+    body: "Movement, sniffing, play, enrichment or company.",
+  },
+  {
+    title: "Updates after care",
+    body: "A photo and written recap after standard sessions.",
+  },
+  {
+    title: "Meet first",
+    body: "An owner-present introduction before solo care.",
+  },
+  {
+    title: "Local service area",
+    body: "Cumming and select Forsyth County neighborhoods.",
+  },
+] as const;
+
+export const safetyFacts = [
+  {
+    title: "Fit comes first",
+    body: "Every dog is considered individually, with an owner-present introduction before care begins.",
+  },
+  {
+    title: "Small by design",
+    body: "Sessions are typically one dog, or two compatible dogs from the same household.",
+  },
+  {
+    title: "The plan can change",
+    body: "Heat, storms, unsafe conditions and your dog’s comfort can change the activity or timing.",
+  },
+  {
+    title: "Adventures are earned",
+    body: "Every dog completes a standard Good Dog Session before transportation to a bigger outing.",
+  },
 ] as const;
 
 export const proofStories = [
@@ -51,9 +86,9 @@ export const proofStories = [
 ] as const;
 
 export const processSteps = [
-  { title: "Tell us about your dog.", body: "Send over a few basics about your dog, where you’re located and what you’re looking for." },
-  { title: "We say hello first.", body: "Before your dog is left in our care, we’ll complete a short owner-present introduction so everyone is comfortable. Sitting clients require a meet-and-greet." },
-  { title: "We plan their day.", body: "Activity is based on your dog’s energy, temperament, environment, routine and what they actually enjoy." },
+  { title: "Tell me about your dog.", body: "Send a few basics about your dog, where you’re located and what kind of help you need." },
+  { title: "Meet your dog first.", body: "Before your dog is left in my care, I’ll complete a short owner-present introduction. Sitting clients require a meet-and-greet." },
+  { title: "I plan their day.", body: "Activity is based on your dog’s energy, temperament, environment, routine and what they actually enjoy." },
   { title: "You get the recap.", body: "After standard sessions, you’ll receive a photo and written update. Adventures include additional photo and video coverage." },
 ] as const;
 
@@ -64,8 +99,8 @@ export const faqItems = [
   { question: "Can you work with reactive or nervous dogs?", answer: "Possibly. Every dog’s needs, triggers and history are reviewed individually before service. Good Dog Days doesn’t make behavioral or safety guarantees, and some situations may require a qualified trainer or behavior professional first." },
   { question: "Do you take multiple dogs?", answer: "Sessions are intentionally kept personal—typically one dog, or two compatible dogs from the same household." },
   { question: "Can I book an Adventure immediately?", answer: "Not quite. Every dog completes at least one standard Good Dog Session before their first Adventure so Sully can get to know their temperament, handling and routine." },
-  { question: "Where do you currently operate?", answer: "Cumming and select areas of Central, West and North Forsyth County, Georgia. Share your neighborhood or ZIP code in the inquiry form and we’ll confirm availability." },
-  { question: "Do you provide in-home sitting?", answer: "Yes. Good Dog Stays will range from scheduled home visits to more comprehensive in-home care, depending on fit and availability." },
+  { question: "Where do you currently operate?", answer: "Cumming and select areas of Central, West and North Forsyth County, Georgia. Share your neighborhood or ZIP code in the inquiry form and I’ll confirm availability." },
+  { question: "Do you provide in-home sitting?", answer: "Yes. Routine Care provides scheduled home visits, while a Good Dog In-Home Stay offers more comprehensive overnight care, depending on fit and availability." },
   { question: "How much notice is required?", answer: "New bookings require at least 24 hours’ notice. More notice is always helpful, especially for in-home stays and longer Adventures, and availability will vary." },
   { question: "What happens when the weather is bad?", answer: "The plan adapts. Heat, storms and unsafe conditions may mean a shorter outdoor activity, a timing change or more indoor enrichment. Your dog’s comfort and sensible risk decisions come first." },
 ] as const;

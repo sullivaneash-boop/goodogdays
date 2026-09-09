@@ -1,18 +1,34 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { bookingBasics, serviceCategories, servicesForCategory } from "@/data/services";
+import { servicesSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Services & Pricing",
   description: "Explore Good Dog Days walks, personalized sessions, in-home care and premium dog adventures in Cumming and Forsyth County, Georgia.",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    title: "Dog Care Services & Pricing | Good Dog Days",
+    description: "Transparent pricing for dog walking, enrichment, in-home care and dog adventures in Cumming and Forsyth County.",
+    url: "/services",
+    images: [{ url: "/services/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dog Care Services & Pricing | Good Dog Days",
+    description: "Transparent pricing for personalized dog care in Cumming and Forsyth County.",
+    images: ["/services/opengraph-image"],
+  },
 };
 
 export default function ServicesPage() {
   return (
     <main className="pricing-page">
+      <JsonLd data={servicesSchema} />
       <a className="skip-link" href="#main-content">Skip to content</a>
       <SiteHeader />
 
@@ -22,8 +38,8 @@ export default function ServicesPage() {
             <div>
               <p className="section-index">SERVICES + PRICING</p>
               <h1 id="pricing-title">Find their kind of good day.</h1>
-              <p>From a reliable walk close to home to a full day outside, every option starts with the dog in front of us.</p>
-              <Link className="button button-dark" href="/#inquiry">Tell Us About Your Dog</Link>
+              <p>From a reliable walk close to home to a full day outside, every option starts with the dog in front of me.</p>
+              <Link className="button button-dark" href="/?service=not-sure#inquiry">Tell Me About Your Dog</Link>
             </div>
             <Image
               className="pricing-hero-mark"
@@ -55,6 +71,7 @@ export default function ServicesPage() {
                 <div>
                   <p className="section-index">{category.number} / SERVICE FAMILY</p>
                   <h2 id={`${category.id}-title`}>{category.name}</h2>
+                  <p className="category-brand-label">{category.brandLabel}</p>
                 </div>
                 <div className="category-start">
                   <span>Starting at</span>
@@ -111,7 +128,14 @@ export default function ServicesPage() {
                         ) : null}
                       </div>
 
-                      <Link className="button button-dark" href={`/?service=${selectedService}#inquiry`}>{service.ctaText}</Link>
+                      <Link
+                        className="button button-dark"
+                        href={`/?service=${selectedService}#inquiry`}
+                        data-track-event="service_cta_click"
+                        data-track-label={service.id}
+                      >
+                        {service.ctaText}
+                      </Link>
                     </article>
                   );
                 })}
@@ -137,7 +161,7 @@ export default function ServicesPage() {
         <section className="pricing-final-cta">
           <div className="shell">
             <p>Not sure which one fits?</p>
-            <h2>Tell us about your dog. We’ll start there.</h2>
+            <h2>Tell me about your dog. I’ll start there.</h2>
             <Link className="button button-dark" href="/?service=not-sure#inquiry">Request a Good Dog Day</Link>
           </div>
         </section>

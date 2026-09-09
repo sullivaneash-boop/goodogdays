@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { siteConfig } from "@/data/site";
 
 export function SiteFooter() {
@@ -16,16 +17,25 @@ export function SiteFooter() {
           />
           <p>{siteConfig.tagline}</p>
         </div>
-        <p>{siteConfig.location}</p>
+        <div className="footer-contact">
+          <p>{siteConfig.serviceArea}</p>
+          <a
+            href={siteConfig.social.email}
+            data-track-event="email_click"
+            data-track-label="footer_email"
+          >
+            {siteConfig.email}
+          </a>
+        </div>
       </div>
       <div className="shell footer-bottom">
         <p>© {new Date().getFullYear()} Good Dog Days</p>
-        <nav aria-label="Social links">
-          <a href={siteConfig.social.instagram}>Instagram</a>
-          <a href={siteConfig.social.tiktok} target="_blank" rel="noreferrer">TikTok</a>
-          <a href={siteConfig.social.email}>Contact</a>
+        <nav aria-label="Footer navigation">
+          <Link href="/services">Services</Link>
+          <Link href="/#care-safety">Care + Safety</Link>
+          <Link href="/privacy">Privacy</Link>
         </nav>
-        <a href="#top">Back to top ↑</a>
+        <Link href="#top">Back to top ↑</Link>
       </div>
     </footer>
   );

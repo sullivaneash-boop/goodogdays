@@ -19,7 +19,21 @@ export function SiteHeader() {
       <nav className="desktop-nav" aria-label="Main navigation">
         {navigation.map((item) => <Link href={item.href} key={item.href}>{item.label}</Link>)}
       </nav>
-      <Link className="nav-cta" href="/#inquiry">Request a Good Dog Day</Link>
+      <details className="mobile-nav">
+        <summary aria-label="Open navigation"><span>Menu</span><i aria-hidden="true" /></summary>
+        <nav aria-label="Mobile navigation">
+          {navigation.map((item) => <Link href={item.href} key={item.href}>{item.label}</Link>)}
+          <Link href="/?service=not-sure#inquiry">Request availability</Link>
+        </nav>
+      </details>
+      <Link
+        className="nav-cta"
+        href="/?service=not-sure#inquiry"
+        data-track-event="service_cta_click"
+        data-track-label="header_request"
+      >
+        Request availability
+      </Link>
     </header>
   );
 }
