@@ -2,41 +2,59 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useForm, ValidationError } from "@formspree/react";
 import { serviceInterestOptions } from "@/data/services";
-import { siteConfig } from "@/data/site";
 import { trackEvent } from "@/lib/analytics";
 
-type FormStatus = "idle" | "sending" | "error";
+const formId = "xbgjqyyz";
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function attributionFields() {
-  const params = new URLSearchParams(window.location.search);
-
-  return {
-    landingPage: window.location.href,
-    referrer: document.referrer,
-    utmSource: params.get("utm_source") ?? "",
-    utmMedium: params.get("utm_medium") ?? "",
-    utmCampaign: params.get("utm_campaign") ?? "",
-    utmContent: params.get("utm_content") ?? "",
-    gclid: params.get("gclid") ?? "",
-    timestamp: new Date().toISOString(),
-  };
+function queryValue(name: string) {
+  return new URLSearchParams(window.location.search).get(name) ?? "";
 }
+
+const attributionData = {
+  landingPage: () => window.location.href,
+  referrer: () => document.referrer,
+  utmSource: () => queryValue("utm_source"),
+  utmMedium: () => queryValue("utm_medium"),
+  utmCampaign: () => queryValue("utm_campaign"),
+  utmContent: () => queryValue("utm_content"),
+  gclid: () => queryValue("gclid"),
+  timestamp: () => new Date().toISOString(),
+};
 
 export function InquiryForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [status, setStatus] = useState<FormStatus>("idle");
+  const [formState, submitToFormspree] = useForm(formId, { data: attributionData });
+  const [ownerName, setOwnerName] = useState("");
+  const [contact, setContact] = useState("");
   const hasStarted = useRef(false);
-  const errorRef = useRef<HTMLParagraphElement>(null);
+  const hasCompleted = useRef(false);
+  const submittedDetails = useRef({ selectedService: "not-sure", zipCode: "" });
+  const errorRef = useRef<HTMLDivElement>(null);
   const requestedService = searchParams.get("service");
   const defaultService = requestedService && serviceInterestOptions.some((service) => service.id === requestedService)
     ? requestedService
     : "not-sure";
+  const contactIsEmail = emailPattern.test(contact);
+  const contactIsPhone = contact.replace(/\D/g, "").length >= 10;
 
   useEffect(() => {
-    if (status === "error") errorRef.current?.focus();
-  }, [status]);
+    if (!formState.succeeded || hasCompleted.current) return;
+
+    hasCompleted.current = true;
+    trackEvent("inquiry_submit", {
+      selected_service: submittedDetails.current.selectedService,
+      zip_code: submittedDetails.current.zipCode,
+    });
+    router.push("/thank-you");
+  }, [formState.succeeded, router]);
+
+  useEffect(() => {
+    if (formState.errors) errorRef.current?.focus();
+  }, [formState.errors]);
 
   function handleStart() {
     if (hasStarted.current) return;
@@ -44,31 +62,20 @@ export function InquiryForm() {
     trackEvent("inquiry_start", { selected_service: defaultService });
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     const formData = new FormData(event.currentTarget);
-    const attribution = attributionFields();
 
-    Object.entries(attribution).forEach(([key, value]) => formData.set(key, value));
-    setStatus("sending");
-
-    try {
-      const response = await fetch("/api/inquiry", {
-        method: "POST",
-        body: formData,
-        headers: { Accept: "application/json" },
-      });
-
-      if (!response.ok) throw new Error("Form submission failed");
-
-      trackEvent("inquiry_submit", {
-        selected_service: String(formData.get("service") ?? "not-sure"),
-        zip_code: String(formData.get("zipCode") ?? ""),
-      });
+    if (formData.get("company")) {
+      event.preventDefault();
       router.push("/thank-you");
-    } catch {
-      setStatus("error");
+      return;
     }
+
+    submittedDetails.current = {
+      selectedService: String(formData.get("service") ?? "not-sure"),
+      zipCode: String(formData.get("zipCode") ?? ""),
+    };
+    void submitToFormspree(event);
   }
 
   return (
@@ -76,17 +83,35 @@ export function InquiryForm() {
       className="inquiry-form"
       onSubmit={handleSubmit}
       onFocus={handleStart}
-      action="/api/inquiry"
+      action={`https://formspree.io/f/${formId}`}
       method="POST"
     >
+      <input type="hidden" name="email" value={contactIsEmail ? contact : ""} />
+      <input type="hidden" name="phone" value={contactIsPhone ? contact : ""} />
+      <input type="hidden" name="subject" value={`New Good Dog Days request from ${ownerName || "a website visitor"}`} />
+
       <div className="field-grid">
         <label>
           <span>Your name</span>
-          <input name="ownerName" autoComplete="name" required placeholder="Your name" />
+          <input
+            name="name"
+            autoComplete="name"
+            required
+            placeholder="Your name"
+            value={ownerName}
+            onChange={(event) => setOwnerName(event.target.value)}
+          />
         </label>
         <label>
           <span>Phone or email</span>
-          <input name="contact" autoComplete="email" required placeholder="How should I reach you?" />
+          <input
+            name="contact"
+            autoComplete="email"
+            required
+            placeholder="How should I reach you?"
+            value={contact}
+            onChange={(event) => setContact(event.target.value)}
+          />
         </label>
         <label>
           <span>ZIP code</span>
@@ -127,7 +152,7 @@ export function InquiryForm() {
 
       <label className="full-field">
         <span>Anything I should know? <em>Optional</em></span>
-        <textarea name="notes" rows={4} placeholder="Energy, routine, temperament or anything useful for the first conversation." />
+        <textarea name="message" rows={4} placeholder="Energy, routine, temperament or anything useful for the first conversation." />
       </label>
 
       <label className="form-honeypot" aria-hidden="true">
@@ -136,8 +161,8 @@ export function InquiryForm() {
       </label>
 
       <div className="form-submit-row">
-        <button className="button button-accent" type="submit" disabled={status === "sending"}>
-          {status === "sending" ? "Sending…" : "Send request"}
+        <button className="button button-accent" type="submit" disabled={formState.submitting}>
+          {formState.submitting ? "Sending…" : "Send request"}
         </button>
         <p>No commitment. I’ll check your location and fit before anything is scheduled.</p>
       </div>
@@ -146,10 +171,10 @@ export function InquiryForm() {
         By sending this form, you agree that I may contact you about your request. See the <a href="/privacy">privacy policy</a>.
       </p>
 
-      {status === "error" ? (
-        <p className="form-error" role="alert" tabIndex={-1} ref={errorRef}>
-          Something went wrong. Please try again or email <a href={siteConfig.social.email}>{siteConfig.email}</a>.
-        </p>
+      {formState.errors ? (
+        <div className="form-error" role="alert" tabIndex={-1} ref={errorRef}>
+          <ValidationError errors={formState.errors} prefix="I couldn’t send that request." />
+        </div>
       ) : null}
     </form>
   );
