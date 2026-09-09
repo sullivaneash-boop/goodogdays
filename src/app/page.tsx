@@ -285,8 +285,8 @@ export default function Home() {
           <div className="shell inquiry-grid">
             <div className="inquiry-intro">
               <p className="section-index inverted">Request availability / 08</p>
-              <h2 id="inquiry-title">Tell me the basics.</h2>
-              <p>I’ll check your location, what you need and whether Good Dog Days is the right fit.</p>
+              <h2 id="inquiry-title">Build their care profile.</h2>
+              <p>A focused 90-second intake turns your dog’s needs into a tailored starting point before you send anything.</p>
               <ol className="next-steps">
                 <li><span>1</span>I check location + fit.</li>
                 <li><span>2</span>I reach out.</li>

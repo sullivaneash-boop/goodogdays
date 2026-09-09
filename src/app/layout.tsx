@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/bricolage-grotesque";
 import "@fontsource-variable/dm-sans";
 import { Analytics } from "@/components/Analytics";
+import { EngagementLayer } from "@/components/engagement/EngagementLayer";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import assets from "@/data/assets.json";
 import { siteConfig } from "@/data/site";
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         {children}
         <StickyMobileCTA />
+        <EngagementLayer />
         <Analytics />
       </body>
     </html>

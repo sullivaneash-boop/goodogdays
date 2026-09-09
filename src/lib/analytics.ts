@@ -1,9 +1,13 @@
 export type AnalyticsEvent =
   | "adventure_story_click"
   | "email_click"
+  | "exit_intent_view"
   | "inquiry_start"
   | "inquiry_submit"
   | "page_view"
+  | "priority_callback_submit"
+  | "scroll_offer_click"
+  | "scroll_offer_view"
   | "service_cta_click"
   | "service_view";
 

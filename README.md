@@ -27,7 +27,35 @@ Run `npm run assets:check` after changing or adding an asset.
 
 ## Lead form and analytics setup
 
-The inquiry form is connected to Formspree form `xbgjqyyz` using `@formspree/react`. It preserves service-prefilled links, includes a honeypot, records referrer/UTM attribution and redirects successful requests to `/thank-you`.
+The inquiry experience submits directly to Formspree form `xbgjqyyz` through the typed fetch helper in `src/lib/formspree.ts`. It preserves service-prefilled links, includes a honeypot, records referrer/UTM attribution and transitions to a personalized in-place success state.
+
+The lead intake is intentionally modular:
+
+```text
+src/
+├── components/
+│   ├── intake/
+│   │   ├── PetProfileForm.tsx       # React Hook Form orchestration + motion
+│   │   ├── PetBasicsStep.tsx        # name, breed and visual size selector
+│   │   ├── CareNeedsStep.tsx        # dynamic goals and care priorities
+│   │   ├── OwnerContactStep.tsx     # contact details + recommendation
+│   │   ├── RecommendationCard.tsx
+│   │   └── FormSuccess.tsx
+│   └── engagement/
+│       ├── EngagementLayer.tsx      # trigger coordination and analytics
+│       ├── ScrollOfferCard.tsx
+│       └── ExitIntentModal.tsx
+├── hooks/
+│   ├── useScrollDepthTrigger.ts
+│   └── useExitIntent.ts
+└── lib/
+    ├── formspree.ts
+    └── intake/
+        ├── schema.ts                # strict Zod schema + step fields
+        └── serviceMatcher.ts        # zero-cost recommendation rules
+```
+
+Run the interaction smoke tests with `npm run test:e2e`. Set `PLAYWRIGHT_BASE_URL` when testing against an already-running server.
 
 To enable Google Analytics, add a GA4 measurement ID in `NEXT_PUBLIC_GA_MEASUREMENT_ID`. Conversion events for service CTAs, inquiry starts/submissions and Adventure story clicks are pushed through the shared analytics adapter.
 
