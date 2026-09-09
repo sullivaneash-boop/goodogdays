@@ -1,0 +1,191 @@
+{
+  "headerFooterLogo": {
+    "label": "Site header and footer — full Good Dog Days logo",
+    "kind": "image",
+    "src": "/brand/logo-primary.svg",
+    "alt": "Good Dog Days — Better days for good dogs",
+    "status": "in-use"
+  },
+  "organizationLogo": {
+    "label": "Search engine organization logo",
+    "kind": "image",
+    "src": "/brand/logo-primary.svg",
+    "alt": "Good Dog Days",
+    "status": "in-use"
+  },
+  "homeHeroPhoto": {
+    "label": "Home page — large hero background photo",
+    "kind": "image",
+    "src": "/media/sully-with-lylah.jpg",
+    "alt": "Sully walking Lylah across a wooden boardwalk",
+    "status": "in-use"
+  },
+  "homeHeroVideo": {
+    "label": "Home page — large hero background video on desktop",
+    "kind": "video",
+    "src": "/media/good-dog-days-bgvideo.mp4",
+    "alt": "",
+    "status": "in-use"
+  },
+  "homeHeroMark": {
+    "label": "Home page — dog and sun graphic over the hero",
+    "kind": "image",
+    "src": "/brand/mark-primary.svg",
+    "alt": "",
+    "status": "in-use"
+  },
+  "processAttentionPhoto": {
+    "label": "Home page / Process proof — Care starts with paying attention",
+    "kind": "image",
+    "src": "/media/sully-with-lylah.jpg",
+    "alt": "Sully walking Lylah across a wooden boardwalk",
+    "status": "in-use"
+  },
+  "processAdaptPhoto": {
+    "label": "Home page / Process proof — The dog in front of me sets the pace",
+    "kind": "image",
+    "src": "/media/lylah-mountain-overlook.jpg",
+    "alt": "Lylah standing at a mountain overlook",
+    "status": "in-use"
+  },
+  "aboutPhoto": {
+    "label": "Home page / About — Meet Sully + Lylah",
+    "kind": "image",
+    "src": "/media/sully-with-savannah.jpg",
+    "alt": "Sully walking Savannah during her shelter Adventure Day",
+    "status": "in-use"
+  },
+  "realDaysFeaturedCover": {
+    "label": "Home page / Real days — featured story cover",
+    "kind": "image",
+    "src": "/media/red-cover.png",
+    "alt": "Cover artwork for Red's Adventure Day through the Humane Society of Forsyth County",
+    "status": "in-use"
+  },
+  "redStoryCover": {
+    "label": "Story data — Red's Adventure Day cover",
+    "kind": "image",
+    "src": "/media/red-cover.png",
+    "alt": "Cover artwork for Red's Adventure Day through the Humane Society of Forsyth County",
+    "status": "in-use"
+  },
+  "savannahStoryCover": {
+    "label": "Story data — Savannah's Adventure Day cover",
+    "kind": "image",
+    "src": "/media/savannah-cover.png",
+    "alt": "Cover artwork for Savannah's Adventure Day through the Humane Society of Forsyth County",
+    "status": "in-use"
+  },
+  "servicesHeroMark": {
+    "label": "Services page — dog and sun graphic in the hero",
+    "kind": "image",
+    "src": "/brand/mark-primary.svg",
+    "alt": "",
+    "status": "in-use"
+  },
+  "browserFavicon": {
+    "label": "Metadata — browser tab favicon",
+    "kind": "icon",
+    "src": "/uploads/icons/favicon.ico",
+    "alt": "Good Dog Days icon",
+    "status": "in-use"
+  },
+  "appIcon": {
+    "label": "Metadata — general app and search icon",
+    "kind": "icon",
+    "src": "/uploads/icons/app-icon.png",
+    "alt": "Good Dog Days app icon",
+    "status": "in-use"
+  },
+  "appleTouchIcon": {
+    "label": "Metadata — Apple home-screen icon",
+    "kind": "icon",
+    "src": "/uploads/icons/apple-touch-icon.png",
+    "alt": "Good Dog Days Apple touch icon",
+    "status": "in-use"
+  },
+  "homeSharePhoto": {
+    "label": "Metadata — home page social-share card background photo",
+    "kind": "image",
+    "src": "/uploads/social/home-share.jpg",
+    "alt": "Good Dog Days dog walking and personalized care",
+    "status": "in-use"
+  },
+  "servicesSharePhoto": {
+    "label": "Metadata — services page social-share card background photo",
+    "kind": "image",
+    "src": "/uploads/social/services-share.jpg",
+    "alt": "Good Dog Days services and pricing",
+    "status": "in-use"
+  },
+  "brandSupportingArtwork": {
+    "label": "Asset library — Same Good Energy supporting artwork",
+    "kind": "image",
+    "src": "/brand/same-good-energy.svg",
+    "alt": "Same Good Energy illustrated Good Dog Days artwork",
+    "status": "library"
+  },
+  "lylahAdoptionDayPhoto": {
+    "label": "Asset library — Lylah adoption day",
+    "kind": "image",
+    "src": "/media/lylah-adoption-day.jpg",
+    "alt": "Lylah on her adoption day",
+    "status": "library"
+  },
+  "lylahLakePhoto": {
+    "label": "Asset library — Lylah at the lake",
+    "kind": "image",
+    "src": "/media/lylah-lake.jpg",
+    "alt": "Lylah at the lake",
+    "status": "library"
+  },
+  "lylahRockTrailPhoto": {
+    "label": "Asset library — Lylah on a rocky trail",
+    "kind": "image",
+    "src": "/media/lylah-rock-trail.jpg",
+    "alt": "Lylah on a rocky trail",
+    "status": "library"
+  },
+  "lylahTrailSelfiePhoto": {
+    "label": "Asset library — trail selfie with Lylah",
+    "kind": "image",
+    "src": "/media/lylah-trail-selfie.jpg",
+    "alt": "Trail selfie with Lylah",
+    "status": "library"
+  },
+  "lylahWalkingAboveVideo": {
+    "label": "Asset library — overhead video of Lylah walking",
+    "kind": "video",
+    "src": "/media/lylah-walking-above.mp4",
+    "alt": "",
+    "status": "library"
+  },
+  "redPlayPhoto": {
+    "label": "Asset library — Red playing",
+    "kind": "image",
+    "src": "/media/red-play-opt.jpg",
+    "alt": "Red playing during an Adventure Day",
+    "status": "library"
+  },
+  "redPortraitPhoto": {
+    "label": "Asset library — portrait of Red",
+    "kind": "image",
+    "src": "/media/red-portrait-opt.jpg",
+    "alt": "Portrait of Red",
+    "status": "library"
+  },
+  "redTrailPhoto": {
+    "label": "Asset library — Red on a trail",
+    "kind": "image",
+    "src": "/media/red-trail-opt.jpg",
+    "alt": "Red on a trail during an Adventure Day",
+    "status": "library"
+  },
+  "savannahPortraitPhoto": {
+    "label": "Asset library — portrait of Savannah",
+    "kind": "image",
+    "src": "/media/savannah-portrait-opt.jpg",
+    "alt": "Portrait of Savannah",
+    "status": "library"
+  }
+}

@@ -1,0 +1,14 @@
+name: Asset check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check registry paths and uploaded files
+        run: node scripts/check-assets.mjs

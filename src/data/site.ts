@@ -1,3 +1,5 @@
+import assets from "@/data/assets.json";
+
 export const siteConfig = {
   name: "Good Dog Days",
   tagline: "Better days for good dogs.",
@@ -62,8 +64,8 @@ export const proofStories = [
     label: "Shelter Adventure Day / Cumming, GA",
     description:
       "Red traded a day inside the shelter for exploration, new people, good treats and the kind of focused enrichment that lets a dog’s personality come through.",
-    cover: "/media/red-cover.png",
-    alt: "Cover artwork for Red’s Adventure Day through the Humane Society of Forsyth County",
+    cover: assets.redStoryCover.src,
+    alt: assets.redStoryCover.alt,
     videoId: "7676155682902543629",
     href: "https://www.tiktok.com/@sullyeash/video/7676155682902543629",
     cta: "Watch Red’s Adventure Day",
@@ -73,8 +75,8 @@ export const proofStories = [
     label: "Shelter Adventure Day / Cumming, GA",
     description:
       "Savannah’s day mixed water, trail exploration, activity around town and plenty of attention from people—a full change of pace from shelter life.",
-    cover: "/media/savannah-cover.png",
-    alt: "Cover artwork for Savannah’s Adventure Day through the Humane Society of Forsyth County",
+    cover: assets.savannahStoryCover.src,
+    alt: assets.savannahStoryCover.alt,
     videoId: "7681492434601200909",
     href: "https://www.tiktok.com/@sullyeash/video/7681492434601200909",
     cta: "Watch Savannah’s Adventure Day",

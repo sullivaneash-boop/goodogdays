@@ -7,6 +7,7 @@ import { InquiryForm } from "@/components/InquiryForm";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import assets from "@/data/assets.json";
 import { serviceCategories } from "@/data/services";
 import {
   faqItems,
@@ -27,15 +28,15 @@ const processProof = [
     label: "One consistent handler",
     title: "Care starts with paying attention.",
     body: "I learn your dog’s routine, energy and preferences before deciding what a useful session looks like.",
-    image: "/media/sully-with-lylah.jpg",
-    alt: "Sully walking Lylah across a wooden boardwalk",
+    image: assets.processAttentionPhoto.src,
+    alt: assets.processAttentionPhoto.alt,
   },
   {
     label: "A plan that can adapt",
     title: "The dog in front of me sets the pace.",
     body: "A session may mean movement, sniffing, play, enrichment or simple companionship—never activity for activity’s sake.",
-    image: "/media/lylah-mountain-overlook.jpg",
-    alt: "Lylah standing at a mountain overlook",
+    image: assets.processAdaptPhoto.src,
+    alt: assets.processAdaptPhoto.alt,
   },
 ] as const;
 
@@ -52,8 +53,8 @@ export default function Home() {
         <section className="hero" id="top" aria-labelledby="hero-title">
           <Image
             className="hero-image"
-            src="/media/sully-with-lylah.jpg"
-            alt="Sully walking Lylah across a wooden boardwalk"
+            src={assets.homeHeroPhoto.src}
+            alt={assets.homeHeroPhoto.alt}
             fill
             priority
             loading="eager"
@@ -63,7 +64,7 @@ export default function Home() {
           <div className="hero-shade" />
           <Image
             className="hero-brand-mark"
-            src="/brand/mark-primary.svg"
+            src={assets.homeHeroMark.src}
             alt=""
             width={347}
             height={248}
@@ -225,7 +226,7 @@ export default function Home() {
         <section className="about section-pad" id="about" aria-labelledby="about-title">
           <div className="shell about-grid">
             <div className="about-image">
-              <Image src="/media/sully-with-savannah.jpg" alt="Sully walking Savannah during her shelter Adventure Day" fill sizes="(min-width: 900px) 48vw, 100vw" />
+              <Image src={assets.aboutPhoto.src} alt={assets.aboutPhoto.alt} fill sizes="(min-width: 900px) 48vw, 100vw" />
             </div>
             <div className="about-copy">
               <p className="section-index inverted">Meet Sully + Lylah / 06</p>
@@ -241,7 +242,7 @@ export default function Home() {
         <section className="real-days section-pad" aria-labelledby="real-days-title">
           <div className="shell real-days-grid">
             <div className="real-days-image">
-              <Image src={featuredStory.cover} alt={featuredStory.alt} fill sizes="(min-width: 900px) 40vw, 100vw" />
+              <Image src={assets.realDaysFeaturedCover.src} alt={assets.realDaysFeaturedCover.alt} fill sizes="(min-width: 900px) 40vw, 100vw" />
             </div>
             <div>
               <p className="section-index">Real days / real dogs</p>

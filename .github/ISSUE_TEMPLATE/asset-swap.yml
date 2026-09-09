@@ -1,0 +1,56 @@
+name: Asset swap
+description: Request a website photo, video, graphic, icon, or share-card change
+title: "Asset swap: "
+labels: [assets]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Choose the part of the site you recognize. You do not need to know the filename or code location.
+  - type: dropdown
+    id: location
+    attributes:
+      label: Where do you see it?
+      options:
+        - Header or footer logo
+        - Home page — large hero photo
+        - Home page — large hero video
+        - Home page — dog and sun hero graphic
+        - Home page — Process proof, first card
+        - Home page — Process proof, second card
+        - Home page — About section
+        - Home page — Real days featured cover
+        - Services page — hero graphic
+        - Browser tab or bookmark icon
+        - Apple home-screen icon
+        - Home page social-share card
+        - Services page social-share card
+        - Somewhere else or I am not sure
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What should change?
+      description: Describe what you see now and what you want instead.
+      placeholder: The tall photo under “Meet Sully + Lylah” should use the attached photo instead.
+    validations:
+      required: true
+  - type: textarea
+    id: replacement
+    attributes:
+      label: Replacement file
+      description: Drag the new image, video, or graphic into this box. If there is no replacement yet, say what you need.
+      placeholder: Drag and drop the replacement file here.
+  - type: input
+    id: alt
+    attributes:
+      label: What is in the image?
+      description: A short plain-language description for accessibility. Leave blank if the graphic is only decorative.
+      placeholder: Sully and Lylah walking on a wooded trail
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: Replace only the location selected above, even if the current file also appears elsewhere.

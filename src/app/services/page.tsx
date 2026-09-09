@@ -4,6 +4,7 @@ import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import assets from "@/data/assets.json";
 import { bookingBasics, serviceCategories, servicesForCategory } from "@/data/services";
 import { servicesSchema } from "@/lib/schema";
 
@@ -43,7 +44,7 @@ export default function ServicesPage() {
             </div>
             <Image
               className="pricing-hero-mark"
-              src="/brand/mark-primary.svg"
+              src={assets.servicesHeroMark.src}
               alt=""
               width={347}
               height={248}

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import assets from "@/data/assets.json";
 import { siteConfig } from "@/data/site";
 
 export function SiteFooter() {
@@ -9,8 +10,8 @@ export function SiteFooter() {
         <div>
           <Image
             className="footer-logo"
-            src="/brand/logo-primary.svg"
-            alt="Good Dog Days — Better days for good dogs"
+            src={assets.headerFooterLogo.src}
+            alt={assets.headerFooterLogo.alt}
             width={376}
             height={220}
             unoptimized

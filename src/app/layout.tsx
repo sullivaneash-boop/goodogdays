@@ -3,6 +3,7 @@ import "@fontsource-variable/bricolage-grotesque";
 import "@fontsource-variable/dm-sans";
 import { Analytics } from "@/components/Analytics";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
+import assets from "@/data/assets.json";
 import { siteConfig } from "@/data/site";
 import { siteUrl } from "@/lib/seo";
 import "./globals.css";
@@ -17,6 +18,13 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   category: "pet care",
   manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: assets.browserFavicon.src, sizes: "any" },
+      { url: assets.appIcon.src, type: "image/png", sizes: "256x256" },
+    ],
+    apple: [{ url: assets.appleTouchIcon.src, type: "image/png", sizes: "180x180" }],
+  },
   alternates: { canonical: "/" },
   openGraph: {
     title: "Dog Walking & In-Home Dog Care in Cumming, GA | Good Dog Days",

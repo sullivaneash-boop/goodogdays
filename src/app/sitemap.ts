@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import assets from "@/data/assets.json";
 import { absoluteUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -7,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl("/"),
       changeFrequency: "monthly",
       priority: 1,
-      images: [absoluteUrl("/media/sully-with-lylah.jpg")],
+      images: [absoluteUrl(assets.homeHeroPhoto.src)],
     },
     {
       url: absoluteUrl("/services"),

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import assets from "@/data/assets.json";
 
 type NavigatorWithConnection = Navigator & {
   connection?: { saveData?: boolean };
@@ -38,10 +39,10 @@ export function HeroMedia() {
       loop
       playsInline
       preload="none"
-      poster="/media/sully-with-lylah.jpg"
+      poster={assets.homeHeroPhoto.src}
       aria-hidden="true"
     >
-      <source src="/media/good-dog-days-bgvideo.mp4" type="video/mp4" />
+      <source src={assets.homeHeroVideo.src} type="video/mp4" />
     </video>
   );
 }

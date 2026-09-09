@@ -1,4 +1,5 @@
 import { services } from "@/data/services";
+import assets from "@/data/assets.json";
 import { siteConfig } from "@/data/site";
 import { absoluteUrl } from "@/lib/seo";
 
@@ -8,7 +9,7 @@ export const organizationSchema = {
   "@id": absoluteUrl("/#organization"),
   name: siteConfig.name,
   url: siteConfig.url,
-  logo: absoluteUrl("/brand/logo-primary.svg"),
+  logo: absoluteUrl(assets.organizationLogo.src),
   description:
     "Personalized dog walking, enrichment and in-home dog care in Cumming and Forsyth County, Georgia.",
   areaServed: {

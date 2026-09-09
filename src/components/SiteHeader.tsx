@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import assets from "@/data/assets.json";
 import { navigation } from "@/data/site";
 
 export function SiteHeader() {
@@ -7,8 +8,8 @@ export function SiteHeader() {
     <header className="site-header">
       <Link className="brand-lockup" href="/#top" aria-label="Good Dog Days home">
         <Image
-          src="/brand/logo-primary.svg"
-          alt="Good Dog Days — Better days for good dogs"
+          src={assets.headerFooterLogo.src}
+          alt={assets.headerFooterLogo.alt}
           width={376}
           height={220}
           priority
