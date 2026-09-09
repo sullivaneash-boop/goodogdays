@@ -36,13 +36,25 @@ export default function Home() {
       <div id="main-content">
         <section className="hero" id="top" aria-labelledby="hero-title">
           <Image
-            className="hero-image"
+            className="hero-image hero-fallback"
             src="/media/sully-with-lylah.jpg"
             alt="Sully walking Lylah across a wooden boardwalk"
             fill
             priority
             sizes="100vw"
           />
+          <video
+            className="hero-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/media/sully-with-lylah.jpg"
+            aria-hidden="true"
+          >
+            <source src="/media/good-dog-days-bgvideo.mp4" type="video/mp4" />
+          </video>
           <div className="hero-shade" />
           <Image
             className="hero-brand-mark"
