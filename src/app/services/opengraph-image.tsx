@@ -45,7 +45,7 @@ export default function ServicesOpenGraphImage() {
           Services<br />+ pricing.
         </div>
         <div style={{ display: "flex", marginTop: 38, fontSize: 27, fontWeight: 700 }}>
-          CLEAR OPTIONS • TRANSPARENT PRICES • PERSONAL CARE
+          EVERYDAY • WHILE YOU’RE AWAY • BIGGER DAYS
         </div>
       </div>
     </div>,

@@ -9,7 +9,7 @@ const photoData = await readFile(
 );
 const photoSrc = `data:image/jpeg;base64,${photoData}`;
 
-export const alt = "Good Dog Days — dog walking and personalized dog care in Cumming, Georgia";
+export const alt = "Good Dog Days — walks, care at home and adventures in Cumming, Georgia";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -45,7 +45,7 @@ export default function OpenGraphImage() {
           Better days<br />for good dogs.
         </div>
         <div style={{ display: "flex", marginTop: 38, color: "#f2c230", fontSize: 27, fontWeight: 700 }}>
-          DOG WALKING • ENRICHMENT • IN-HOME CARE
+          WALKS • CARE AT HOME • ADVENTURES
         </div>
       </div>
     </div>,

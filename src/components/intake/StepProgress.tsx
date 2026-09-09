@@ -2,11 +2,11 @@ type StepProgressProps = {
   currentStep: number;
 };
 
-const steps = ["Pet basics", "Care priorities", "Your details"] as const;
+const steps = ["What you need", "Your dog", "Your details"] as const;
 
 export function StepProgress({ currentStep }: StepProgressProps) {
   return (
-    <nav aria-label="Pet profile progress" className="mb-8 sm:mb-10">
+    <nav aria-label="Inquiry progress" className="mb-8 sm:mb-10">
       <ol className="grid grid-cols-3 gap-2">
         {steps.map((label, index) => {
           const isCurrent = index === currentStep;

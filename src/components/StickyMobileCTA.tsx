@@ -29,7 +29,7 @@ export function StickyMobileCTA() {
         data-track-event="service_cta_click"
         data-track-label="sticky_mobile_request"
       >
-        Request availability
+        Tell Us About Your Dog
       </Link>
     </aside>
   );

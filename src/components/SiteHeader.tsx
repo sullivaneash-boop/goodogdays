@@ -24,7 +24,7 @@ export function SiteHeader() {
         <summary aria-label="Open navigation"><span>Menu</span><i aria-hidden="true" /></summary>
         <nav aria-label="Mobile navigation">
           {navigation.map((item) => <Link href={item.href} key={item.href}>{item.label}</Link>)}
-          <Link href="/?service=not-sure#inquiry">Request availability</Link>
+          <Link href="/?service=not-sure#inquiry">Tell Us About Your Dog</Link>
         </nav>
       </details>
       <Link
@@ -33,7 +33,7 @@ export function SiteHeader() {
         data-track-event="service_cta_click"
         data-track-label="header_request"
       >
-        Request availability
+        Tell Us About Your Dog
       </Link>
     </header>
   );

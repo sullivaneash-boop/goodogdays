@@ -1,6 +1,6 @@
 # Good Dog Days
 
-Mobile-first marketing site for Good Dog Days, a personalized dog exercise, enrichment, in-home sitting and outdoor adventure service in Cumming and Forsyth County, Georgia.
+Mobile-first marketing site for Good Dog Days, offering dog walks, activity sessions, in-home care and outdoor adventures in Cumming and Forsyth County, Georgia.
 
 ## Local development
 
@@ -27,7 +27,7 @@ Run `npm run assets:check` after changing or adding an asset.
 
 ## Lead form and analytics setup
 
-The inquiry experience submits directly to Formspree form `xbgjqyyz` through the typed fetch helper in `src/lib/formspree.ts`. It preserves service-prefilled links, includes a honeypot, records referrer/UTM attribution and transitions to a personalized in-place success state.
+The inquiry experience submits directly to Formspree form `xbgjqyyz` through the typed fetch helper in `src/lib/formspree.ts`. It preserves service-prefilled links, includes a honeypot, records referrer/UTM attribution and transitions to an in-place success state.
 
 The lead intake is intentionally modular:
 
@@ -37,7 +37,7 @@ src/
 │   ├── intake/
 │   │   ├── PetProfileForm.tsx       # React Hook Form orchestration + motion
 │   │   ├── PetBasicsStep.tsx        # name, breed and visual size selector
-│   │   ├── CareNeedsStep.tsx        # dynamic goals and care priorities
+│   │   ├── CareNeedsStep.tsx        # dog personality and context
 │   │   ├── OwnerContactStep.tsx     # contact details + recommendation
 │   │   ├── RecommendationCard.tsx
 │   │   └── FormSuccess.tsx

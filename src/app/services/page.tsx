@@ -10,18 +10,18 @@ import { servicesSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Services & Pricing",
-  description: "Explore Good Dog Days walks, personalized sessions, in-home care and premium dog adventures in Cumming and Forsyth County, Georgia.",
+  description: "Explore Good Dog Days walks, activity sessions, care at home and dog adventures in Cumming and Forsyth County, Georgia.",
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Dog Care Services & Pricing | Good Dog Days",
-    description: "Transparent pricing for dog walking, enrichment, in-home care and dog adventures in Cumming and Forsyth County.",
+    description: "Clear pricing for dog walks, activity sessions, care at home and dog adventures in Cumming and Forsyth County.",
     url: "/services",
     images: [{ url: "/services/opengraph-image", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dog Care Services & Pricing | Good Dog Days",
-    description: "Transparent pricing for personalized dog care in Cumming and Forsyth County.",
+    description: "Clear pricing for walks, care at home and dog adventures in Cumming and Forsyth County.",
     images: ["/services/opengraph-image"],
   },
 };
@@ -39,8 +39,8 @@ export default function ServicesPage() {
             <div>
               <p className="section-index">SERVICES + PRICING</p>
               <h1 id="pricing-title">Find their kind of good day.</h1>
-              <p>From a reliable walk close to home to a full day outside, every option starts with the dog in front of me.</p>
-              <Link className="button button-dark" href="/?service=not-sure#inquiry">Tell Me About Your Dog</Link>
+              <p>A walk close to home. More activity during the day. Care while you’re away. Or a bigger day outside.</p>
+              <Link className="button button-dark" href="/?service=not-sure#inquiry">Tell Us About Your Dog</Link>
             </div>
             <Image
               className="pricing-hero-mark"
@@ -111,13 +111,13 @@ export default function ServicesPage() {
                         </section>
                         {service.potentialActivities ? (
                           <section>
-                            <h4>The day may include</h4>
+                            <h4>Depending on the dog</h4>
                             <ul>{service.potentialActivities.map((item) => <li key={item}>{item}</li>)}</ul>
                           </section>
                         ) : null}
                         {service.addOns.length > 0 ? (
                           <section>
-                            <h4>Add-ons + recurring</h4>
+                            <h4>Other pricing</h4>
                             <ul>{service.addOns.map((item) => <li key={item}>{item}</li>)}</ul>
                           </section>
                         ) : null}
@@ -162,8 +162,8 @@ export default function ServicesPage() {
         <section className="pricing-final-cta">
           <div className="shell">
             <p>Not sure which one fits?</p>
-            <h2>Tell me about your dog. I’ll start there.</h2>
-            <Link className="button button-dark" href="/?service=not-sure#inquiry">Request a Good Dog Day</Link>
+            <h2>Tell me about your dog. We’ll figure it out together.</h2>
+            <Link className="button button-dark" href="/?service=not-sure#inquiry">Find Their Fit</Link>
           </div>
         </section>
       </div>

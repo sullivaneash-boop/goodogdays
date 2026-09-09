@@ -2,15 +2,9 @@
 
 import { Controller, useFormContext, useWatch } from "react-hook-form";
 import { FormField } from "@/components/intake/FormField";
-import { RecommendationCard } from "@/components/intake/RecommendationCard";
 import type { PetProfileFormValues } from "@/lib/intake/schema";
-import type { ServiceRecommendation } from "@/lib/intake/serviceMatcher";
 
-type OwnerContactStepProps = {
-  recommendation: ServiceRecommendation;
-};
-
-export function OwnerContactStep({ recommendation }: OwnerContactStepProps) {
+export function OwnerContactStep() {
   const { control } = useFormContext<PetProfileFormValues>();
   const petName = useWatch({ control, name: "petName" }).trim() || "your dog";
 
@@ -18,14 +12,22 @@ export function OwnerContactStep({ recommendation }: OwnerContactStepProps) {
     <div className="space-y-6">
       <header>
         <p className="mb-2 text-xs font-black uppercase tracking-[0.14em] text-[#f2c230]">
-          Your tailored starting point
+          Last step
         </p>
         <h3 className="font-[var(--display)] text-4xl font-extrabold leading-[0.95] tracking-[-0.045em] text-white sm:text-5xl">
-          Meet {petName}’s match.
+          Where should we follow up?
         </h3>
+        <p className="mt-3 text-sm leading-relaxed text-white/55 sm:text-base">
+          Tell us where you are and when you need help with {petName}. We’ll check fit and availability.
+        </p>
       </header>
 
-      <RecommendationCard petName={petName} recommendation={recommendation} />
+      <FormField
+        name="timing"
+        label="When or how often do you need help?"
+        placeholder="Weekdays at lunch / Oct. 12–16 / still figuring it out"
+        autoComplete="off"
+      />
 
       <div className="grid gap-5 sm:grid-cols-2">
         <FormField
@@ -50,6 +52,12 @@ export function OwnerContactStep({ recommendation }: OwnerContactStepProps) {
           inputMode="tel"
           autoComplete="tel"
           hint="Used only to respond about this request."
+        />
+        <FormField
+          name="zipCode"
+          label="ZIP code"
+          placeholder="30040"
+          autoComplete="postal-code"
         />
 
         <Controller

@@ -97,13 +97,13 @@ export function EngagementLayer() {
 
   const offer = pathname === "/services"
     ? {
-        title: "Comparing care options? Meet your dog’s best fit.",
-        body: "Answer a few thoughtful questions and see a personalized starting point before you send anything.",
+        title: "Not sure which kind of day fits?",
+        body: "Tell us what you need and a little about your dog. We’ll help with the next step.",
         href: "/?service=not-sure#inquiry",
       }
     : {
-        title: "Made it this far? Let’s shape the right day.",
-        body: "Build a quick pet profile and get a tailored service direction based on your dog—not a generic package.",
+        title: "Your dog has plans.",
+        body: "Tell us what they love and what kind of help you need. We’ll take it from there.",
         href: "/#inquiry",
       };
 

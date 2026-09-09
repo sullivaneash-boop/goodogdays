@@ -31,27 +31,27 @@ export type ServiceCategory = {
 export const serviceCategories: readonly ServiceCategory[] = [
   {
     id: "everyday",
-    name: "Dog Walking + Enrichment",
+    name: "Walks + Good Dog Sessions",
     brandLabel: "Everyday",
     number: "01",
     startingPrice: "$30",
-    description: "Reliable movement close to home or a personalized session built around the dog in front of me.",
+    description: "A familiar neighborhood walk or more activity built around what your dog enjoys.",
   },
   {
     id: "away",
-    name: "In-Home Dog Care",
+    name: "Care at Home",
     brandLabel: "While You’re Away",
     number: "02",
     startingPrice: "$95/day",
-    description: "In-home visits and stays that keep dogs close to their normal surroundings and routine.",
+    description: "Visits and overnight stays that keep your dog’s routine familiar while you’re away.",
   },
   {
     id: "bigger-days",
-    name: "Adventure Outings",
+    name: "Good Dog Adventures",
     brandLabel: "Bigger Days",
     number: "03",
     startingPrice: "$175",
-    description: "Two hours, half a day or the full flagship experience—planned around the individual dog.",
+    description: "Two hours, half a day or a full day to explore, play and get outside.",
   },
 ] as const;
 
@@ -63,8 +63,8 @@ export const services: readonly Service[] = [
     category: "everyday",
     duration: "30 minutes",
     price: "$30",
-    description: "A simple, reliable walk beginning and ending at your home. No vehicle transportation required.",
-    bestFor: "For dogs who are happiest staying close to home.",
+    description: "A simple walk that begins and ends at home. Your dog stays in their own neighborhood.",
+    bestFor: "Movement, sniffing, a potty break and a familiar routine.",
     includes: [
       "30-minute neighborhood walk",
       "Sniff time",
@@ -77,7 +77,7 @@ export const services: readonly Service[] = [
       "3+ recurring walks per week: $28 each",
     ],
     requirements: [
-      "This option stays close to home, without pickup, loading, transportation or a custom off-site outing.",
+      "No transportation or off-site outing—just a good walk close to home.",
     ],
     ctaText: "Request a Walk",
   },
@@ -88,7 +88,7 @@ export const services: readonly Service[] = [
     category: "everyday",
     duration: "45 minutes",
     price: "$50",
-    description: "A personalized activity session built around what the individual dog actually needs that day.",
+    description: "Maybe it’s a run. Maybe it’s fetch. Maybe they spend half the session sniffing one trail. Different dog, different day.",
     bestFor: "More than a walk.",
     potentialActivities: [
       "Neighborhood walking",
@@ -96,12 +96,11 @@ export const services: readonly Service[] = [
       "Running",
       "Fetch or tug",
       "Backyard play",
-      "Enrichment",
-      "Appropriate local outings",
-      "Controlled exposure to new environments",
+      "Something engaging to figure out",
+      "A nearby outing that suits them",
     ],
     includes: [
-      "Personalized activity",
+      "Activity built around your dog",
       "One photo",
       "Written recap",
       "Fresh-water check",
@@ -111,7 +110,7 @@ export const services: readonly Service[] = [
       "2+ recurring Good Dog Sessions per week: $45 each",
     ],
     requirements: [
-      "The plan is tailored each time; no single activity is promised in every session.",
+      "We choose what fits the dog and the day; no single activity happens every time.",
     ],
     ctaText: "Request a Session",
   },
@@ -123,7 +122,7 @@ export const services: readonly Service[] = [
     duration: "3 visits / day",
     price: "$95/day",
     pricePrefix: "From",
-    description: "Designed for dogs who are comfortable spending portions of the day alone but need consistent visits, activity, feeding and companionship while their owner is away.",
+    description: "Three visits for dogs who are comfortable spending part of the day alone but still need meals, movement and company.",
     bestFor: "Dependable care without moving your dog out of their home.",
     includes: [
       "3 daily visits: 2 shorter check-ins + 1 extended visit",
@@ -146,7 +145,7 @@ export const services: readonly Service[] = [
     duration: "Overnight / 16+ hours",
     price: "$175/night",
     pricePrefix: "From",
-    description: "Premium in-home care for dogs who benefit from a higher level of presence while their owners are away.",
+    description: "An overnight stay with plenty of time at home for dogs who do best with more company while you’re away.",
     bestFor: "Their home. Their routine. Someone genuinely there.",
     includes: [
       "Overnight stay",
@@ -159,8 +158,8 @@ export const services: readonly Service[] = [
       "Up to two dogs from the same household",
     ],
     addOns: [
-      "Puppies or unusually intensive care routines: from +$25/day",
-      "Extended stays and highly specialized care: quoted individually",
+      "Puppies or care routines that need more time: from +$25/day",
+      "Extended stays or more involved routines: quoted individually",
     ],
     requirements: [
       "A meet-and-greet is required before the first stay.",
@@ -175,7 +174,7 @@ export const services: readonly Service[] = [
     category: "bigger-days",
     duration: "2 hours",
     price: "$175",
-    description: "A custom outing based on your dog’s personality, activity level, comfort and interests.",
+    description: "A bigger outing shaped around your dog’s energy, comfort and favorite ways to explore.",
     bestFor: "A bigger outing without taking over the whole day.",
     potentialActivities: ["Trails", "Hiking", "Parks", "Running", "Swimming", "Sniffing", "Exploration", "Appropriate new environments"],
     includes: [
@@ -197,7 +196,7 @@ export const services: readonly Service[] = [
     category: "bigger-days",
     duration: "4 hours",
     price: "$295",
-    description: "A four-hour custom outing with time for multiple activities when they suit the dog and the day.",
+    description: "Four hours with room to move, explore, play and slow down along the way.",
     bestFor: "More room to move, explore and slow down along the way.",
     includes: [
       "Pickup + drop-off",
@@ -219,7 +218,7 @@ export const services: readonly Service[] = [
     category: "bigger-days",
     duration: "Up to 8 hours",
     price: "$495",
-    description: "A fully planned day built around your dog’s personality, energy and comfort level.",
+    description: "A full day out, planned around your dog’s energy, comfort and favorite things.",
     bestFor: "The flagship Good Dog Days experience.",
     potentialActivities: ["Hiking", "Trails", "Swimming", "Running", "Exploration", "Sniffing", "Play", "Downtime", "Decompression stops"],
     includes: [
@@ -228,7 +227,7 @@ export const services: readonly Service[] = [
       "Photos throughout",
       "Video clips",
       "Real-time updates",
-      "Professionally edited Good Dog Day highlight",
+      "Edited Good Dog Day highlight",
     ],
     addOns: ["Second dog from the same household: +$125"],
     requirements: ["A successful Good Dog Session is required first."],
@@ -238,16 +237,51 @@ export const services: readonly Service[] = [
   },
 ] as const;
 
-export const serviceInterestOptions = [
-  ...services.map((service) => ({ id: service.id, name: service.name })),
-  { id: "not-sure", name: "Not sure yet" },
+export const inquiryServiceOptions = [
+  {
+    id: "regular-walk",
+    name: "A regular walk",
+    description: "A simple walk around their own neighborhood.",
+  },
+  {
+    id: "more-activity",
+    name: "More activity during the day",
+    description: "Walking, sniffing, play or other activity in a Good Dog Session.",
+  },
+  {
+    id: "care-while-away",
+    name: "Care while I’m away",
+    description: "Visits or an in-home stay while you’re gone.",
+  },
+  {
+    id: "bigger-day",
+    name: "A bigger day out",
+    description: "Trails, water, exploring and Good Dog Adventures.",
+  },
+  {
+    id: "not-sure",
+    name: "I’m not sure yet",
+    description: "Tell us about your dog and we’ll help figure it out.",
+  },
 ] as const;
+
+export type InquiryServiceId = (typeof inquiryServiceOptions)[number]["id"];
+
+export const serviceInquiryDefaults: Readonly<Record<string, InquiryServiceId>> = {
+  "neighborhood-walk": "regular-walk",
+  "good-dog-session": "more-activity",
+  "routine-care": "care-while-away",
+  "in-home-stay": "care-while-away",
+  "two-hour-adventure": "bigger-day",
+  "half-day-adventure": "bigger-day",
+  "ultimate-good-dog-day": "bigger-day",
+  "not-sure": "not-sure",
+};
 
 export const bookingBasics = [
   "New bookings require at least 24 hours’ notice.",
   "Services are paid in advance.",
-  "A short introduction is required before a dog is left in my care.",
-  "Sitting clients require a meet-and-greet.",
+  "We’ll meet with you and your dog before solo care begins.",
   "Adventure dogs must first complete a Good Dog Session.",
   "Activity may be adjusted for weather, safety or the dog’s comfort.",
   "Holiday pricing may apply.",

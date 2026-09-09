@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     default: "Dog Walking & In-Home Dog Care in Cumming, GA | Good Dog Days",
     template: "%s | Good Dog Days",
   },
-  description: "Personalized dog walking, enrichment sessions, in-home care and premium dog adventures in Cumming and Forsyth County, Georgia.",
+  description: "Dog walking, activity sessions, in-home care and dog adventures in Cumming and Forsyth County, Georgia.",
   applicationName: siteConfig.name,
   category: "pet care",
   manifest: "/manifest.webmanifest",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     title: "Dog Walking & In-Home Dog Care in Cumming, GA | Good Dog Days",
-    description: "Personalized dog walking, enrichment and in-home care in Cumming and Forsyth County.",
+    description: "Walks, activity, care at home and bigger days out for dogs in Cumming and Forsyth County.",
     url: "/",
     siteName: siteConfig.name,
     type: "website",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Dog Walking & In-Home Dog Care in Cumming, GA | Good Dog Days",
-    description: "Personalized dog walking, enrichment and in-home care in Cumming and Forsyth County.",
+    description: "Walks, activity, care at home and bigger days out for dogs in Cumming and Forsyth County.",
     images: ["/opengraph-image"],
   },
 };

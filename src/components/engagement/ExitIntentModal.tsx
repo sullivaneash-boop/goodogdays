@@ -74,15 +74,15 @@ export function ExitIntentModal({ onDismiss }: ExitIntentModalProps) {
 
     try {
       await submitToFormspree({
-        subject: "Priority availability text request",
-        leadType: "Exit-intent priority callback",
+        subject: "Availability text request",
+        leadType: "Exit-intent callback",
         phone,
         smsConsent: confirmed,
         preferredContactMethod: "text",
         landingPage: window.location.href,
         referrer: document.referrer,
         submittedAt: new Date().toISOString(),
-        message: "Visitor requested a priority availability text before leaving the site.",
+        message: "Visitor asked for a text about service availability before leaving the site.",
       });
       setState("success");
       trackEvent("priority_callback_submit", { source: "exit_intent" });
@@ -117,7 +117,7 @@ export function ExitIntentModal({ onDismiss }: ExitIntentModalProps) {
         <button
           type="button"
           onClick={onDismiss}
-          aria-label="Close priority availability form"
+          aria-label="Close availability form"
           className="absolute right-4 top-4 grid size-10 place-items-center rounded-full text-xl text-[#0f2942]/45 transition hover:bg-[#0f2942]/5 hover:text-[#0f2942] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0f2942]"
         >
           ×
@@ -127,13 +127,13 @@ export function ExitIntentModal({ onDismiss }: ExitIntentModalProps) {
           <div className="py-10" role="status">
             <span className="grid size-14 place-items-center rounded-full bg-[#8fa768] text-xl font-black">✓</span>
             <p className="mt-7 text-[0.65rem] font-black uppercase tracking-[0.15em] text-[#64753a]">
-              You’re on the priority list
+              We’ve got your number
             </p>
             <h2 id="exit-intent-title" className="mt-2 max-w-[12ch] font-[var(--display)] text-4xl font-extrabold normal-case leading-[0.95] tracking-[-0.05em] sm:text-5xl">
               We’ll text you about availability.
             </h2>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-[#0f2942]/65">
-              No full intake needed right now. We’ll start with the quickest useful next step.
+              We’ll start with a quick conversation and take it from there.
             </p>
             <button
               type="button"
@@ -146,13 +146,13 @@ export function ExitIntentModal({ onDismiss }: ExitIntentModalProps) {
         ) : (
           <>
             <p className="pr-12 text-[0.65rem] font-black uppercase tracking-[0.15em] text-[#64753a]">
-              Save your place
+              Pick this up later
             </p>
             <h2 id="exit-intent-title" className="mt-3 max-w-[13ch] font-[var(--display)] text-4xl font-extrabold normal-case leading-[0.95] tracking-[-0.05em] sm:text-5xl">
-              Too busy to finish booking right now?
+              Want us to text you?
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-[#0f2942]/65 sm:text-base">
-              Leave your number and we’ll text you priority availability. Two fields, no full profile required.
+              Leave your number and we’ll text you about availability. No full inquiry needed right now.
             </p>
 
             <form onSubmit={submitPriorityRequest} noValidate className="mt-7">
@@ -192,7 +192,7 @@ export function ExitIntentModal({ onDismiss }: ExitIntentModalProps) {
                 disabled={state === "submitting"}
                 className="mt-5 flex min-h-13 w-full items-center justify-center rounded-xl bg-[#0f2942] px-5 text-xs font-black uppercase tracking-[0.08em] text-white transition hover:-translate-y-0.5 hover:bg-[#173b5d] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#f2c230]/50 disabled:cursor-wait disabled:translate-y-0 disabled:opacity-65"
               >
-                {state === "submitting" ? "Saving your place…" : "Text me priority availability"}
+                {state === "submitting" ? "Sending…" : "Text me about availability"}
               </button>
               <div className="mt-3 min-h-5" aria-live="polite">
                 {error ? <p role="alert" className="text-sm text-[#a13f27]">{error}</p> : null}

@@ -3,7 +3,14 @@
 import { useFormContext, useWatch } from "react-hook-form";
 import type { PetProfileFormValues } from "@/lib/intake/schema";
 
-type TextFieldName = "petName" | "breed" | "ownerName" | "email" | "phone";
+type TextFieldName =
+  | "petName"
+  | "age"
+  | "timing"
+  | "ownerName"
+  | "email"
+  | "phone"
+  | "zipCode";
 
 type FormFieldProps = {
   name: TextFieldName;

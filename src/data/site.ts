@@ -10,7 +10,7 @@ export const siteConfig = {
 
 export const navigation = [
   { label: "Services & Pricing", href: "/services" },
-  { label: "How It Works", href: "/#how-it-works" },
+  { label: "What to Expect", href: "/#how-it-works" },
   { label: "Service Area", href: "/#service-area" },
   { label: "About", href: "/#about" },
   { label: "FAQ", href: "/#faq" },
@@ -22,8 +22,8 @@ export const trustFacts = [
     body: "Personal attention—not a giant group walk.",
   },
   {
-    title: "Built around your dog",
-    body: "Movement, sniffing, play, enrichment or company.",
+    title: "The dog sets the pace",
+    body: "Some dogs run. Some sniff everything. Some just want company.",
   },
   {
     title: "Updates after care",
@@ -63,7 +63,7 @@ export const proofStories = [
     name: "Red",
     label: "Shelter Adventure Day / Cumming, GA",
     description:
-      "Red traded a day inside the shelter for exploration, new people, good treats and the kind of focused enrichment that lets a dog’s personality come through.",
+      "Red traded a day inside the shelter for exploring, meeting new people, good treats and the kind of attention that lets a dog’s personality come through.",
     cover: assets.redStoryCover.src,
     alt: assets.redStoryCover.alt,
     videoId: "7676155682902543629",
@@ -84,21 +84,21 @@ export const proofStories = [
 ] as const;
 
 export const processSteps = [
-  { title: "Tell me about your dog.", body: "Send a few basics about your dog, where you’re located and what kind of help you need." },
-  { title: "Meet your dog first.", body: "Before your dog is left in my care, I’ll complete a short owner-present introduction. Sitting clients require a meet-and-greet." },
-  { title: "I plan their day.", body: "Activity is based on your dog’s energy, temperament, environment, routine and what they actually enjoy." },
+  { title: "Tell me about your dog.", body: "Share what you need, where you’re located and a few things your dog enjoys." },
+  { title: "We meet first.", body: "Before solo care begins, I’ll meet your dog with you and learn the routines that matter." },
+  { title: "I plan their day.", body: "You don’t need to build an itinerary. I choose what makes sense for your dog, the weather and the day." },
   { title: "You get the recap.", body: "After standard sessions, you’ll receive a photo and written update. Adventures include additional photo and video coverage." },
 ] as const;
 
 export const faqItems = [
-  { question: "What is a Good Dog Session?", answer: "A one-on-one or two-dog session built around your dog’s needs that day. It can blend movement, sniffing, play, enrichment and an appropriate local outing." },
-  { question: "Are sessions only walks?", answer: "No. A walk might be part of the plan, but so might running, fetch, tug, enrichment games, decompression time or getting into a new environment." },
+  { question: "What is a Good Dog Session?", answer: "It’s more than a walk. The 45-minute session is built around what your dog enjoys—maybe walking, running, sniffing, fetch, tug, backyard play or a nearby outing." },
+  { question: "Does every dog do every activity?", answer: "No. Some dogs want to run. Some want to sniff every mailbox. We choose what fits your dog, their comfort and the day." },
   { question: "What types of dogs do you work with?", answer: "Dogs of different breeds, ages, energy levels and personalities are considered. The first conversation and owner-present introduction help determine whether the service is a good fit." },
-  { question: "Can you work with reactive or nervous dogs?", answer: "Possibly. Every dog’s needs, triggers and history are reviewed individually before service. Good Dog Days doesn’t make behavioral or safety guarantees, and some situations may require a qualified trainer or behavior professional first." },
+  { question: "Can you care for nervous dogs?", answer: "Possibly. Tell me what situations make your dog nervous or uncomfortable. We’ll talk through fit and choose familiar, appropriate surroundings before care begins." },
   { question: "Do you take multiple dogs?", answer: "Sessions are intentionally kept personal—typically one dog, or two compatible dogs from the same household." },
-  { question: "Can I book an Adventure immediately?", answer: "Not quite. Every dog completes at least one standard Good Dog Session before their first Adventure so Sully can get to know their temperament, handling and routine." },
+  { question: "Can I book an Adventure immediately?", answer: "Not quite. Every dog completes a Good Dog Session first. I’d rather know who’s on the other end of the leash before we’re halfway down a trail together." },
   { question: "Where do you currently operate?", answer: "Cumming and select areas of Central, West and North Forsyth County, Georgia. Share your neighborhood or ZIP code in the inquiry form and I’ll confirm availability." },
-  { question: "Do you provide in-home sitting?", answer: "Yes. Routine Care provides scheduled home visits, while a Good Dog In-Home Stay offers more comprehensive overnight care, depending on fit and availability." },
+  { question: "Do you provide care at home?", answer: "Yes. Routine Care includes three visits a day. A Good Dog In-Home Stay includes overnight care and more time at home, depending on fit and availability." },
   { question: "How much notice is required?", answer: "New bookings require at least 24 hours’ notice. More notice is always helpful, especially for in-home stays and longer Adventures, and availability will vary." },
-  { question: "What happens when the weather is bad?", answer: "The plan adapts. Heat, storms and unsafe conditions may mean a shorter outdoor activity, a timing change or more indoor enrichment. Your dog’s comfort and sensible risk decisions come first." },
+  { question: "What happens when the weather is bad?", answer: "The plan changes. Heat, storms or unsafe conditions may mean less time outside, a timing change, or more play and company at home." },
 ] as const;

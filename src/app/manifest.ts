@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Good Dog Days",
     short_name: "Good Dog Days",
-    description: "Personalized dog walking and in-home dog care in Cumming, Georgia.",
+    description: "Dog walking, activity sessions and in-home dog care in Cumming, Georgia.",
     start_url: "/",
     display: "standalone",
     background_color: "#f7f1e6",

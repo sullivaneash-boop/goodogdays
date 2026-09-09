@@ -26,15 +26,15 @@ export const metadata: Metadata = {
 const processProof = [
   {
     label: "One consistent handler",
-    title: "Care starts with paying attention.",
-    body: "I learn your dog’s routine, energy and preferences before deciding what a useful session looks like.",
+    title: "I get to know your dog first.",
+    body: "I learn their routine, energy and favorite things before taking over the leash.",
     image: assets.processAttentionPhoto.src,
     alt: assets.processAttentionPhoto.alt,
   },
   {
     label: "A plan that can adapt",
     title: "The dog in front of me sets the pace.",
-    body: "A session may mean movement, sniffing, play, enrichment or simple companionship—never activity for activity’s sake.",
+    body: "A session may mean walking, running, sniffing, play or simply some company. Different dog, different day.",
     image: assets.processAdaptPhoto.src,
     alt: assets.processAdaptPhoto.alt,
   },
@@ -72,10 +72,10 @@ export default function Home() {
             unoptimized
           />
           <div className="hero-content shell">
-            <p className="eyebrow">Dog walking + personalized dog care / Cumming, GA</p>
+            <p className="eyebrow">Walks, care at home + adventures / Cumming, GA</p>
             <h1 id="hero-title">Better days<br />for good dogs.</h1>
             <p className="hero-copy">
-              Personalized dog walking, enrichment and in-home care in Cumming and Forsyth County.
+              Walks, activity, care at home and bigger days out—built around the dog in front of us.
             </p>
             <div className="hero-actions">
               <a
@@ -84,13 +84,13 @@ export default function Home() {
                 data-track-event="service_cta_click"
                 data-track-label="hero_request"
               >
-                Request availability
+                Tell Us About Your Dog
               </a>
               <Link className="text-link light-link" href="/services">
-                Explore services + pricing <span aria-hidden="true">↗</span>
+                See services + pricing <span aria-hidden="true">↗</span>
               </Link>
             </div>
-            <p className="hero-note">Tell me about your dog—no commitment.</p>
+            <p className="hero-note">A few quick questions. No commitment.</p>
           </div>
           <p className="photo-label">Sully + Lylah / On the move</p>
         </section>
@@ -120,7 +120,7 @@ export default function Home() {
               <p className="section-index inverted">Services + pricing / 01</p>
               <h2 id="services-title">The right kind<br />of good day.</h2>
             </div>
-            <p>Clear options, transparent starting prices and a plan built around the dog—not a one-size-fits-all routine.</p>
+            <p>A walk. More activity. Care at home. A bigger day out. Pick what sounds right and we’ll take it from there.</p>
           </div>
 
           <div className="shell service-family-list">
@@ -148,9 +148,9 @@ export default function Home() {
 
         <section className="process-proof section-pad" aria-labelledby="proof-title">
           <div className="shell proof-heading">
-            <p className="section-index">Process proof / 02</p>
-            <h2 id="proof-title">Personal care.<br />Made visible.</h2>
-            <p>While Good Dog Days builds its customer review history, the proof is in a clear, repeatable process and real days with real dogs.</p>
+            <p className="section-index">Built around the dog / 02</p>
+            <h2 id="proof-title">Real attention.<br />No giant group.</h2>
+            <p>Good Dog Days stays small on purpose. Your dog gets a familiar person, an appropriate plan and an update after care.</p>
           </div>
           <div className="shell proof-process-grid">
             {processProof.map((item) => (
@@ -173,7 +173,7 @@ export default function Home() {
                 <p className="section-index inverted">How it works / 03</p>
                 <h2 id="how-title">Simple<br />on purpose.</h2>
               </div>
-              <p>Start with fit. Meet first. Build the plan from there.</p>
+              <p>You tell me about your dog. I handle the plan.</p>
             </div>
             <ol className="steps">
               {processSteps.map((step, index) => (
@@ -192,7 +192,7 @@ export default function Home() {
             <div className="care-intro">
               <p className="section-index">Care + safety / 04</p>
               <h2 id="safety-title">Trust starts before the leash changes hands.</h2>
-              <p>These are current operating practices—not badges, certifications or claims that don’t exist yet.</p>
+              <p>We meet first, talk through their routine and make sure the service fits before solo care begins.</p>
             </div>
             <div className="safety-list">
               {safetyFacts.map((fact, index) => (
@@ -232,8 +232,8 @@ export default function Home() {
               <p className="section-index inverted">Meet Sully + Lylah / 06</p>
               <h2 id="about-title">One good dog started all of this.</h2>
               <p className="lead">I’ve spent my life around dogs—and I know “active” means something different for every one of them.</p>
-              <p>After adopting Lylah in 2025, the right mix of walks, trails, swimming, stimulation and new environments became a major part of our life together. Good Dog Days grew from that simple idea: pay attention to the dog in front of you.</p>
-              <p>I’m local to Forsyth County, comfortable adapting the plan, and serious about earning trust before taking over the leash.</p>
+              <p>After adopting Lylah in 2025, walks, trails, swimming and new places became a major part of our life together. Good Dog Days grew from one simple idea: pay attention to the dog in front of you.</p>
+              <p>I’m local to Forsyth County. I keep care small, adapt the day when needed and earn trust before taking over the leash.</p>
               <a className="button button-accent" href="#inquiry">Tell me about your dog</a>
             </div>
           </div>
@@ -247,7 +247,7 @@ export default function Home() {
             <div>
               <p className="section-index">Real days / real dogs</p>
               <h2 id="real-days-title">See Good Dog Days in action.</h2>
-              <p>Neighborhood time, outdoor sessions and shelter Adventure Days are a window into how curiosity, movement and focused attention can change a dog’s day.</p>
+              <p>Neighborhood walks, outdoor sessions and shelter Adventure Days show what can happen when a dog gets somewhere to go and something good to do.</p>
               <a
                 className="arrow-link"
                 href={featuredStory.href}
@@ -281,22 +281,24 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="inquiry section-pad" id="inquiry" aria-labelledby="inquiry-title">
+        <section className="inquiry section-pad" id="inquiry-section" aria-labelledby="inquiry-title">
           <div className="shell inquiry-grid">
             <div className="inquiry-intro">
-              <p className="section-index inverted">Request availability / 08</p>
-              <h2 id="inquiry-title">Build their care profile.</h2>
-              <p>A focused 90-second intake turns your dog’s needs into a tailored starting point before you send anything.</p>
+              <p className="section-index inverted">Tell us about your dog / 08</p>
+              <h2 id="inquiry-title">Tell us about your dog.</h2>
+              <p>Start with one simple choice. Then share a few basics about your dog and where you are.</p>
               <ol className="next-steps">
-                <li><span>1</span>I check location + fit.</li>
-                <li><span>2</span>I reach out.</li>
-                <li><span>3</span>I meet your dog.</li>
-                <li><span>4</span>Care gets scheduled.</li>
+                <li><span>1</span>Tell me what you need.</li>
+                <li><span>2</span>I check location + fit.</li>
+                <li><span>3</span>We meet your dog.</li>
+                <li><span>4</span>We plan the first day.</li>
               </ol>
             </div>
-            <Suspense fallback={<div className="form-loading" aria-hidden="true" />}>
-              <InquiryForm />
-            </Suspense>
+            <div className="inquiry-form-anchor" id="inquiry">
+              <Suspense fallback={<div className="form-loading" aria-hidden="true" />}>
+                <InquiryForm />
+              </Suspense>
+            </div>
           </div>
         </section>
       </div>

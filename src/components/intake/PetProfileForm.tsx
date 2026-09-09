@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -12,12 +12,12 @@ import {
   type Variants,
 } from "framer-motion";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
-import { CareNeedsStep } from "@/components/intake/CareNeedsStep";
+import { DogDetailsStep } from "@/components/intake/CareNeedsStep";
 import { FormSuccess } from "@/components/intake/FormSuccess";
 import { OwnerContactStep } from "@/components/intake/OwnerContactStep";
-import { PetBasicsStep } from "@/components/intake/PetBasicsStep";
+import { ServiceNeedStep } from "@/components/intake/PetBasicsStep";
 import { StepProgress } from "@/components/intake/StepProgress";
-import { serviceInterestOptions } from "@/data/services";
+import { serviceInquiryDefaults } from "@/data/services";
 import { submitToFormspree } from "@/lib/formspree";
 import {
   petProfileDefaults,
@@ -25,7 +25,6 @@ import {
   stepFields,
   type PetProfileFormValues,
 } from "@/lib/intake/schema";
-import { matchService } from "@/lib/intake/serviceMatcher";
 import { trackEvent } from "@/lib/analytics";
 
 const stepVariants: Variants = {
@@ -62,9 +61,7 @@ function getAttribution() {
 export function PetProfileForm() {
   const searchParams = useSearchParams();
   const requestedServiceParam = searchParams.get("service");
-  const requestedService = serviceInterestOptions.some(
-    (service) => service.id === requestedServiceParam,
-  )
+  const requestedService = requestedServiceParam && requestedServiceParam in serviceInquiryDefaults
     ? requestedServiceParam
     : null;
   const [currentStep, setCurrentStep] = useState(0);
@@ -78,18 +75,42 @@ export function PetProfileForm() {
     resolver: zodResolver(petProfileSchema),
     mode: "onTouched",
     reValidateMode: "onChange",
-    defaultValues: petProfileDefaults,
+    defaultValues: {
+      ...petProfileDefaults,
+      serviceNeed: requestedService
+        ? serviceInquiryDefaults[requestedService]
+        : petProfileDefaults.serviceNeed,
+    },
   });
   const petName = useWatch({ control: form.control, name: "petName" });
-  const size = useWatch({ control: form.control, name: "size" });
-  const careNeeds = useWatch({ control: form.control, name: "careNeeds" });
-  const recommendation = useMemo(
-    () => matchService({ size, careNeeds, requestedService }),
-    [careNeeds, requestedService, size],
-  );
 
   useEffect(() => {
     return () => requestController.current?.abort();
+  }, []);
+
+  useEffect(() => {
+    if (window.location.hash !== "#inquiry") return;
+
+    let cancelled = false;
+    function alignInquiry() {
+      if (cancelled) return;
+      const inquiry = document.getElementById("inquiry");
+      if (!inquiry) return;
+
+      const root = document.documentElement;
+      const previousScrollBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = "auto";
+      inquiry.scrollIntoView({ block: "start", behavior: "auto" });
+      root.style.scrollBehavior = previousScrollBehavior;
+    }
+
+    const timeout = window.setTimeout(alignInquiry, 300);
+    void document.fonts.ready.then(alignInquiry);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeout);
+    };
   }, []);
 
   useEffect(() => {
@@ -101,7 +122,7 @@ export function PetProfileForm() {
     if (hasStarted.current) return;
     hasStarted.current = true;
     trackEvent("inquiry_start", {
-      selected_service: requestedService ?? "profile-matcher",
+      selected_service: requestedService ?? "inquiry",
     });
   }
 
@@ -126,37 +147,33 @@ export function PetProfileForm() {
     setServerError("");
     requestController.current?.abort();
     requestController.current = new AbortController();
-    const finalRecommendation = matchService({
-      size: values.size,
-      careNeeds: values.careNeeds,
-      requestedService,
-    });
-
     try {
       await submitToFormspree(
         {
-          subject: `New pet profile for ${values.petName}`,
-          leadType: "Full pet profile",
+          subject: `New inquiry for ${values.petName}`,
+          leadType: "Initial service inquiry",
+          serviceNeed: values.serviceNeed,
           petName: values.petName,
-          breed: values.breed,
+          age: values.age,
           size: values.size,
-          careNeeds: values.careNeeds,
-          recommendedService: finalRecommendation.name,
-          recommendationReason: finalRecommendation.rationale,
-          requestedService: requestedService ?? "profile-matcher",
+          personality: values.personality,
+          anythingWeShouldKnow: values.dogContext,
+          timing: values.timing,
+          requestedService: requestedService ?? "not-specified",
           ownerName: values.ownerName,
           name: values.ownerName,
           email: values.email,
           phone: values.phone,
+          zipCode: values.zipCode,
           preferredContactMethod: values.contactMethod,
-          message: `${values.ownerName} completed the pet profile for ${values.petName}. Recommended starting point: ${finalRecommendation.name}.`,
+          message: `${values.ownerName} asked about ${values.serviceNeed} for ${values.petName}.`,
           ...getAttribution(),
         },
         requestController.current.signal,
       );
 
       trackEvent("inquiry_submit", {
-        selected_service: finalRecommendation.name,
+        selected_service: values.serviceNeed,
         pet_size: values.size,
       });
       setSuccess({
@@ -230,11 +247,9 @@ export function PetProfileForm() {
                     transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                     className="outline-none"
                   >
-                    {currentStep === 0 ? <PetBasicsStep /> : null}
-                    {currentStep === 1 ? <CareNeedsStep /> : null}
-                    {currentStep === 2 ? (
-                      <OwnerContactStep recommendation={recommendation} />
-                    ) : null}
+                    {currentStep === 0 ? <ServiceNeedStep /> : null}
+                    {currentStep === 1 ? <DogDetailsStep /> : null}
+                    {currentStep === 2 ? <OwnerContactStep /> : null}
                   </m.div>
                 </AnimatePresence>
               </div>
@@ -251,7 +266,7 @@ export function PetProfileForm() {
                   </button>
                 ) : (
                   <p className="px-1 text-xs leading-relaxed text-white/40">
-                    About 90 seconds · no commitment
+                    A few quick questions · no commitment
                   </p>
                 )}
 
@@ -270,8 +285,8 @@ export function PetProfileForm() {
                     className="min-h-13 rounded-xl bg-[#f2c230] px-6 text-sm font-black uppercase tracking-[0.06em] text-[#0f2942] shadow-[0_12px_35px_rgba(242,194,48,0.18)] transition hover:-translate-y-0.5 hover:bg-[#ffe171] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#f2c230]/30 disabled:cursor-wait disabled:translate-y-0 disabled:opacity-70"
                   >
                     {form.formState.isSubmitting
-                      ? `Sending ${petName || "your dog"}’s profile…`
-                      : "Send pet profile"}
+                      ? `Sending ${petName || "your dog"}’s request…`
+                      : "Tell Us About Your Dog"}
                   </button>
                 )}
               </div>
@@ -280,7 +295,7 @@ export function PetProfileForm() {
                 {form.formState.isSubmitting ? (
                   <p className="flex items-center gap-2 text-xs font-semibold text-[#c9dda2]">
                     <span className="size-2 animate-pulse rounded-full bg-[#8fa768]" />
-                    Matching the final details and sending securely…
+                    Sending your request…
                   </p>
                 ) : serverError ? (
                   <p role="alert" className="text-sm text-[#ffc1b3]">
