@@ -51,8 +51,8 @@
   "aboutPhoto": {
     "label": "Home page / About — Meet Sully + Lylah",
     "kind": "image",
-    "src": "/media/sully-with-savannah.jpg",
-    "alt": "Sully walking Savannah during her shelter Adventure Day",
+    "src": "/uploads/photos/sully-and-lylah-petco.jpg",
+    "alt": "Sully and Lylah posing together at Petco",
     "status": "in-use"
   },
   "realDaysFeaturedCover": {
@@ -186,6 +186,13 @@
     "kind": "image",
     "src": "/media/savannah-portrait-opt.jpg",
     "alt": "Portrait of Savannah",
+    "status": "library"
+  },
+  "sullyWithSavannahPhoto": {
+    "label": "Asset library — Sully walking Savannah",
+    "kind": "image",
+    "src": "/media/sully-with-savannah.jpg",
+    "alt": "Sully walking Savannah during her shelter Adventure Day",
     "status": "library"
   }
 }

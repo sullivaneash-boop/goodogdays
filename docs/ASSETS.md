@@ -61,7 +61,7 @@ issue captures enough context for a developer or Codex to make a precise change.
 | Dog-and-sun mark over the home hero | `homeHeroMark` | `public/brand/mark-primary.svg` | SVG with transparent background |
 | “Care starts with paying attention” photo | `processAttentionPhoto` | `public/media/sully-with-lylah.jpg` | Landscape-friendly crop |
 | “The dog in front of me sets the pace” photo | `processAdaptPhoto` | `public/media/lylah-mountain-overlook.jpg` | Landscape-friendly crop |
-| “Meet Sully + Lylah” / About photo | `aboutPhoto` | `public/media/sully-with-savannah.jpg` | Tall portrait works best |
+| “Meet Sully + Lylah” / About photo | `aboutPhoto` | `public/uploads/photos/sully-and-lylah-petco.jpg` | Tall portrait works best |
 | “Real days / real dogs” featured cover | `realDaysFeaturedCover` | `public/media/red-cover.png` | Tall cover artwork |
 | Red story cover in site data | `redStoryCover` | `public/media/red-cover.png` | Tall cover artwork |
 | Savannah story cover in site data | `savannahStoryCover` | `public/media/savannah-cover.png` | Tall cover artwork |
@@ -71,7 +71,7 @@ issue captures enough context for a developer or Codex to make a precise change.
 
 | Home hero + first Process card | Second Process card | About section | Real days cover |
 | --- | --- | --- | --- |
-| ![Sully and Lylah](../public/media/sully-with-lylah.jpg) | ![Lylah at an overlook](../public/media/lylah-mountain-overlook.jpg) | ![Sully and Savannah](../public/media/sully-with-savannah.jpg) | ![Red cover](../public/media/red-cover.png) |
+| ![Sully and Lylah](../public/media/sully-with-lylah.jpg) | ![Lylah at an overlook](../public/media/lylah-mountain-overlook.jpg) | ![Sully and Lylah at Petco](../public/uploads/photos/sully-and-lylah-petco.jpg) | ![Red cover](../public/media/red-cover.png) |
 
 | Header/footer logo | Hero and Services mark | Savannah story cover |
 | --- | --- | --- |
@@ -117,6 +117,7 @@ by changing that placement's `src` and `alt` values.
 | ![Portrait of Red](../public/media/red-portrait-opt.jpg) | `redPortraitPhoto` | `public/media/red-portrait-opt.jpg` |
 | ![Red on a trail](../public/media/red-trail-opt.jpg) | `redTrailPhoto` | `public/media/red-trail-opt.jpg` |
 | ![Portrait of Savannah](../public/media/savannah-portrait-opt.jpg) | `savannahPortraitPhoto` | `public/media/savannah-portrait-opt.jpg` |
+| ![Sully walking Savannah](../public/media/sully-with-savannah.jpg) | `sullyWithSavannahPhoto` | `public/media/sully-with-savannah.jpg` |
 
 ## Graphics that are not uploaded files
 
