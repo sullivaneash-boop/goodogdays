@@ -13,7 +13,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Editable content
 
-Service copy, pricing placeholders, links, service-area language, process steps, form options and FAQs live in `src/data/site.ts`.
+Service and pricing details live in `src/data/services.ts`. Site links, service-area language, process steps and FAQs live in `src/data/site.ts`.
 
 ## Formspree setup
 
