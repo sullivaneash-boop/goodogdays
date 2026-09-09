@@ -13,6 +13,13 @@ import {
   proofStories,
 } from "@/data/site";
 
+const lylahStoryImages = [
+  "/media/lylah-adoption-day.jpg",
+  "/media/lylah-trail-selfie.jpg",
+  "/media/lylah-mountain-overlook.jpg",
+  "/media/lylah-rock-trail.jpg",
+] as const;
+
 export default function Home() {
   return (
     <main>
@@ -169,8 +176,25 @@ export default function Home() {
 
         <section className="story section-pad" id="story" aria-labelledby="story-title">
           <div className="story-collage shell-wide">
-            <div className="story-image story-image-main">
-              <Image src="/media/lylah-lake.jpg" alt="Lylah standing ready beside the lake in her pink adventure harness" fill sizes="(min-width: 900px) 52vw, 100vw" />
+            <div
+              className="story-slideshow"
+              role="img"
+              aria-label="Sully and Lylah together on adoption day and outdoor adventures"
+            >
+              {lylahStoryImages.map((src) => (
+                <Image
+                  className="story-slide"
+                  src={src}
+                  alt=""
+                  fill
+                  sizes="(min-width: 980px) 58vw, 100vw"
+                  key={src}
+                />
+              ))}
+              <div className="story-slide-meta" aria-hidden="true">
+                <span>LYLAH / THEN + NOW</span>
+                <span>01—04</span>
+              </div>
             </div>
             <div className="story-content">
               <p className="section-index inverted">THE START / 04</p>
@@ -178,16 +202,9 @@ export default function Home() {
               <p>Sully adopted Lylah from the Hall County Animal Shelter in September 2025. Since then, walks, trails, swimming, outdoor adventures and exploring new places together have become a major part of their lives.</p>
               <p>Seeing what the right mix of exercise, stimulation and new experiences means to Lylah is part of the inspiration behind Good Dog Days.</p>
               <blockquote>“Dogs spend a lot of their lives waiting on us. Good Dog Days gives them something to look forward to.”</blockquote>
-              <a className="arrow-link light-link" href="https://www.tiktok.com/@sullyeash/photo/7592808399943765303" target="_blank" rel="noreferrer">
-                See Lylah’s story <span aria-hidden="true">↗</span>
+              <a className="arrow-link light-link" href="https://www.tiktok.com/@sullyeash/photo/7592808399943765303?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7602050129038804511" target="_blank" rel="noreferrer">
+                Learn more about Lylah and me <span aria-hidden="true">↗</span>
               </a>
-            </div>
-            <div className="story-image story-image-small">
-              <p className="story-status">CURRENT STATUS: ABSOLUTELY COOKED</p>
-              <video controls preload="none" playsInline poster="/media/sully-with-lylah.jpg" aria-label="Sully walking Lylah on a boardwalk">
-                <source src="/media/lylah-walking-above.mp4" type="video/mp4" />
-                Your browser does not support this video.
-              </video>
             </div>
           </div>
         </section>
