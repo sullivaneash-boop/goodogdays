@@ -7,7 +7,7 @@ Reviewed September 14, 2026. Confirmed public domain: **https://www.goodogdays.c
 ## 1. Conversion and copy
 
 - The homepage now immediately identifies dog walking, enrichment, in-home pet sitting and Adventures with Sully in Cumming/Forsyth County. Starting prices are visible in the hero: $30, $95/day and $175.
-- Clarified the difference between a neighborhood walk, flexible 45-minute enrichment visit and longer Adventure. Transportation is an option for an appropriate enrichment visit, never a universal promise.
+- Clarified the difference between a neighborhood walk, personalized 60-minute Good Dog Session and longer Adventure. Transportation is an option for an appropriate enrichment visit, never a universal promise.
 - Made owner involvement, individual attention, physical and mental activity, and real dog stories more explicit. Added a direct answer to “Who comes to my home?”
 - Preserved “Get Started” and the existing three-step intake. Optional personality details now expand on demand. Success copy explains that an inquiry is followed by a conversation and is not a confirmed booking.
 
@@ -17,7 +17,7 @@ Reviewed September 14, 2026. Confirmed public domain: **https://www.goodogdays.c
 - Improved home and services titles/descriptions with natural local service language. Fixed the thank-you page's own canonical while retaining noindex.
 - Added a host-specific permanent redirect from `goodogdays.vercel.app`, preserving paths and queries. Preview deployments are noindex and disallowed in robots; the confirmed production domain remains indexable.
 - Retained the approved shared banner and favicon assets. Added a branded page with a true HTTP 404 response and useful recovery links.
-- Added WebSite schema and aligned Organization/Service data with visible services and prices. JSON-LD parses correctly; all seven offers match current prices. This is code validation, not a claim of Google rich-result eligibility.
+- Added WebSite schema and aligned Organization/Service data with visible services and prices. JSON-LD parses correctly; all seven services and four weekly-plan offers match current prices. This is code validation, not a claim of Google rich-result eligibility.
 - Live checks confirmed apex → www, HTTP → HTTPS and trailing-slash normalization already work. The old Vercel hostname still returns 200 before this change is deployed.
 
 Google recommends consistent canonical signals and people-first crawlable content. See [canonical guidance](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls) and [Search Essentials](https://developers.google.com/search/docs/essentials).
@@ -26,7 +26,7 @@ Google recommends consistent canonical signals and people-first crawlable conten
 
 Business identity, geography, service differences, prices, process and proof are readable page text. No thin city pages, generic blog expansion or artificial AI files were added. This follows [Google's AI optimization guidance](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide).
 
-The best next content investment is one permission-cleared, firsthand Adventure recap or an illustrated “what happens during a 45-minute visit” story, using actual outings and outcomes.
+The best next content investment is one permission-cleared, firsthand Adventure recap or an illustrated “what happens during a 60-minute visit” story, using actual outings and outcomes.
 
 ## 4. Technical fixes
 

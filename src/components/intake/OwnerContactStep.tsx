@@ -40,7 +40,8 @@ export function OwnerContactStep() {
               <option value="" disabled>Choose the closest fit</option>
               <option>Weekdays around lunch</option>
               <option>1–2 times per week</option>
-              <option>3+ times per week</option>
+              <option>3-Day Weekly Plan</option>
+              <option>5-Day Weekly Plan</option>
               <option>Occasionally / as needed</option>
               <option>While I’m away / upcoming trip</option>
               <option>A one-time outing or Adventure</option>

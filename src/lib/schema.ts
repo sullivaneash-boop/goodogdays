@@ -27,12 +27,23 @@ export const servicesSchema = {
     description: service.description,
     provider: { "@id": absoluteUrl("/#organization") },
     areaServed: "Cumming and select areas of Forsyth County, Georgia",
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "USD",
-      price: service.price.replace(/[^0-9.]/g, ""),
-      url: absoluteUrl(`/services#${service.id}`),
-    },
+    offers: [
+      {
+        "@type": "Offer",
+        name: service.weeklyPlans ? `${service.shortName} — Single visit` : service.name,
+        priceCurrency: "USD",
+        price: service.price.replace(/[^0-9.]/g, ""),
+        url: absoluteUrl(`/services#${service.id}`),
+      },
+      ...(service.weeklyPlans ?? []).map((plan) => ({
+        "@type": "Offer",
+        name: `${service.shortName} — ${plan.name}`,
+        description: `${plan.visits} visits per week for $${plan.price}/week.`,
+        priceCurrency: "USD",
+        price: String(plan.price),
+        url: absoluteUrl(`/services#${service.id}`),
+      })),
+    ],
   })),
 };
 

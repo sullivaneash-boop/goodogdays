@@ -53,7 +53,7 @@ export const safetyFacts = [
   },
   {
     title: "Comfort before Adventures",
-    body: "We arrange a 45-minute introductory Good Dog Session before the first off-site Adventure. Request your Adventure now; we’ll handle setup.",
+    body: "We arrange a 60-minute introductory Good Dog Session before the first off-site Adventure. Request your Adventure now; we’ll handle setup.",
   },
 ] as const;
 
@@ -91,12 +91,14 @@ export const processSteps = [
 export const faqItems = [
   { question: "Who comes to my home?", answer: "Sully, the owner of Good Dog Days, is your handler. We meet with you and your dog before solo care begins. Walks and sitting start at your home; Adventures include pickup and drop-off in the service area." },
   { question: "Not sure which service to choose?", answer: "That’s okay. Select Not Sure / Help Me Choose in Get Started. Share your dog’s needs and schedule, and we’ll recommend the right fit and confirm availability before arranging introductions." },
-  { question: "What is a Good Dog Session?", answer: "It’s our 45-Minute Enrichment Visit ($50): time for running, sniffing, fetch, tug, backyard activity or enrichment. When it suits your dog and the logistics, it can include a short drive to a nearby park or trail. Not every visit includes transportation. For a longer off-site experience, choose a 2–8 hour Good Dog Adventure." },
+  { question: "What is a Good Dog Session?", answer: "A personalized hour of exercise and enrichment for $65—not just a longer walk. Walking, running, sniffing, fetch, tug, backyard play and exploration are all options. The 60-minute service window begins when we arrive and ends when your dog is returned home, including any driving. For a larger, intentionally planned off-site experience, choose a 2–8 hour Good Dog Adventure." },
+  { question: "Does a Good Dog Session include transportation?", answer: "A short drive to a nearby park, trail, green space or other suitable location may be part of the session when appropriate. Transportation is one tool we may use, not a guarantee or a separate standard add-on. Specific destinations or extended travel can be quoted separately. Neighborhood Walks stay close to home and do not include transportation." },
+  { question: "Do you offer weekly plans?", answer: "Yes. For the 30-Minute Neighborhood Walk, the 3-Day Weekly Plan is $85/week and the 5-Day Weekly Plan is $135/week. For the 60-Minute Good Dog Session, the 3-Day Weekly Plan is $180/week and the 5-Day Weekly Plan is $290/week. Single visits are $30 and $65, respectively. A second dog from the same household adds $10/visit for walks or $15/visit for sessions." },
   { question: "Does every dog do every activity?", answer: "No. Some dogs want to run. Some want to sniff every mailbox. We choose what fits your dog, their comfort and the day." },
   { question: "What types of dogs do you work with?", answer: "Dogs of different breeds, ages, energy levels and personalities are considered. The first conversation and owner-present introduction help determine whether the service is a good fit." },
   { question: "Can you care for nervous dogs?", answer: "Possibly. Tell me what situations make your dog nervous or uncomfortable. We’ll talk through fit and choose familiar, appropriate surroundings before care begins." },
   { question: "Do you take multiple dogs?", answer: "Sessions are intentionally kept personal—typically one dog, or two compatible dogs from the same household." },
-  { question: "Can I request an Adventure as a new customer?", answer: "Yes. Request the Adventure you’re interested in now. Before their first off-site Adventure, your dog must successfully complete a 45-minute Good Dog Session ($50). We’ll arrange it during setup; you don’t need to book it separately." },
+  { question: "Can I request an Adventure as a new customer?", answer: "Yes. Request the Adventure you’re interested in now. Before their first off-site Adventure, your dog must successfully complete a 60-minute Good Dog Session ($65). We’ll arrange it during setup; you don’t need to book it separately." },
   { question: "Where do you currently operate?", answer: "Cumming and select areas of Central, West and North Forsyth County, Georgia. Share your neighborhood or ZIP code in the inquiry form and I’ll confirm availability." },
   { question: "Do you provide care at home?", answer: "Yes. Pet Sitting Visits include three visits per day for $95/day, for dogs comfortable alone overnight. Overnight Pet Sitting starts at $175/night with approximately 16+ hours at home per day. Both include up to two dogs. We arrange a meet-and-greet before the first stay." },
   { question: "How much notice is required?", answer: "New bookings require at least 24 hours’ notice. More notice is always helpful, especially for in-home stays and longer Adventures, and availability will vary." },

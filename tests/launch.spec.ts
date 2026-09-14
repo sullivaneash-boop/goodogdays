@@ -45,7 +45,8 @@ test("every page has the production canonical, shared preview and valid internal
     if (path === "/services") {
       const graph = JSON.parse(json[0])["@graph"];
       expect(graph).toHaveLength(7);
-      expect(graph.map((service: { offers: { price: string } }) => service.offers.price)).toEqual(["30", "50", "95", "175", "175", "295", "495"]);
+      expect(graph.map((service: { offers: { price: string }[] }) => service.offers[0].price)).toEqual(["30", "65", "95", "175", "175", "295", "495"]);
+      expect(graph.slice(0, 2).map((service: { offers: { price: string }[] }) => service.offers.slice(1).map(offer => offer.price))).toEqual([["85", "135"], ["180", "290"]]);
     }
     const hrefs = await page.locator('a[href]').evaluateAll(nodes => nodes.map(node => (node as HTMLAnchorElement).getAttribute("href")!));
     for (const href of hrefs) {

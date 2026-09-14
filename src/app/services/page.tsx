@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Dog Care Prices in Cumming, GA | Good Dog Days",
-    description: "Clear pricing for dog dog walking, enrichment visits, in-home pet sitting and dog adventures in Cumming and Forsyth County.",
+    description: "Clear pricing for dog walking, enrichment visits, in-home pet sitting and dog adventures in Cumming and Forsyth County.",
     url: "/services",
     images: [sharedPreviewImage],
   },
@@ -98,7 +98,7 @@ export default function ServicesPage() {
                   <p>Trails. Hiking. Swimming. Running. Exploring. Sniffing. Playing. Maybe a little of everything. Every Adventure is planned around your dog’s energy, personality, comfort, interests, and physical ability.</p>
                   <aside className="adventure-setup" aria-label="Adventure introduction">
                     <h3>New to Good Dog Days?</h3>
-                    <p>Before their first Adventure, your dog must successfully complete a 45-minute enrichment visit (Good Dog Session, $50) so we can get to know them and make sure they’re comfortable before heading off-site.</p>
+                    <p>Before their first Adventure, your dog must successfully complete a 60-minute Good Dog Session ($65) so we can get to know them and make sure they’re comfortable before heading off-site.</p>
                     <p><strong>You don’t need to book it separately. We’ll take care of that during setup.</strong></p>
                     <Link className="button button-accent" href="/?service=two-hour-adventure#inquiry" data-track-event="service_cta_click" data-track-label="adventure_setup">Request an Adventure</Link>
                   </aside>
@@ -120,7 +120,7 @@ export default function ServicesPage() {
                           <p className="service-best-for">{service.bestFor}</p>
                         </div>
                         <p className="price-display">
-                          {service.pricePrefix ? <span>{service.pricePrefix}</span> : null}
+                          {service.pricePrefix ? <span>{service.pricePrefix}</span> : service.weeklyPlans ? <span>Single visit</span> : null}
                           <strong>{service.price}</strong>
                         </p>
                       </div>
@@ -141,10 +141,13 @@ export default function ServicesPage() {
                             <ul>{service.potentialActivities.map((item) => <li key={item}>{item}</li>)}</ul>
                           </section>
                         ) : null}
-                        {service.addOns.length > 0 ? (
+                        {service.addOns.length > 0 || service.weeklyPlans?.length ? (
                           <section>
                             <h4>Other pricing</h4>
-                            <ul>{service.addOns.map((item) => <li key={item}>{item}</li>)}</ul>
+                            <ul>
+                              {service.weeklyPlans?.map((plan) => <li key={plan.name}>{plan.name}: ${plan.price}/week ({plan.visits} visits)</li>)}
+                              {service.addOns.map((item) => <li key={item}>{item}</li>)}
+                            </ul>
                           </section>
                         ) : null}
                         {service.requirements.length > 0 ? (

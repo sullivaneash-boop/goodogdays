@@ -8,6 +8,7 @@ export type Service = {
   duration: string;
   price: string;
   pricePrefix?: string;
+  weeklyPlans?: readonly { name: string; price: number; visits: number }[];
   description: string;
   bestFor: string;
   includes: readonly string[];
@@ -51,19 +52,23 @@ export const serviceCategories: readonly ServiceCategory[] = [
     brandLabel: "Bigger Days",
     number: "03",
     startingPrice: "$175",
-    description: "Bigger off-site experiences built around your dog. Choose 2–8 hours.",
+    description: "Larger, intentionally planned off-site experiences. Choose 2–8 hours.",
   },
 ] as const;
 
 export const services: readonly Service[] = [
   {
     id: "neighborhood-walk",
-    name: "30-Minute Dog Walk",
+    name: "30-Minute Neighborhood Walk",
     shortName: "Neighborhood Walk",
     category: "everyday",
     duration: "30 minutes",
     price: "$30",
-    description: "A familiar neighborhood walk that starts and ends at your home, with time to move, sniff, potty, and get out of the house.",
+    weeklyPlans: [
+      { name: "3-Day Weekly Plan", price: 85, visits: 3 },
+      { name: "5-Day Weekly Plan", price: 135, visits: 5 },
+    ],
+    description: "Dependable everyday exercise close to home: walking, sniffing, potty time and movement, plus a fresh-water check, photo and recap. Starts and ends at your home; no transportation is included.",
     bestFor: "Movement, sniffing, a potty break and a familiar routine.",
     includes: [
       "30-minute neighborhood walk",
@@ -73,8 +78,7 @@ export const services: readonly Service[] = [
       "Written recap",
     ],
     addOns: [
-      "Second dog from the same household: +$10",
-      "3+ recurring walks per week: $28 each",
+      "Second dog from the same household: +$10/visit",
     ],
     requirements: [
       "No transportation or off-site outing—just a good walk close to home.",
@@ -83,13 +87,17 @@ export const services: readonly Service[] = [
   },
   {
     id: "good-dog-session",
-    name: "45-Minute Enrichment Visit",
+    name: "60-Minute Good Dog Session",
     shortName: "Good Dog Session",
     category: "everyday",
-    duration: "45 minutes",
-    price: "$50",
-    description: "More than the usual loop: running, fetch, tug, sniffing or enrichment. When your dog and the logistics are a good fit, we can take a short drive to a nearby park, trail or green space. Transportation isn’t included in every visit.",
-    bestFor: "Good Dog Session · One-on-one activity tailored to your dog.",
+    duration: "60 minutes",
+    price: "$65",
+    weeklyPlans: [
+      { name: "3-Day Weekly Plan", price: 180, visits: 3 },
+      { name: "5-Day Weekly Plan", price: 290, visits: 5 },
+    ],
+    description: "More than a longer walk: a personalized hour of exercise and enrichment built around your dog. Walking, running, sniffing, fetch, tug, backyard play or exploration—we choose what fits. A short drive to a nearby park, trail, green space or other suitable location may be part of the session when appropriate.",
+    bestFor: "A personalized hour built around your dog.",
     potentialActivities: [
       "Neighborhood walking",
       "Sniff-heavy decompression",
@@ -100,17 +108,19 @@ export const services: readonly Service[] = [
       "A short trip to a nearby park or trail, when appropriate",
     ],
     includes: [
-      "45 minutes of one-on-one activity built around your dog",
+      "60-minute service window, from our arrival until your dog is returned home",
       "One photo",
       "Written recap",
       "Fresh-water check",
     ],
     addOns: [
-      "Second dog from the same household: +$15",
-      "2+ recurring Good Dog Sessions per week: $45 each",
+      "Second dog from the same household: +$15/visit",
     ],
     requirements: [
-      "We choose what fits the dog and the day; no single activity happens every time.",
+      "The 60-minute window begins when we arrive and ends when your dog is returned home; any driving is part of that hour.",
+      "Transportation is one tool we may use, not a guarantee or a separate standard add-on.",
+      "Specific destinations or extended travel can be quoted separately if needed.",
+      "For a larger, intentionally planned off-site experience, choose a Good Dog Adventure.",
     ],
     ctaText: "Get Started",
   },
@@ -237,7 +247,7 @@ export const services: readonly Service[] = [
 ] as const;
 
 export const inquiryServiceOptions = [
-  { id: "regular-walk", name: "Walking + Enrichment", description: "A 30-minute walk or 45-minute enrichment visit. From $30." },
+  { id: "regular-walk", name: "Walking + Enrichment", description: "A 30-minute Neighborhood Walk ($30) or 60-minute Good Dog Session ($65). Weekly plans available." },
   { id: "care-while-away", name: "In-Home Pet Sitting", description: "Daily visits or overnight care while you’re away. From $95/day." },
   { id: "bigger-day", name: "Good Dog Adventures", description: "A 2-hour, half-day or full-day outing. From $175." },
   { id: "not-sure", name: "Not Sure / Help Me Choose", description: "Tell us about your dog and we’ll help find the right fit." },

@@ -40,9 +40,12 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844
     await expect(dialog).toBeVisible();
     await expect(dialog.getByRole("heading")).toHaveCSS("font-size", viewport.width >= 640 ? "32px" : "30px");
     expect(await dialog.evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
-    const box = await dialog.boundingBox();
-    expect(box!.y).toBeGreaterThanOrEqual(0);
-    expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height);
+    // Visibility begins before the entrance animation settles; measure its final bounds.
+    await expect(async () => {
+      const box = await dialog.boundingBox();
+      expect(box!.y).toBeGreaterThanOrEqual(0);
+      expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height);
+    }).toPass();
     const submit = dialog.getByRole("button", { name: "Text me about availability" });
     expect(await contrast(submit)).toBeGreaterThanOrEqual(4.5);
     await submit.click();

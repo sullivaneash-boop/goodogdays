@@ -23,6 +23,12 @@ for (const [id, label, category] of journeys) {
 test("mobile family anchors, disclosure, and menu work", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/services");
+  for (const [id, threeDay, fiveDay] of [["neighborhood-walk", "85", "135"], ["good-dog-session", "180", "290"]]) {
+    const service = page.locator(`#${id}`);
+    await service.locator("summary").click();
+    await expect(service.getByText(`3-Day Weekly Plan: $${threeDay}/week (3 visits)`)).toBeVisible();
+    await expect(service.getByText(`5-Day Weekly Plan: $${fiveDay}/week (5 visits)`)).toBeVisible();
+  }
   await page.locator('.pricing-doors a[href="#bigger-days"]').click();
   await expect(page).toHaveURL(/#bigger-days$/);
   await expect(page.getByRole("heading", { name: "Good Dog Adventures", exact: true })).toBeInViewport();
