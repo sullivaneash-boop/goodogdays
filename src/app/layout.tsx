@@ -6,7 +6,7 @@ import { EngagementLayer } from "@/components/engagement/EngagementLayer";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import assets from "@/data/assets.json";
 import { siteConfig } from "@/data/site";
-import { siteUrl } from "@/lib/seo";
+import { sharedPreviewImage, siteUrl } from "@/lib/seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,10 +21,11 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
-      { url: assets.browserFavicon.src, sizes: "any" },
-      { url: assets.appIcon.src, type: "image/png", sizes: "256x256" },
+      { url: `${assets.browserFavicon.src}?v=2`, type: "image/x-icon", sizes: "16x16 32x32 48x48 64x64 128x128 256x256" },
+      { url: `${assets.browserFaviconSvg.src}?v=2`, type: "image/svg+xml", sizes: "any" },
+      { url: `${assets.appIcon.src}?v=2`, type: "image/png", sizes: "256x256" },
     ],
-    apple: [{ url: assets.appleTouchIcon.src, type: "image/png", sizes: "180x180" }],
+    apple: [{ url: `${assets.appleTouchIcon.src}?v=2`, type: "image/png", sizes: "180x180" }],
   },
   alternates: { canonical: "/" },
   openGraph: {
@@ -34,13 +35,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     type: "website",
     locale: "en_US",
-    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+    images: [sharedPreviewImage],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dog Walking & In-Home Dog Care in Cumming, GA | Good Dog Days",
     description: "Walks, activity, care at home and bigger days out for dogs in Cumming and Forsyth County.",
-    images: ["/opengraph-image"],
+    images: [sharedPreviewImage],
   },
 };
 

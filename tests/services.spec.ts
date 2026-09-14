@@ -50,7 +50,8 @@ test("Adventure inquiry retains duration and permits retry after a server failur
   await page.getByLabel("Age or best guess").fill("4 years");
   // The optional personality checklist should not block a qualified inquiry.
   await page.getByRole("button", { name: /Continue/ }).click();
-  await page.getByLabel("When or how often do you need help?").fill("Next Saturday");
+  await page.getByLabel("When or how often do you need help?").selectOption("A one-time outing or Adventure");
+  await page.getByLabel("Dates or schedule details (optional)").fill("Next Saturday");
   await page.getByLabel("Your name").fill("Test Owner");
   await page.getByLabel("Email").fill("test@example.com");
   await page.getByLabel("Mobile number").fill("7705550123");
@@ -59,5 +60,5 @@ test("Adventure inquiry retains duration and permits retry after a server failur
   await expect(page.locator("#inquiry").getByRole("alert")).toContainText("didn’t make it through");
   await page.getByRole("button", { name: "Send Request" }).click();
   await expect(page.getByRole("heading", { name: "Good things ahead for Rufus." })).toBeVisible();
-  expect(payload).toMatchObject({ serviceNeed: "bigger-day", requestedService: "half-day-adventure", personality: [], timing: "Next Saturday" });
+  expect(payload).toMatchObject({ serviceNeed: "bigger-day", requestedService: "half-day-adventure", personality: [], timing: "A one-time outing or Adventure — Next Saturday" });
 });

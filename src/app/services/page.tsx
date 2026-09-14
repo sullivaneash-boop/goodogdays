@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import assets from "@/data/assets.json";
 import { bookingBasics, serviceCategories, servicesForCategory } from "@/data/services";
+import { sharedPreviewImage } from "@/lib/seo";
 import { servicesSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -16,13 +17,13 @@ export const metadata: Metadata = {
     title: "Dog Care Services & Pricing | Good Dog Days",
     description: "Clear pricing for dog dog walking, enrichment visits, in-home pet sitting and dog adventures in Cumming and Forsyth County.",
     url: "/services",
-    images: [{ url: "/services/opengraph-image", width: 1200, height: 630 }],
+    images: [sharedPreviewImage],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dog Care Services & Pricing | Good Dog Days",
     description: "Clear pricing for walks, care at home and dog adventures in Cumming and Forsyth County.",
-    images: ["/services/opengraph-image"],
+    images: [sharedPreviewImage],
   },
 };
 

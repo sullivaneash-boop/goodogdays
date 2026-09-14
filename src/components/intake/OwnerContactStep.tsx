@@ -22,10 +22,40 @@ export function OwnerContactStep() {
         </p>
       </header>
 
-      <FormField
+      <Controller
+        control={control}
         name="timing"
-        label="When or how often do you need help?"
-        placeholder="Weekdays at lunch / Oct. 12–16 / still figuring it out"
+        render={({ field, fieldState }) => (
+          <div>
+            <label htmlFor="inquiry-timing" className="mb-2.5 block text-[0.7rem] font-black uppercase tracking-[0.12em] text-white/70">
+              When or how often do you need help?
+            </label>
+            <select
+              {...field}
+              id="inquiry-timing"
+              className="timing-select"
+              aria-invalid={Boolean(fieldState.error)}
+              aria-describedby={fieldState.error ? "timing-error" : "timing-hint"}
+            >
+              <option value="" disabled>Choose the closest fit</option>
+              <option>Weekdays around lunch</option>
+              <option>1–2 times per week</option>
+              <option>3+ times per week</option>
+              <option>Occasionally / as needed</option>
+              <option>While I’m away / upcoming trip</option>
+              <option>A one-time outing or Adventure</option>
+              <option>Not sure yet — help me plan</option>
+              <option>Something else</option>
+            </select>
+            <p id="timing-hint" className="mt-2 text-xs text-white/65">A rough idea is enough. We’ll confirm the details together.</p>
+            {fieldState.error ? <p id="timing-error" role="alert" className="mt-2 text-sm text-[#ffc1b3]">{fieldState.error.message}</p> : null}
+          </div>
+        )}
+      />
+      <FormField
+        name="timingDetails"
+        label="Dates or schedule details (optional)"
+        placeholder="Oct. 12–16, Tuesdays after 2, or anything else"
         autoComplete="off"
       />
 

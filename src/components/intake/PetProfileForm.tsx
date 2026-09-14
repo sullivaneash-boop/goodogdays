@@ -164,7 +164,7 @@ export function PetProfileForm() {
           size: values.size,
           personality: values.personality,
           anythingWeShouldKnow: values.dogContext,
-          timing: values.timing,
+          timing: [values.timing, values.timingDetails].filter(Boolean).join(" — "),
           requestedService: requestedService ?? "not-specified",
           ownerName: values.ownerName,
           name: values.ownerName,

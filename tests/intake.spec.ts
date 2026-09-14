@@ -32,7 +32,7 @@ test.describe("initial lead inquiry", () => {
     await page.getByText("Professional sniffer", { exact: true }).click();
     await page.getByRole("button", { name: /continue/i }).click();
 
-    await page.getByLabel("When or how often do you need help?").fill("Weekdays around lunch");
+    await page.getByLabel("When or how often do you need help?").selectOption("Weekdays around lunch");
     await page.getByLabel("Your name").fill("Sam Owner");
     await page.getByLabel("Email").fill("sam@example.com");
     await page.getByLabel("Mobile number").fill("7705550123");

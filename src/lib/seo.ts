@@ -1,5 +1,14 @@
 import type { Metadata } from "next";
+import assets from "@/data/assets.json";
 import { siteConfig } from "@/data/site";
+
+export const sharedPreviewImage = {
+  url: assets.websiteShareBanner.src,
+  width: 2033,
+  height: 774,
+  type: "image/png",
+  alt: assets.websiteShareBanner.alt,
+};
 
 export const siteUrl = new URL(siteConfig.url);
 
@@ -11,14 +20,12 @@ type PageMetadata = {
   title: string;
   description: string;
   path: string;
-  image?: string;
 };
 
 export function createMetadata({
   title,
   description,
   path,
-  image = "/opengraph-image",
 }: PageMetadata): Metadata {
   const canonical = absoluteUrl(path);
 
@@ -33,13 +40,13 @@ export function createMetadata({
       siteName: siteConfig.name,
       type: "website",
       locale: "en_US",
-      images: [{ url: image, width: 1200, height: 630 }],
+      images: [sharedPreviewImage],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image],
+      images: [sharedPreviewImage],
     },
   };
 }

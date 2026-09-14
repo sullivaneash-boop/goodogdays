@@ -6,7 +6,7 @@ import type { PetProfileFormValues } from "@/lib/intake/schema";
 type TextFieldName =
   | "petName"
   | "age"
-  | "timing"
+  | "timingDetails"
   | "ownerName"
   | "email"
   | "phone"

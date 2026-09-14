@@ -29,7 +29,8 @@ export const petProfileSchema = z.object({
   personality: z
     .array(z.enum(dogPersonalityIds)),
   dogContext: z.string().trim().max(600, "Keep this to 600 characters or fewer."),
-  timing: z.string().trim().min(2, "Tell us when or how often you need help.").max(160),
+  timing: z.string().trim().min(2, "Choose the closest schedule, or select not sure yet.").max(160),
+  timingDetails: z.string().trim().max(160, "Keep schedule details to 160 characters or fewer."),
   ownerName: z.string().trim().min(2, "Add your name.").max(80),
   email: z.string().trim().email("Enter a valid email address."),
   phone: z
@@ -55,7 +56,7 @@ export type DogPersonality = PetProfileFormValues["personality"][number];
 export const stepFields = [
   ["serviceNeed"],
   ["petName", "age", "size", "personality", "dogContext"],
-  ["timing", "ownerName", "email", "phone", "contactMethod", "zipCode"],
+  ["timing", "timingDetails", "ownerName", "email", "phone", "contactMethod", "zipCode"],
 ] as const satisfies readonly (readonly (keyof PetProfileFormValues)[])[];
 
 export const petProfileDefaults: PetProfileFormValues = {
@@ -66,6 +67,7 @@ export const petProfileDefaults: PetProfileFormValues = {
   personality: [],
   dogContext: "",
   timing: "",
+  timingDetails: "",
   ownerName: "",
   email: "",
   phone: "",

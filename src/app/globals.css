@@ -499,3 +499,7 @@ body { padding-bottom: 62px; }
   .steps li:last-child { border-right: 0; }
 }
 .pricing-category-header h2 { max-width: none; font-size: clamp(2.3rem, 5vw, 5rem); line-height: 1; overflow-wrap: normal; }
+
+.timing-select { width: 100%; min-height: 52px; border: 1px solid #75828b; border-radius: 16px; padding: 12px; background: #183650; color: #fffaf1; font-family: var(--body); font-size: 16px; color-scheme: dark; }
+.timing-select:focus-visible { outline: 3px solid #f2c230; outline-offset: 3px; }
+.timing-select option { background: #183650; color: #fffaf1; }

@@ -109,14 +109,14 @@
     "kind": "image",
     "src": "/uploads/social/home-share.jpg",
     "alt": "Good Dog Days dog walking, in-home care and adventures",
-    "status": "in-use"
+    "status": "library"
   },
   "servicesSharePhoto": {
     "label": "Metadata — services page social-share card background photo",
     "kind": "image",
     "src": "/uploads/social/services-share.jpg",
     "alt": "Good Dog Days services and pricing",
-    "status": "in-use"
+    "status": "library"
   },
   "brandSupportingArtwork": {
     "label": "Asset library — Same Good Energy supporting artwork",
@@ -194,5 +194,19 @@
     "src": "/media/sully-with-savannah.jpg",
     "alt": "Sully walking Savannah during her shelter Adventure Day",
     "status": "library"
+  },
+  "browserFaviconSvg": {
+    "label": "Metadata — scalable browser favicon",
+    "kind": "icon",
+    "src": "/uploads/icons/favicon.svg",
+    "alt": "Good Dog Days icon",
+    "status": "in-use"
+  },
+  "websiteShareBanner": {
+    "label": "Metadata — shared link preview for every page",
+    "kind": "image",
+    "src": "/uploads/social/gdd-banner.png",
+    "alt": "Good Dog Days — Better days for good dogs. Walks, stays, adventures in Cumming and Forsyth County, Georgia.",
+    "status": "in-use"
   }
 }
