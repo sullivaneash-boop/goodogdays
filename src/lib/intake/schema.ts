@@ -27,8 +27,7 @@ export const petProfileSchema = z.object({
   age: z.string().trim().min(1, "Add their age or your best guess.").max(30),
   size: z.enum(petSizes, { error: "Choose the closest size." }),
   personality: z
-    .array(z.enum(dogPersonalityIds))
-    .min(1, "Pick at least one that sounds like your dog."),
+    .array(z.enum(dogPersonalityIds)),
   dogContext: z.string().trim().max(600, "Keep this to 600 characters or fewer."),
   timing: z.string().trim().min(2, "Tell us when or how often you need help.").max(160),
   ownerName: z.string().trim().min(2, "Add your name.").max(80),

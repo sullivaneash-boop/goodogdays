@@ -472,3 +472,30 @@ body { padding-bottom: 62px; }
 @media (prefers-reduced-motion: reduce) {
   .process-proof-image img { transition: none; }
 }
+
+/* Clear service families, with secondary details available on demand. */
+.pricing-reassurance { max-width: 620px; margin: 0 0 26px; line-height: 1.6; }
+.pricing-doors { display: grid; gap: 16px; margin-top: 56px; }
+.pricing-doors > a { display: flex; flex-direction: column; gap: 14px; padding: 24px; border: 1px solid var(--navy); background: var(--cream); }
+.pricing-doors strong { font-family: var(--display); font-size: 1.45rem; line-height: 1.1; }
+.pricing-doors span { line-height: 1.5; }
+.pricing-doors b { margin-top: auto; }
+.pricing-doors a:hover { background: var(--white); }
+.pricing-service h3 { font-size: clamp(2rem, 5vw, 4rem); max-width: 22ch; line-height: 1; }
+.service-highlights { margin: 18px 0; line-height: 1.6; font-weight: 650; }
+.service-disclosure { margin: 26px 0; border-block: 1px solid currentColor; }
+.service-disclosure > summary { cursor: pointer; padding: 18px 0; font-weight: 750; }
+.service-disclosure .pricing-details { margin: 0 0 28px; }
+.adventure-intro { padding-bottom: 40px; }
+.adventure-intro > h3 { max-width: 28ch; font-size: clamp(1.8rem, 3vw, 2.7rem); }
+.adventure-intro p { max-width: 780px; line-height: 1.7; }
+.adventure-setup { margin-top: 28px; padding: 26px; border: 1px solid rgba(255,255,255,.3); }
+.adventure-setup h3 { margin-top: 0; }
+.process-cta { margin-top: 32px; }
+@media (min-width: 760px) {
+  .pricing-doors { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .steps li, .steps li:nth-child(odd), .steps li:nth-child(even) { padding: 32px 24px; border-right: 1px solid rgba(255,255,255,.23); }
+  .steps li:last-child { border-right: 0; }
+}
+.pricing-category-header h2 { max-width: none; font-size: clamp(2.3rem, 5vw, 5rem); line-height: 1; overflow-wrap: normal; }

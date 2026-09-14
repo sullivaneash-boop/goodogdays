@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import assets from "@/data/assets.json";
@@ -22,9 +24,13 @@ export function SiteHeader() {
       </nav>
       <details className="mobile-nav">
         <summary aria-label="Open navigation"><span>Menu</span><i aria-hidden="true" /></summary>
-        <nav aria-label="Mobile navigation">
+        <nav aria-label="Mobile navigation" onClick={(event) => {
+          if ((event.target as HTMLElement).closest("a")) {
+            event.currentTarget.closest("details")?.removeAttribute("open");
+          }
+        }}>
           {navigation.map((item) => <Link href={item.href} key={item.href}>{item.label}</Link>)}
-          <Link href="/?service=not-sure#inquiry">Tell Us About Your Dog</Link>
+          <Link href="/?service=not-sure#inquiry">Get Started</Link>
         </nav>
       </details>
       <Link
@@ -33,7 +39,7 @@ export function SiteHeader() {
         data-track-event="service_cta_click"
         data-track-label="header_request"
       >
-        Tell Us About Your Dog
+        Get Started
       </Link>
     </header>
   );

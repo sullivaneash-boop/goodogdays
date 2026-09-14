@@ -23,7 +23,7 @@ test.describe("initial lead inquiry", () => {
 
     await page.getByRole("button", { name: /continue/i }).click();
     await expect(page.getByText("Choose what you need help with.")).toBeVisible();
-    await page.getByText("A regular walk", { exact: true }).click();
+    await page.locator("#inquiry").getByText("Walking + Enrichment", { exact: true }).click();
     await page.getByRole("button", { name: /continue/i }).click();
 
     await page.getByLabel("Dog’s name").fill("Rufus");
@@ -38,7 +38,7 @@ test.describe("initial lead inquiry", () => {
     await page.getByLabel("Mobile number").fill("7705550123");
     await page.getByLabel("ZIP code").fill("30040");
     await page.getByText("Text me", { exact: true }).click();
-    await page.getByRole("button", { name: "Tell Us About Your Dog" }).click();
+    await page.getByRole("button", { name: "Send Request" }).click();
 
     await expect(page.getByRole("heading", { name: "Good things ahead for Rufus." })).toBeVisible();
     expect(submittedInquiry).toMatchObject({
@@ -63,7 +63,7 @@ test.describe("initial lead inquiry", () => {
     });
 
     await expect(page.getByLabel("Help finding the right service")).toBeVisible();
-    await expect(page.getByRole("link", { name: /Find Their Fit/ })).toBeVisible();
+    await expect(page.getByLabel("Help finding the right service").getByRole("link", { name: /Get Started/ })).toBeVisible();
   });
 
   test("captures exit intent with a simple availability text request", async ({ page }) => {
@@ -89,6 +89,6 @@ test.describe("initial lead inquiry", () => {
 
   test("keeps service links prefilled without skipping the first choice", async ({ page }) => {
     await page.goto("/?service=in-home-stay#inquiry");
-    await expect(page.getByRole("radio", { name: /Care while I’m away/ })).toBeChecked();
+    await expect(page.getByRole("radio", { name: /In-Home Pet Sitting/ })).toBeChecked();
   });
 });

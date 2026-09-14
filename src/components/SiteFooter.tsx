@@ -20,7 +20,7 @@ export function SiteFooter() {
         </div>
         <div className="footer-contact">
           <p>{siteConfig.serviceArea}</p>
-          <Link href="/#inquiry">Tell Us About Your Dog</Link>
+          <Link href="/#inquiry">Get Started</Link>
         </div>
       </div>
       <div className="shell footer-bottom">

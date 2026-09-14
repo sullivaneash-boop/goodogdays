@@ -10,11 +10,11 @@ import { servicesSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Services & Pricing",
-  description: "Explore Good Dog Days walks, activity sessions, care at home and dog adventures in Cumming and Forsyth County, Georgia.",
+  description: "Explore Good Dog Days dog walking, enrichment visits, in-home pet sitting and dog adventures in Cumming and Forsyth County, Georgia.",
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Dog Care Services & Pricing | Good Dog Days",
-    description: "Clear pricing for dog walks, activity sessions, care at home and dog adventures in Cumming and Forsyth County.",
+    description: "Clear pricing for dog dog walking, enrichment visits, in-home pet sitting and dog adventures in Cumming and Forsyth County.",
     url: "/services",
     images: [{ url: "/services/opengraph-image", width: 1200, height: 630 }],
   },
@@ -39,8 +39,9 @@ export default function ServicesPage() {
             <div>
               <p className="section-index">SERVICES + PRICING</p>
               <h1 id="pricing-title">Find their kind of good day.</h1>
-              <p>A walk close to home. More activity during the day. Care while you’re away. Or a bigger day outside.</p>
-              <Link className="button button-dark" href="/?service=not-sure#inquiry">Tell Us About Your Dog</Link>
+              <p>Whether they need a walk while you’re at work, care while you’re away, or a bigger day outside, we’ll build the day around your dog.</p>
+              <p className="pricing-reassurance">Not sure what to choose? That’s okay. Tell us about your dog and we’ll help you find the right fit.</p>
+              <Link className="button button-dark" href="/?service=not-sure#inquiry">Get Started</Link>
             </div>
             <Image
               className="pricing-hero-mark"
@@ -52,6 +53,15 @@ export default function ServicesPage() {
               loading="eager"
               unoptimized
             />
+          </div>
+          <div className="shell pricing-doors">
+            {serviceCategories.map((category) => (
+              <a href={`#${category.id}`} key={category.id}>
+                <strong>{category.name}</strong>
+                <span>{category.description}</span>
+                <b>From {category.startingPrice} <span aria-hidden="true">↓</span></b>
+              </a>
+            ))}
           </div>
         </section>
 
@@ -72,7 +82,7 @@ export default function ServicesPage() {
                 <div>
                   <p className="section-index">{category.number} / SERVICE FAMILY</p>
                   <h2 id={`${category.id}-title`}>{category.name}</h2>
-                  <p className="category-brand-label">{category.brandLabel}</p>
+                  <p className="category-brand-label">{category.id === "bigger-days" ? "2–8 hours · One Adventure, three lengths" : category.brandLabel}</p>
                 </div>
                 <div className="category-start">
                   <span>Starting at</span>
@@ -81,9 +91,21 @@ export default function ServicesPage() {
                 </div>
               </div>
 
+              {category.id === "bigger-days" ? (
+                <div className="shell adventure-intro">
+                  <h3>Bigger days for dogs who are happiest doing something.</h3>
+                  <p>Trails. Hiking. Swimming. Running. Exploring. Sniffing. Playing. Maybe a little of everything. Every Adventure is planned around your dog’s energy, personality, comfort, interests, and physical ability.</p>
+                  <aside className="adventure-setup" aria-label="Adventure introduction">
+                    <h3>New to Good Dog Days?</h3>
+                    <p>Before their first Adventure, your dog must successfully complete a 45-minute enrichment visit (Good Dog Session, $50) so we can get to know them and make sure they’re comfortable before heading off-site.</p>
+                    <p><strong>You don’t need to book it separately. We’ll take care of that during setup.</strong></p>
+                    <Link className="button button-accent" href="/?service=two-hour-adventure#inquiry" data-track-event="service_cta_click" data-track-label="adventure_setup">Request an Adventure</Link>
+                  </aside>
+                </div>
+              ) : null}
               <div className="shell pricing-service-list">
                 {categoryServices.map((service) => {
-                  const selectedService = service.category === "bigger-days" ? "good-dog-session" : service.id;
+                  const selectedService = service.id;
 
                   return (
                     <article className={`pricing-service${service.featured ? " pricing-service-featured" : ""}`} id={service.id} key={service.id}>
@@ -104,7 +126,10 @@ export default function ServicesPage() {
 
                       <p className="pricing-description">{service.description}</p>
 
-                      <div className="pricing-details">
+                      <p className="service-highlights">{service.includes.slice(0, 2).join(" · ")}</p>
+                      <details className="service-disclosure">
+                        <summary>What’s included + pricing details<span className="sr-only"> for {service.name}</span></summary>
+                        <div className="pricing-details">
                         <section>
                           <h4>What’s included</h4>
                           <ul>{service.includes.map((item) => <li key={item}>{item}</li>)}</ul>
@@ -128,6 +153,7 @@ export default function ServicesPage() {
                           </section>
                         ) : null}
                       </div>
+                      </details>
 
                       <Link
                         className="button button-dark"
@@ -163,7 +189,7 @@ export default function ServicesPage() {
           <div className="shell">
             <p>Not sure which one fits?</p>
             <h2>Tell me about your dog. We’ll figure it out together.</h2>
-            <Link className="button button-dark" href="/?service=not-sure#inquiry">Find Their Fit</Link>
+            <Link className="button button-dark" href="/?service=not-sure#inquiry">Get Started</Link>
           </div>
         </section>
       </div>

@@ -27,7 +27,7 @@ export function FormSuccess({ petName, ownerName, contactMethod }: FormSuccessPr
           Good things ahead for {petName}.
         </h3>
         <p className="mt-6 max-w-lg text-base leading-relaxed text-white/65">
-          Thanks, {ownerName}. We’ll review what you shared and {contactMethod === "text" ? "text" : "call"} you about fit and availability.
+          Thanks, {ownerName}. We’ll review what you shared and {contactMethod === "text" ? "text" : "call"} you about fit and availability. We’ll help choose the right service and arrange any meet-and-greet or introductory Good Dog Session before care begins.
         </p>
         <div className="mt-8 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.1em] text-white/45">
           <span className="h-px w-10 bg-[#f2c230]" /> No booking commitment yet

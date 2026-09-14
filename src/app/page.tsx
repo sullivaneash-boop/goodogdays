@@ -72,10 +72,10 @@ export default function Home() {
             unoptimized
           />
           <div className="hero-content shell">
-            <p className="eyebrow">Walks, care at home + adventures / Cumming, GA</p>
+            <p className="eyebrow">Walking, pet sitting + adventures / Cumming, GA</p>
             <h1 id="hero-title">Better days<br />for good dogs.</h1>
             <p className="hero-copy">
-              Walks, activity, care at home and bigger days out—built around the dog in front of us.
+              Walking + enrichment, in-home pet sitting and Good Dog Adventures—built around the dog in front of us.
             </p>
             <div className="hero-actions">
               <a
@@ -84,7 +84,7 @@ export default function Home() {
                 data-track-event="service_cta_click"
                 data-track-label="hero_request"
               >
-                Tell Us About Your Dog
+                Get Started
               </a>
               <Link className="text-link light-link" href="/services">
                 See services + pricing <span aria-hidden="true">↗</span>
@@ -120,7 +120,7 @@ export default function Home() {
               <p className="section-index inverted">Services + pricing / 01</p>
               <h2 id="services-title">The right kind<br />of good day.</h2>
             </div>
-            <p>A walk. More activity. Care at home. A bigger day out. Pick what sounds right and we’ll take it from there.</p>
+            <p>Whether they need a walk while you’re at work, care while you’re away, or a bigger day outside, we’ll build the day around your dog.</p>
           </div>
 
           <div className="shell service-family-list">
@@ -143,6 +143,10 @@ export default function Home() {
                 </Link>
               </article>
             ))}
+          </div>
+          <div className="shell process-cta">
+            <p>Not sure what to choose? Tell us about your dog and we’ll help you find the right fit.</p>
+            <a className="button button-accent" href="#inquiry">Get Started</a>
           </div>
         </section>
 
@@ -171,9 +175,9 @@ export default function Home() {
             <div className="section-heading row-heading">
               <div>
                 <p className="section-index inverted">How it works / 03</p>
-                <h2 id="how-title">Simple<br />on purpose.</h2>
+                <h2 id="how-title">Getting started is easy.</h2>
               </div>
-              <p>You tell me about your dog. I handle the plan.</p>
+              <p>Not sure what to choose? That’s okay. Tell us about your dog and we’ll help you find the right fit.</p>
             </div>
             <ol className="steps">
               {processSteps.map((step, index) => (
@@ -184,6 +188,7 @@ export default function Home() {
                 </li>
               ))}
             </ol>
+            <a className="button button-accent process-cta" href="#inquiry">Get Started</a>
           </div>
         </section>
 
@@ -232,9 +237,9 @@ export default function Home() {
               <p className="section-index inverted">Meet Sully + Lylah / 06</p>
               <h2 id="about-title">One good dog started all of this.</h2>
               <p className="lead">I’ve spent my life around dogs—and I know “active” means something different for every one of them.</p>
-              <p>After adopting Lylah in 2025, walks, trails, swimming and new places became a major part of our life together. Good Dog Days grew from one simple idea: pay attention to the dog in front of you.</p>
+              <p>After adopting Lylah in 2025, walks, trails, swimming and new places became a major part of our life together. Dogs spend a lot of their lives waiting on us. Good Dog Days gives them something to look forward to.</p>
               <p>I’m local to Forsyth County. I keep care small, adapt the day when needed and earn trust before taking over the leash.</p>
-              <a className="button button-accent" href="#inquiry">Tell me about your dog</a>
+              <a className="button button-accent" href="#inquiry">Get Started</a>
             </div>
           </div>
         </section>
@@ -286,7 +291,7 @@ export default function Home() {
             <div className="inquiry-intro">
               <p className="section-index inverted">Tell us about your dog / 08</p>
               <h2 id="inquiry-title">Tell us about your dog.</h2>
-              <p>Start with one simple choice. Then share a few basics about your dog and where you are.</p>
+              <p>Tell us about your dog and what you need. We’ll help you find the right fit, confirm availability, and arrange any introductions.</p>
               <ol className="next-steps">
                 <li><span>1</span>Tell me what you need.</li>
                 <li><span>2</span>I check location + fit.</li>

@@ -85,6 +85,12 @@ export function PetProfileForm() {
   const petName = useWatch({ control: form.control, name: "petName" });
 
   useEffect(() => {
+    if (requestedService) {
+      form.setValue("serviceNeed", serviceInquiryDefaults[requestedService]);
+    }
+  }, [requestedService, form]);
+
+  useEffect(() => {
     return () => requestController.current?.abort();
   }, []);
 
@@ -286,7 +292,7 @@ export function PetProfileForm() {
                   >
                     {form.formState.isSubmitting
                       ? `Sending ${petName || "your dog"}’s request…`
-                      : "Tell Us About Your Dog"}
+                      : "Send Request"}
                   </button>
                 )}
               </div>

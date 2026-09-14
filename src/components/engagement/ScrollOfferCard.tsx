@@ -48,7 +48,7 @@ export function ScrollOfferCard({
         onClick={onAccept}
         className="mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-[#0f2942] px-4 text-xs font-black uppercase tracking-[0.07em] text-white transition hover:-translate-y-0.5 hover:bg-[#173b5d] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#f2c230]/40"
       >
-        Find Their Fit <span className="ml-2" aria-hidden="true">→</span>
+        Get Started <span className="ml-2" aria-hidden="true">→</span>
       </Link>
     </m.aside>
   );

@@ -51,7 +51,7 @@ export function DogDetailsStep() {
         render={({ field, fieldState }) => (
           <fieldset>
             <legend className="mb-3 text-[0.7rem] font-black uppercase tracking-[0.12em] text-white/70">
-              What they enjoy
+              What they enjoy (optional)
             </legend>
             <div className="grid gap-2 sm:grid-cols-2">
               {personalityOptions.map((option) => {
