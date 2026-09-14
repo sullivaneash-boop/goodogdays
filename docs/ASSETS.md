@@ -16,9 +16,9 @@ Use this when the new asset has the same purpose as the old one.
 5. Confirm the **Asset check** passes and review the deployment preview.
 
 This requires no code edit. Keep roughly the same shape as the old asset so
-the crop still looks intentional. Changing `homeHeroPhoto` this way also
-changes `processAttentionPhoto` because both currently use the same physical
-file. To change only one placement, use the new-filename option below.
+the crop still looks intentional. If a file is shared by multiple registry entries, replacing it changes every
+placement using that file. To change only one placement, use the new-filename
+option below.
 
 ## Safer option: upload a new file and change one registry entry
 
@@ -59,7 +59,7 @@ issue captures enough context for a developer or Codex to make a precise change.
 | Main home-page background photo | `homeHeroPhoto` | `public/media/sully-with-lylah.jpg` | Portrait or landscape is okay; keep the subject near center |
 | Autoplay home-page hero | `homeHeroVideo` | `public/media/good-dog-days-hero.mp4` | Silent H.264 MP4, 720×960, 24 fps, fast-start, about 2 MB |
 | Dog-and-sun mark over the home hero | `homeHeroMark` | `public/brand/mark-primary.svg` | SVG with transparent background |
-| “Care starts with paying attention” photo | `processAttentionPhoto` | `public/media/sully-with-lylah.jpg` | Landscape-friendly crop |
+| “Care starts with paying attention” photo | `processAttentionPhoto` | `public/uploads/photos/red-car-chew-toy.jpg` | Landscape-friendly crop |
 | “The dog in front of me sets the pace” photo | `processAdaptPhoto` | `public/media/lylah-mountain-overlook.jpg` | Landscape-friendly crop |
 | “Meet Sully + Lylah” / About photo | `aboutPhoto` | `public/uploads/photos/sully-and-lylah-petco.jpg` | Tall portrait works best |
 | “Real days / real dogs” featured cover | `realDaysFeaturedCover` | `public/media/red-cover.png` | Tall cover artwork |
@@ -69,9 +69,9 @@ issue captures enough context for a developer or Codex to make a precise change.
 
 ### Visual previews
 
-| Home hero + first Process card | Second Process card | About section | Real days cover |
+| First Process card | Second Process card | About section | Real days cover |
 | --- | --- | --- | --- |
-| ![Sully and Lylah](../public/media/sully-with-lylah.jpg) | ![Lylah at an overlook](../public/media/lylah-mountain-overlook.jpg) | ![Sully and Lylah at Petco](../public/uploads/photos/sully-and-lylah-petco.jpg) | ![Red cover](../public/media/red-cover.png) |
+| ![Red with his chew toy](../public/uploads/photos/red-car-chew-toy.jpg) | ![Lylah at an overlook](../public/media/lylah-mountain-overlook.jpg) | ![Sully and Lylah at Petco](../public/uploads/photos/sully-and-lylah-petco.jpg) | ![Red cover](../public/media/red-cover.png) |
 
 | Header/footer logo | Hero and Services mark | Savannah story cover |
 | --- | --- | --- |

@@ -376,6 +376,7 @@ body { padding-bottom: 62px; }
 .process-proof-image { position: relative; min-height: 480px; overflow: hidden; background: var(--navy); }
 .process-proof-image img { object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
 .process-proof-card:hover .process-proof-image img { transform: scale(1.02); }
+.process-proof-card:first-child .process-proof-image img { object-position: center 15%; }
 .process-proof-card:nth-child(2) .process-proof-image img { object-position: center 62%; }
 .process-proof-card .proof-label { margin-top: 24px; }
 .process-proof-card h3 { max-width: 16ch; margin: 0; font-family: var(--display); font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 820; line-height: .95; letter-spacing: -.045em; text-transform: uppercase; }
