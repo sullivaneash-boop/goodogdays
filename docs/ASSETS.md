@@ -57,7 +57,7 @@ issue captures enough context for a developer or Codex to make a precise change.
 | --- | --- | --- | --- |
 | Full logo in the header and footer | `headerFooterLogo` | `public/brand/logo-primary.svg` | Wide SVG; transparent background |
 | Main home-page background photo | `homeHeroPhoto` | `public/media/sully-with-lylah.jpg` | Portrait or landscape is okay; keep the subject near center |
-| Moving home-page hero on desktop | `homeHeroVideo` | `public/media/good-dog-days-bgvideo.mp4` | MP4; short, muted-friendly, compressed |
+| Autoplay home-page hero | `homeHeroVideo` | `public/media/good-dog-days-hero.mp4` | Silent H.264 MP4, 720×960, 24 fps, fast-start, about 2 MB |
 | Dog-and-sun mark over the home hero | `homeHeroMark` | `public/brand/mark-primary.svg` | SVG with transparent background |
 | “Care starts with paying attention” photo | `processAttentionPhoto` | `public/media/sully-with-lylah.jpg` | Landscape-friendly crop |
 | “The dog in front of me sets the pace” photo | `processAdaptPhoto` | `public/media/lylah-mountain-overlook.jpg` | Landscape-friendly crop |
@@ -153,3 +153,6 @@ Open Graph and Twitter use the same file. The old `/opengraph-image` and
 `/services/opengraph-image` endpoints redirect to that banner. The older
 `homeSharePhoto` and `servicesSharePhoto` entries are retained as library assets;
 they no longer generate social cards. External services may crop or cache previews.
+
+The original hero source remains at `public/media/good-dog-days-bgvideo.mp4` for
+future edits. The site requests only the optimized `homeHeroVideo` asset.

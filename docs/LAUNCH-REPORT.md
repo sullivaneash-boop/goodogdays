@@ -46,7 +46,7 @@ Production pages were checked at 320, 390, 768 and 1440px: no horizontal overflo
 
 ## 6. Performance
 
-The 15.6 MB hero video is no longer requested on initial load. Desktop visitors explicitly press Play; playback pauses when out of view. The real photo/poster remains visible. Responsive hero image sizes better match the layout. No new runtime dependencies were added.
+The hero now autoplays a roughly 2 MB silent, fast-start MP4 on desktop and mobile, replacing the 15.6 MB source in the live placement. The photo stays visible until the first video frame plays. Playback pauses offscreen or in a hidden tab and resumes when visible unless the visitor manually paused it. Reduced-motion preferences keep the static photo. Responsive hero image sizes match the layout; no new runtime dependencies were added.
 
 ## 7. Intentionally unchanged
 
@@ -80,10 +80,12 @@ Local discovery and reporting setup:
 
 Checks completed:
 
-- Asset registry: all 30 assets passed.
+- Asset registry: all 31 assets passed.
 - ESLint: passed.
 - Production Webpack build and TypeScript checks: passed. Default Turbopack build was blocked by the local sandbox's process/port restriction; deployment must verify the normal build in its own environment.
-- Playwright: **22 passed against the production server**, covering service selection, intake success/error/retry, popups, mobile flow, tablet navigation, metadata, internal links, schema prices, real 404, legacy redirect, analytics forwarding and deferred video loading.
+- Playwright: **22 passed against the production server**, covering service selection, intake success/error/retry, popups, mobile flow, tablet navigation, metadata, internal links, schema prices, real 404, legacy redirect, analytics forwarding and hero playback.
 - Four-width production visual/image/runtime audit and settled axe contrast checks completed.
 
 No Lighthouse score, physical Safari result, real Formspree delivery, Google indexing or analytics-account receipt is claimed. Changes remain local until committed and deployed.
+
+Hero autoplay follow-up: three focused production browser checks passed for desktop/mobile autoplay, offscreen pause/resume, manual pause and reduced motion. A cold-cache mobile test at 1.5 Mbps and 80 ms latency began playback in 2.95 seconds, with the hero photo visible during startup. Local measurements are not a guarantee for every device or connection.

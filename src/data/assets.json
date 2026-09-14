@@ -21,9 +21,9 @@
     "status": "in-use"
   },
   "homeHeroVideo": {
-    "label": "Home page — large hero background video on desktop",
+    "label": "Home page — autoplay hero background video",
     "kind": "video",
-    "src": "/media/good-dog-days-bgvideo.mp4",
+    "src": "/media/good-dog-days-hero.mp4",
     "alt": "",
     "status": "in-use"
   },
@@ -208,5 +208,12 @@
     "src": "/uploads/social/gdd-banner.png",
     "alt": "Good Dog Days — Better days for good dogs. Walks, stays, adventures in Cumming and Forsyth County, Georgia.",
     "status": "in-use"
+  },
+  "homeHeroVideoOriginal": {
+    "label": "Library — original hero video source",
+    "kind": "video",
+    "src": "/media/good-dog-days-bgvideo.mp4",
+    "alt": "",
+    "status": "library"
   }
 }

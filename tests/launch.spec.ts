@@ -110,14 +110,32 @@ test("mobile inquiry has no premature errors, preserves answers, and submits", a
   expect(payload).toMatchObject({ petName: "Q", timing: "Not sure yet — help me plan", requestedService: "two-hour-adventure" });
 });
 
-test("hero video is only fetched after an explicit play action", async ({ page }) => {
+for (const width of [1440, 390]) {
+  test(`hero video autoplays and pauses offscreen at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto("/");
+    const video = page.locator("video");
+    await expect(video).toHaveCount(1);
+    await expect.poll(() => video.evaluate((el: HTMLVideoElement) => !el.paused && el.currentTime > 0)).toBe(true);
+    expect(await video.evaluate((el: HTMLVideoElement) => el.muted && el.playsInline)).toBe(true);
+    await expect(video).toHaveCSS("opacity", "1");
+    await page.locator("#about").evaluate(el => el.scrollIntoView({ behavior: "instant" }));
+    await expect.poll(() => video.evaluate((el: HTMLVideoElement) => el.paused)).toBe(true);
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+    await expect.poll(() => video.evaluate((el: HTMLVideoElement) => el.paused)).toBe(false);
+    await page.getByRole("button", { name: "Pause background video" }).click();
+    await page.locator("#about").evaluate(el => el.scrollIntoView({ behavior: "instant" }));
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+    await expect.poll(() => video.evaluate((el: HTMLVideoElement) => el.paused)).toBe(true);
+  });
+}
+
+test("reduced motion keeps the hero photo without downloading video", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
   const videos: string[] = [];
   page.on("request", request => { if (request.url().endsWith(".mp4")) videos.push(request.url()); });
   await page.goto("/");
-  await expect(page.getByRole("button", { name: "Play background video" })).toBeVisible();
+  await expect(page.locator(".hero-image")).toBeVisible();
   await expect(page.locator("video")).toHaveCount(0);
   expect(videos).toHaveLength(0);
-  await page.getByRole("button", { name: "Play background video" }).click();
-  await expect(page.locator("video")).toHaveCount(1);
-  await expect.poll(() => videos.length).toBeGreaterThan(0);
 });
