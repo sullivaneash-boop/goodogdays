@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/bricolage-grotesque";
 import "@fontsource-variable/dm-sans";
+import { siteIsIndexable } from "@/lib/site-origin";
 import { Analytics } from "@/components/Analytics";
 import { EngagementLayer } from "@/components/engagement/EngagementLayer";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
@@ -11,11 +12,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
+  robots: siteIsIndexable ? { index: true, follow: true } : { index: false, follow: false },
   title: {
-    default: "Dog Walking & In-Home Dog Care in Cumming, GA | Good Dog Days",
+    default: "Dog Walking & Pet Sitting in Cumming, GA | Good Dog Days",
     template: "%s | Good Dog Days",
   },
-  description: "Dog walking, activity sessions, in-home care and dog adventures in Cumming and Forsyth County, Georgia.",
+  description: "Dog walking from $30, in-home pet sitting from $95/day, and Adventures in Cumming and Forsyth County, GA. Personal care with Sully. Tell us about your dog.",
   applicationName: siteConfig.name,
   category: "pet care",
   manifest: "/manifest.webmanifest",
@@ -29,8 +31,8 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Dog Walking & In-Home Dog Care in Cumming, GA | Good Dog Days",
-    description: "Walks, activity, care at home and bigger days out for dogs in Cumming and Forsyth County.",
+    title: "Dog Walking & Pet Sitting in Cumming, GA | Good Dog Days",
+    description: "Dog walking, enrichment, in-home pet sitting and Adventures in Cumming and Forsyth County. Individual care, clear pricing, and updates from Sully.",
     url: "/",
     siteName: siteConfig.name,
     type: "website",
@@ -39,8 +41,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dog Walking & In-Home Dog Care in Cumming, GA | Good Dog Days",
-    description: "Walks, activity, care at home and bigger days out for dogs in Cumming and Forsyth County.",
+    title: "Dog Walking & Pet Sitting in Cumming, GA | Good Dog Days",
+    description: "Dog walking, enrichment, in-home pet sitting and Adventures in Cumming and Forsyth County. Individual care, clear pricing, and updates from Sully.",
     images: [sharedPreviewImage],
   },
 };

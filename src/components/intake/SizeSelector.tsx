@@ -17,7 +17,7 @@ const sizeOptions: readonly {
 
 function DogSizeIcon({ scale }: { scale: number }) {
   return (
-    <svg viewBox="0 0 96 64" className="h-12 w-16" aria-hidden="true">
+    <svg viewBox="0 0 96 64" className="h-9 w-12" aria-hidden="true">
       <g
         fill="none"
         stroke="currentColor"
@@ -64,15 +64,15 @@ export function SizeSelector() {
                     className="peer sr-only"
                   />
                   <span
-                    className={`flex min-h-32 flex-col items-center justify-center rounded-2xl border px-2 py-4 text-center transition duration-200 peer-focus-visible:ring-4 peer-focus-visible:ring-[#f2c230]/30 ${
+                    className={`flex min-h-24 flex-col items-center justify-center rounded-2xl border px-2 py-4 text-center transition duration-200 peer-focus-visible:ring-4 peer-focus-visible:ring-[#f2c230]/30 ${
                       selected
                         ? "border-[#8fa768] bg-[#8fa768]/15 text-[#d7e7b6] shadow-[0_0_0_1px_rgba(143,167,104,0.1)]"
-                        : "border-white/15 bg-white/[0.04] text-white/55 hover:border-white/35 hover:bg-white/[0.07]"
+                        : "border-white/15 bg-white/[0.04] text-white/70 hover:border-white/35 hover:bg-white/[0.07]"
                     }`}
                   >
                     <DogSizeIcon scale={option.scale} />
                     <strong className="mt-1 text-sm text-white">{option.label}</strong>
-                    <small className="mt-0.5 text-[0.68rem] text-white/45">{option.guide}</small>
+                    <small className="mt-0.5 text-[0.68rem] text-white/70">{option.guide}</small>
                   </span>
                 </label>
               );

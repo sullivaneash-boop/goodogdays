@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className="simple-page legal-page">
+    <main id="top" className="simple-page legal-page">
       <a className="skip-link" href="#main-content">Skip to content</a>
       <SiteHeader />
       <article className="shell legal-content" id="main-content">

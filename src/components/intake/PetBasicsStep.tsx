@@ -16,7 +16,7 @@ export function ServiceNeedStep() {
         <h3 className="font-[var(--display)] text-4xl font-extrabold leading-[0.95] tracking-[-0.045em] text-white sm:text-5xl">
           What can we help with?
         </h3>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/55 sm:text-base">
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/70 sm:text-base">
           Pick one. If you’re not sure, tell us about your dog and we’ll help figure it out.
         </p>
       </header>
@@ -60,7 +60,7 @@ export function ServiceNeedStep() {
                       </span>
                       <span>
                         <strong className="block text-sm text-white">{option.name}</strong>
-                        <small className="mt-0.5 block text-xs leading-snug text-white/45">
+                        <small className="mt-0.5 block text-xs leading-snug text-white/70">
                           {option.description}
                         </small>
                       </span>
@@ -69,11 +69,13 @@ export function ServiceNeedStep() {
                 );
               })}
             </div>
+            <div className="mt-3 min-h-6" aria-live="polite">
             {fieldState.error ? (
-              <p role="alert" className="mt-3 text-sm text-[#ffc1b3]">
+              <p role="alert" className="text-sm text-[#ffc1b3]">
                 {fieldState.error.message}
               </p>
             ) : null}
+            </div>
           </fieldset>
         )}
       />

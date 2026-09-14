@@ -32,10 +32,10 @@ export function DogDetailsStep() {
           Meet your dog
         </p>
         <h3 className="font-[var(--display)] text-4xl font-extrabold leading-[0.95] tracking-[-0.045em] text-white sm:text-5xl">
-          What sounds like {petName}?
+          A little about {petName}.
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-white/55 sm:text-base">
-          Tell us a little about what they enjoy. Pick anything that fits.
+        <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">
+          Their name, age and size help us plan. Add anything important below.
         </p>
       </header>
 
@@ -45,6 +45,8 @@ export function DogDetailsStep() {
       </div>
       <SizeSelector />
 
+      <details className="intake-extra">
+        <summary>What do they enjoy? (optional)</summary>
       <Controller
         control={control}
         name="personality"
@@ -94,7 +96,7 @@ export function DogDetailsStep() {
                       </span>
                       <span>
                         <strong className="block text-sm text-white">{option.label}</strong>
-                        <small className="mt-0.5 block text-xs leading-snug text-white/45">
+                        <small className="mt-0.5 block text-xs leading-snug text-white/70">
                           {option.detail}
                         </small>
                       </span>
@@ -110,19 +112,21 @@ export function DogDetailsStep() {
         )}
       />
 
+      </details>
+
       <Controller
         control={control}
         name="dogContext"
         render={({ field, fieldState }) => (
           <label className="block">
             <span className="mb-2.5 block text-[0.7rem] font-black uppercase tracking-[0.12em] text-white/70">
-              Anything we should know? <span className="normal-case tracking-normal text-white/40">Optional</span>
+              Anything we should know? <span className="normal-case tracking-normal text-white/70">Optional</span>
             </span>
             <textarea
               {...field}
               rows={3}
               placeholder="Nervous around dogs, nervous around people, medical considerations, escape artist, or anything else that helps us understand them."
-              className="w-full rounded-2xl border border-white/20 bg-white/[0.055] px-4 py-3.5 text-base text-[#fffaf1] outline-none transition placeholder:text-white/30 focus:border-[#f2c230] focus:bg-white/[0.08] focus:ring-4 focus:ring-[#f2c230]/10"
+              className="w-full rounded-2xl border border-white/20 bg-white/[0.055] px-4 py-3.5 text-base text-[#fffaf1] outline-none transition placeholder:text-white/70 focus:border-[#f2c230] focus:bg-white/[0.08] focus:ring-4 focus:ring-[#f2c230]/10"
             />
             {fieldState.error ? (
               <span role="alert" className="mt-2 block text-sm text-[#ffc1b3]">{fieldState.error.message}</span>

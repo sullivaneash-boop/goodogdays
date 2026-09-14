@@ -29,6 +29,7 @@ test.describe("initial lead inquiry", () => {
     await page.getByLabel("Dog’s name").fill("Rufus");
     await page.getByLabel("Age or best guess").fill("4 years");
     await page.getByText("Large", { exact: true }).click();
+    await page.locator(".intake-extra summary").click();
     await page.getByText("Professional sniffer", { exact: true }).click();
     await page.getByRole("button", { name: /continue/i }).click();
 

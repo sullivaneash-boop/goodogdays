@@ -1,14 +1,14 @@
 import type { MetadataRoute } from "next";
+import { siteIsIndexable } from "@/lib/site-origin";
 import { absoluteUrl } from "@/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
-  const isPreview = process.env.VERCEL_ENV === "preview";
 
   return {
-    rules: isPreview
+    rules: !siteIsIndexable
       ? { userAgent: "*", disallow: "/" }
       : { userAgent: "*", allow: "/" },
-    sitemap: absoluteUrl("/sitemap.xml"),
+    sitemap: siteIsIndexable ? absoluteUrl("/sitemap.xml") : undefined,
     host: absoluteUrl("/"),
   };
 }

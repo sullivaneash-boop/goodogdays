@@ -87,15 +87,11 @@ no registry edit is needed.
 | Browser tab and bookmark favicon | `browserFavicon` | `public/uploads/icons/favicon.ico` | Square, multi-size ICO |
 | General app/search icon | `appIcon` | `public/uploads/icons/app-icon.png` | Square PNG, at least 256×256 |
 | iPhone/iPad home-screen icon | `appleTouchIcon` | `public/uploads/icons/apple-touch-icon.png` | 180×180 PNG, no transparent edges |
-| Home-page social-share photo | `homeSharePhoto` | `public/uploads/social/home-share.jpg` | 1200×630 JPG, under 5 MB |
-| Services social-share photo | `servicesSharePhoto` | `public/uploads/social/services-share.jpg` | 1200×630 JPG, under 5 MB |
+| Shared social preview for all pages | `websiteShareBanner` | `public/uploads/social/gdd-banner.png` | Current approved banner: 2033×774 PNG |
 
-The social photos sit behind the site's existing color overlay and text. To
-replace the **entire designed card** rather than its photo, replace the
-generated routes with static `opengraph-image.jpg` files or edit:
-
-- `src/app/opengraph-image.tsx` for the home page.
-- `src/app/services/opengraph-image.tsx` for Services.
+All pages use the approved complete banner through `src/lib/seo.ts`. There are
+no generated social-card overlays. Legacy Open Graph image URLs redirect to
+this same asset through `next.config.ts`.
 
 Social networks cache previews. After deployment, an old card may continue to
 appear until that service refreshes its cache.
@@ -129,8 +125,6 @@ in the asset registry:
   `src/app/page.tsx` styled by `src/app/globals.css`.
 - Plus signs, arrows, rules, colors, card shapes, and button treatments are CSS
   in `src/app/globals.css`.
-- Social-card typography and overlays are generated in the two
-  `opengraph-image.tsx` files listed above.
 
 If you cannot identify something, describe it using nearby words, its page,
 and whether it is above or below another section. A screenshot is even better.
@@ -148,3 +142,14 @@ npm run dev
 
 The check fails if a registry path points to a missing file or if website code
 starts hard-coding asset paths outside the registry.
+
+
+### Shared link preview (current)
+
+All pages use `websiteShareBanner` from the asset registry. The original banner
+is served unchanged at `/uploads/social/gdd-banner.png`. Its dimensions are
+2033×774 in `src/lib/seo.ts`; update those if replacing it with a different size.
+Open Graph and Twitter use the same file. The old `/opengraph-image` and
+`/services/opengraph-image` endpoints redirect to that banner. The older
+`homeSharePhoto` and `servicesSharePhoto` entries are retained as library assets;
+they no longer generate social cards. External services may crop or cache previews.

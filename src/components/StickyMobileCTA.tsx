@@ -20,7 +20,7 @@ export function StickyMobileCTA() {
     return () => observer.disconnect();
   }, [pathname]);
 
-  if (pathname === "/thank-you" || inquiryVisible) return null;
+  if (!["/", "/services"].includes(pathname) || (pathname === "/" && inquiryVisible)) return null;
 
   return (
     <aside className="mobile-cta" aria-label="Quick action">

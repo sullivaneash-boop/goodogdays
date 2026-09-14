@@ -5,7 +5,6 @@ export const siteConfig = {
   tagline: "Better days for good dogs.",
   location: "Cumming + Forsyth County, Georgia",
   serviceArea: "Cumming and select areas of Central, West and North Forsyth County",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://goodogdays.vercel.app",
 } as const;
 
 export const navigation = [
@@ -18,8 +17,8 @@ export const navigation = [
 
 export const trustFacts = [
   {
-    title: "One or two dogs at a time",
-    body: "Personal attention—not a giant group walk.",
+    title: "Sully is your handler",
+    body: "Owner-operated care. A familiar person who gets to know your dog.",
   },
   {
     title: "The dog sets the pace",
@@ -27,7 +26,7 @@ export const trustFacts = [
   },
   {
     title: "Updates after care",
-    body: "A photo and written recap after standard sessions.",
+    body: "Photos and a recap after visits. Adventures add video and updates along the way.",
   },
   {
     title: "Meet first",
@@ -90,8 +89,9 @@ export const processSteps = [
 ] as const;
 
 export const faqItems = [
+  { question: "Who comes to my home?", answer: "Sully, the owner of Good Dog Days, is your handler. We meet with you and your dog before solo care begins. Walks and sitting start at your home; Adventures include pickup and drop-off in the service area." },
   { question: "Not sure which service to choose?", answer: "That’s okay. Select Not Sure / Help Me Choose in Get Started. Share your dog’s needs and schedule, and we’ll recommend the right fit and confirm availability before arranging introductions." },
-  { question: "What is a Good Dog Session?", answer: "It’s our 45-Minute Enrichment Visit ($50). The session is built around what your dog enjoys—maybe walking, running, sniffing, fetch, tug, backyard play or a nearby outing." },
+  { question: "What is a Good Dog Session?", answer: "It’s our 45-Minute Enrichment Visit ($50): time for running, sniffing, fetch, tug, backyard activity or enrichment. When it suits your dog and the logistics, it can include a short drive to a nearby park or trail. Not every visit includes transportation. For a longer off-site experience, choose a 2–8 hour Good Dog Adventure." },
   { question: "Does every dog do every activity?", answer: "No. Some dogs want to run. Some want to sniff every mailbox. We choose what fits your dog, their comfort and the day." },
   { question: "What types of dogs do you work with?", answer: "Dogs of different breeds, ages, energy levels and personalities are considered. The first conversation and owner-present introduction help determine whether the service is a good fit." },
   { question: "Can you care for nervous dogs?", answer: "Possibly. Tell me what situations make your dog nervous or uncomfortable. We’ll talk through fit and choose familiar, appropriate surroundings before care begins." },

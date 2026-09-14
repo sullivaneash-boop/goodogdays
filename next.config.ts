@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { siteOrigin } from "./src/lib/site-origin";
 import assets from "./src/data/assets.json";
 
 const nextConfig: NextConfig = {
@@ -6,11 +7,20 @@ const nextConfig: NextConfig = {
     root: process.cwd(),
   },
   async redirects() {
-    return ["/opengraph-image", "/services/opengraph-image"].map((source) => ({
-      source,
-      destination: assets.websiteShareBanner.src,
-      permanent: true,
-    }));
+    const legacyHost = "goodogdays.vercel.app";
+    return [
+      ...(new URL(siteOrigin).hostname !== legacyHost ? [{
+        source: "/:path*",
+        has: [{ type: "host" as const, value: legacyHost }],
+        destination: `${siteOrigin}/:path*`,
+        permanent: true,
+      }] : []),
+      ...["/opengraph-image", "/services/opengraph-image"].map((source) => ({
+        source,
+        destination: assets.websiteShareBanner.src,
+        permanent: true,
+      })),
+    ];
   },
   async headers() {
     return [

@@ -61,7 +61,7 @@ function getAttribution() {
 export function PetProfileForm() {
   const searchParams = useSearchParams();
   const requestedServiceParam = searchParams.get("service");
-  const requestedService = requestedServiceParam && requestedServiceParam in serviceInquiryDefaults
+  const requestedService = requestedServiceParam && Object.hasOwn(serviceInquiryDefaults, requestedServiceParam)
     ? requestedServiceParam
     : null;
   const [currentStep, setCurrentStep] = useState(0);
@@ -119,11 +119,6 @@ export function PetProfileForm() {
     };
   }, []);
 
-  useEffect(() => {
-    if (currentStep === 0) return;
-    panelRef.current?.focus({ preventScroll: true });
-  }, [currentStep]);
-
   function trackStart() {
     if (hasStarted.current) return;
     hasStarted.current = true;
@@ -165,7 +160,7 @@ export function PetProfileForm() {
           personality: values.personality,
           anythingWeShouldKnow: values.dogContext,
           timing: [values.timing, values.timingDetails].filter(Boolean).join(" — "),
-          requestedService: requestedService ?? "not-specified",
+          requestedService: requestedService && serviceInquiryDefaults[requestedService] === values.serviceNeed ? requestedService : "not-specified",
           ownerName: values.ownerName,
           name: values.ownerName,
           email: values.email,
@@ -239,11 +234,17 @@ export function PetProfileForm() {
 
               <StepProgress currentStep={currentStep} />
 
-              <div className="min-h-[37rem] sm:min-h-[35rem]">
+              <div>
                 <AnimatePresence mode="wait" initial={false} custom={direction}>
                   <m.div
                     key={currentStep}
                     ref={panelRef}
+                    onAnimationComplete={(definition) => {
+                      if (definition === "center" && currentStep > 0) {
+                        panelRef.current?.focus({ preventScroll: true });
+                        panelRef.current?.scrollIntoView({ block: "start", behavior: "instant" });
+                      }
+                    }}
                     tabIndex={-1}
                     custom={direction}
                     variants={stepVariants}
@@ -266,18 +267,19 @@ export function PetProfileForm() {
                     type="button"
                     onClick={moveBack}
                     disabled={form.formState.isSubmitting}
-                    className="min-h-12 rounded-xl px-5 text-sm font-bold text-white/55 transition hover:bg-white/[0.06] hover:text-white disabled:cursor-wait disabled:opacity-40"
+                    className="min-h-12 rounded-xl px-5 text-sm font-bold text-white/70 transition hover:bg-white/[0.06] hover:text-white disabled:cursor-wait disabled:opacity-40"
                   >
                     ← Back
                   </button>
                 ) : (
-                  <p className="px-1 text-xs leading-relaxed text-white/40">
+                  <p className="px-1 text-xs leading-relaxed text-white/70">
                     A few quick questions · no commitment
                   </p>
                 )}
 
                 {currentStep < stepFields.length - 1 ? (
                   <button
+                    key="continue"
                     type="button"
                     onClick={() => void moveForward()}
                     className="min-h-13 rounded-xl bg-[#f2c230] px-6 text-sm font-black uppercase tracking-[0.06em] text-[#0f2942] shadow-[0_12px_35px_rgba(242,194,48,0.18)] transition hover:-translate-y-0.5 hover:bg-[#ffe171] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#f2c230]/30"
@@ -286,6 +288,7 @@ export function PetProfileForm() {
                   </button>
                 ) : (
                   <button
+                    key="submit"
                     type="submit"
                     disabled={form.formState.isSubmitting}
                     className="min-h-13 rounded-xl bg-[#f2c230] px-6 text-sm font-black uppercase tracking-[0.06em] text-[#0f2942] shadow-[0_12px_35px_rgba(242,194,48,0.18)] transition hover:-translate-y-0.5 hover:bg-[#ffe171] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#f2c230]/30 disabled:cursor-wait disabled:translate-y-0 disabled:opacity-70"
@@ -308,7 +311,7 @@ export function PetProfileForm() {
                     {serverError}
                   </p>
                 ) : currentStep === 2 ? (
-                  <p className="text-xs leading-relaxed text-white/40">
+                  <p className="text-xs leading-relaxed text-white/70">
                     By sending, you agree that Good Dog Days may contact you about this request. See the <a href="/privacy" className="underline underline-offset-4 hover:text-white">privacy policy</a>.
                   </p>
                 ) : null}

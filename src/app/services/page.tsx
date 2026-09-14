@@ -10,18 +10,18 @@ import { sharedPreviewImage } from "@/lib/seo";
 import { servicesSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Services & Pricing",
-  description: "Explore Good Dog Days dog walking, enrichment visits, in-home pet sitting and dog adventures in Cumming and Forsyth County, Georgia.",
+  title: "Dog Walking & Pet Sitting Prices in Cumming, GA",
+  description: "Compare dog walks from $30, in-home pet sitting from $95/day, and Adventures from $175 in Cumming and Forsyth County. We’ll help you choose.",
   alternates: { canonical: "/services" },
   openGraph: {
-    title: "Dog Care Services & Pricing | Good Dog Days",
+    title: "Dog Care Prices in Cumming, GA | Good Dog Days",
     description: "Clear pricing for dog dog walking, enrichment visits, in-home pet sitting and dog adventures in Cumming and Forsyth County.",
     url: "/services",
     images: [sharedPreviewImage],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dog Care Services & Pricing | Good Dog Days",
+    title: "Dog Care Prices in Cumming, GA | Good Dog Days",
     description: "Clear pricing for walks, care at home and dog adventures in Cumming and Forsyth County.",
     images: [sharedPreviewImage],
   },
@@ -79,7 +79,7 @@ export default function ServicesPage() {
 
           return (
             <section className={`pricing-category pricing-category-${category.id}`} id={category.id} key={category.id} aria-labelledby={`${category.id}-title`}>
-              <div className="shell pricing-category-header">
+              <div className="shell pricing-category-header" data-service-family={category.id}>
                 <div>
                   <p className="section-index">{category.number} / SERVICE FAMILY</p>
                   <h2 id={`${category.id}-title`}>{category.name}</h2>

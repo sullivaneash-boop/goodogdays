@@ -63,7 +63,7 @@ export const services: readonly Service[] = [
     category: "everyday",
     duration: "30 minutes",
     price: "$30",
-    description: "A familiar neighborhood walk with time to move, sniff, potty, and get out of the house.",
+    description: "A familiar neighborhood walk that starts and ends at your home, with time to move, sniff, potty, and get out of the house.",
     bestFor: "Movement, sniffing, a potty break and a familiar routine.",
     includes: [
       "30-minute neighborhood walk",
@@ -88,7 +88,7 @@ export const services: readonly Service[] = [
     category: "everyday",
     duration: "45 minutes",
     price: "$50",
-    description: "More time and flexibility than a standard walk. Walking, running, sniffing or play: different dog, different day.",
+    description: "More than the usual loop: running, fetch, tug, sniffing or enrichment. When your dog and the logistics are a good fit, we can take a short drive to a nearby park, trail or green space. Transportation isn’t included in every visit.",
     bestFor: "Good Dog Session · One-on-one activity tailored to your dog.",
     potentialActivities: [
       "Neighborhood walking",
@@ -97,7 +97,7 @@ export const services: readonly Service[] = [
       "Fetch or tug",
       "Backyard play",
       "Something engaging to figure out",
-      "A nearby outing that suits them",
+      "A short trip to a nearby park or trail, when appropriate",
     ],
     includes: [
       "45 minutes of one-on-one activity built around your dog",

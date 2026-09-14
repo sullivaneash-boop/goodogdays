@@ -23,7 +23,7 @@ export const petProfileSchema = z.object({
   serviceNeed: z
     .union([z.enum(inquiryServiceIds), z.literal("")])
     .refine((value): boolean => value.length > 0, "Choose what you need help with."),
-  petName: z.string().trim().min(2, "Tell us your dog’s name.").max(40),
+  petName: z.string().trim().min(1, "Tell us your dog’s name.").max(40),
   age: z.string().trim().min(1, "Add their age or your best guess.").max(30),
   size: z.enum(petSizes, { error: "Choose the closest size." }),
   personality: z

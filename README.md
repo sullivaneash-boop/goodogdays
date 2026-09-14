@@ -29,31 +29,10 @@ Run `npm run assets:check` after changing or adding an asset.
 
 The inquiry experience submits directly to Formspree form `xbgjqyyz` through the typed fetch helper in `src/lib/formspree.ts`. It preserves service-prefilled links, includes a honeypot, records referrer/UTM attribution and transitions to an in-place success state.
 
-The lead intake is intentionally modular:
-
-```text
-src/
-├── components/
-│   ├── intake/
-│   │   ├── PetProfileForm.tsx       # React Hook Form orchestration + motion
-│   │   ├── PetBasicsStep.tsx        # name, breed and visual size selector
-│   │   ├── CareNeedsStep.tsx        # dog personality and context
-│   │   ├── OwnerContactStep.tsx     # contact details + recommendation
-│   │   ├── RecommendationCard.tsx
-│   │   └── FormSuccess.tsx
-│   └── engagement/
-│       ├── EngagementLayer.tsx      # trigger coordination and analytics
-│       ├── ScrollOfferCard.tsx
-│       └── ExitIntentModal.tsx
-├── hooks/
-│   ├── useScrollDepthTrigger.ts
-│   └── useExitIntent.ts
-└── lib/
-    ├── formspree.ts
-    └── intake/
-        ├── schema.ts                # strict Zod schema + step fields
-        └── serviceMatcher.ts        # zero-cost recommendation rules
-```
+The intake keeps three steps: service family, dog basics, and contact/schedule.
+Exact dates and personality details are optional. Service-page links preserve the
+requested tier. `src/lib/intake/schema.ts` validates the fields, and
+`src/lib/formspree.ts` handles delivery with a 20-second timeout and retryable errors.
 
 Run the interaction smoke tests with `npm run test:e2e`. Set `PLAYWRIGHT_BASE_URL` when testing against an already-running server.
 
@@ -61,4 +40,23 @@ To enable Google Analytics, add a GA4 measurement ID in `NEXT_PUBLIC_GA_MEASUREM
 
 ## Deployment
 
-The app is ready for a standard Vercel Next.js deployment at `https://goodogdays.vercel.app`. Set `NEXT_PUBLIC_SITE_URL` to that canonical production origin and optionally set `NEXT_PUBLIC_GA_MEASUREMENT_ID` for analytics.
+The confirmed production origin is `https://www.goodogdays.com`. Set
+`NEXT_PUBLIC_SITE_URL=https://www.goodogdays.com` in Vercel Production and rebuild.
+`src/lib/site-origin.ts` validates this setting and defaults to the confirmed domain.
+Preview deployments emit noindex and disallow crawling. Production canonicals,
+sitemap, social image URLs and schema all use the same origin.
+
+The apex domain already redirects to www. The old `goodogdays.vercel.app` production host redirects to the configured
+canonical origin through `next.config.ts`, preserving paths and queries. Unique
+deployment previews and local hosts are not redirected. Keep previews protected/noindex.
+
+Set a real `NEXT_PUBLIC_GA_MEASUREMENT_ID` to activate GA4. Mark `inquiry_submit`
+and, separately, `priority_callback_submit` as key events. Confirm them in GA4
+Realtime after deployment. No names, phone numbers, email addresses, dog notes or
+schedule details are included in analytics events. The shared event adapter also
+emits `gooddogdays:analytics` for a future consent-aware advertising integration;
+no Meta pixel is installed. Search Console can use DNS verification without code.
+
+Before paid traffic, complete [the launch report and checks](docs/LAUNCH-REPORT.md),
+including an actual form submission and confirmation in both Formspree and the
+owner’s inbox. Mocked browser tests cannot verify inbox delivery.

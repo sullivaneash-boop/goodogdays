@@ -26,14 +26,14 @@ export function StepProgress({ currentStep }: StepProgressProps) {
                       ? "border-[#8fa768] bg-[#8fa768] text-[#0f2942]"
                       : isCurrent
                         ? "border-[#f2c230] text-[#f2c230]"
-                        : "border-white/20 text-white/35"
+                        : "border-white/20 text-white/70"
                   }`}
                 >
                   {isComplete ? "✓" : index + 1}
                 </span>
                 <span
                   className={`hidden text-[0.65rem] font-bold uppercase tracking-[0.08em] sm:block ${
-                    isCurrent ? "text-white" : "text-white/40"
+                    isCurrent ? "text-white" : "text-white/70"
                   }`}
                 >
                   {label}

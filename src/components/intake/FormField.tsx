@@ -17,7 +17,7 @@ type FormFieldProps = {
   label: string;
   placeholder: string;
   autoComplete?: string;
-  inputMode?: "email" | "tel" | "text";
+  inputMode?: "email" | "tel" | "text" | "numeric";
   type?: "email" | "tel" | "text";
   hint?: string;
 };
@@ -51,16 +51,17 @@ export function FormField({
   const hintId = `${name}-hint`;
 
   return (
-    <label className="group block">
-      <span className="mb-2.5 flex items-center justify-between gap-3 text-[0.7rem] font-black uppercase tracking-[0.12em] text-white/70">
-        {label}
+    <div className="group block">
+      <div className="mb-2.5 flex items-center justify-between gap-3 text-[0.7rem] font-black uppercase tracking-[0.12em] text-white/70">
+        <label htmlFor={`inquiry-${name}`}>{label}</label>
         {isComplete ? (
-          <span className="flex items-center gap-1.5 normal-case tracking-normal text-[#b8cc91]">
+          <span aria-hidden="true" className="flex items-center gap-1.5 normal-case tracking-normal text-[#b8cc91]">
             <span aria-hidden="true">✓</span> Ready
           </span>
         ) : null}
-      </span>
+      </div>
       <input
+        id={`inquiry-${name}`}
         {...register(name)}
         type={type}
         inputMode={inputMode}
@@ -68,17 +69,17 @@ export function FormField({
         placeholder={placeholder}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? errorId : hint ? hintId : undefined}
-        className={`min-h-14 w-full rounded-2xl border px-4 py-3.5 text-base text-[#fffaf1] outline-none transition duration-200 placeholder:text-white/30 focus:border-[#f2c230] focus:bg-white/[0.08] focus:ring-4 focus:ring-[#f2c230]/10 ${stateClass}`}
+        className={`min-h-14 w-full rounded-2xl border px-4 py-3.5 text-base text-[#fffaf1] outline-none transition duration-200 placeholder:text-white/70 focus:border-[#f2c230] focus:bg-white/[0.08] focus:ring-4 focus:ring-[#f2c230]/10 ${stateClass}`}
       />
       {error ? (
         <span id={errorId} role="alert" className="mt-2 block text-sm text-[#ffc1b3]">
           {error.message}
         </span>
       ) : hint ? (
-        <span id={hintId} className="mt-2 block text-xs leading-relaxed text-white/45">
+        <span id={hintId} className="mt-2 block text-xs leading-relaxed text-white/70">
           {hint}
         </span>
       ) : null}
-    </label>
+    </div>
   );
 }

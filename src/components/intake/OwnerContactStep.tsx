@@ -17,7 +17,7 @@ export function OwnerContactStep() {
         <h3 className="font-[var(--display)] text-4xl font-extrabold leading-[0.95] tracking-[-0.045em] text-white sm:text-5xl">
           Where should we follow up?
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-white/55 sm:text-base">
+        <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">
           Tell us where you are and when you need help with {petName}. We’ll check fit and availability.
         </p>
       </header>
@@ -88,6 +88,7 @@ export function OwnerContactStep() {
           label="ZIP code"
           placeholder="30040"
           autoComplete="postal-code"
+          inputMode="numeric"
         />
 
         <Controller
@@ -116,7 +117,7 @@ export function OwnerContactStep() {
                         className={`flex min-h-14 items-center justify-center rounded-2xl border px-3 text-sm font-bold capitalize transition peer-focus-visible:ring-4 peer-focus-visible:ring-[#f2c230]/25 ${
                           selected
                             ? "border-[#8fa768] bg-[#8fa768]/15 text-[#d7e7b6]"
-                            : "border-white/20 bg-white/[0.055] text-white/55 hover:border-white/35"
+                            : "border-white/20 bg-white/[0.055] text-white/70 hover:border-white/35"
                         }`}
                       >
                         {method === "text" ? "Text me" : "Call me"}

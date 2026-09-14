@@ -1,6 +1,7 @@
 export type AnalyticsEvent =
   | "adventure_story_click"
   | "email_click"
+  | "phone_click"
   | "exit_intent_view"
   | "inquiry_start"
   | "inquiry_submit"
@@ -14,8 +15,11 @@ export type AnalyticsEvent =
 declare global {
   interface Window {
     dataLayer?: Record<string, unknown>[];
+    gtag?: (command: string, event: string, details?: Record<string, unknown>) => void;
   }
 }
+
+const sentToGoogle = new WeakSet<object>();
 
 export function trackEvent(
   event: AnalyticsEvent,
@@ -26,5 +30,20 @@ export function trackEvent(
   const payload = { event, ...details };
   window.dataLayer = window.dataLayer ?? [];
   window.dataLayer.push(payload);
+  if (window.gtag) {
+    window.gtag("event", event, details);
+    sentToGoogle.add(payload);
+  }
   window.dispatchEvent(new CustomEvent("gooddogdays:analytics", { detail: payload }));
+}
+
+/** Replay pre-initialization events once the Google tag has been configured. */
+export function flushAnalyticsQueue() {
+  if (!window.gtag) return;
+  for (const payload of [...(window.dataLayer ?? [])]) {
+    if (typeof payload.event !== "string" || sentToGoogle.has(payload)) continue;
+    const { event, ...details } = payload;
+    window.gtag("event", event, details);
+    sentToGoogle.add(payload);
+  }
 }

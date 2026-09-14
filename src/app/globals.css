@@ -339,7 +339,6 @@ h1 { margin: 0; max-width: 9.5ch; font-family: var(--display); font-size: clamp(
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  .hero-video { display: none; }
   .story-slide { animation: none !important; }
   .story-slide:first-child { opacity: 1; }
 }
@@ -503,3 +502,38 @@ body { padding-bottom: 62px; }
 .timing-select { width: 100%; min-height: 52px; border: 1px solid #75828b; border-radius: 16px; padding: 12px; background: #183650; color: #fffaf1; font-family: var(--body); font-size: 16px; color-scheme: dark; }
 .timing-select:focus-visible { outline: 3px solid #f2c230; outline-offset: 3px; }
 .timing-select option { background: #183650; color: #fffaf1; }
+
+/* Launch polish: preserve the brand while keeping compact screens usable. */
+.hero-prices { display: flex; flex-wrap: wrap; gap: 10px 20px; max-width: 640px; margin: 24px 0; font-size: .88rem; font-weight: 750; }
+.hero-prices a { text-decoration: underline; text-underline-offset: 5px; }
+.trust-grid article > span, .safety-list article > span, .category-brand-label { color: #a54220; }
+.footer-bottom > p { color: #46596b; }
+.intake-extra { border-block: 1px solid rgba(255,255,255,.25); }
+.intake-extra > summary { padding: 16px 0; color: #fffaf1; font-size: .9rem; cursor: pointer; }
+.intake-extra[open] { padding-bottom: 20px; }
+.inquiry-form-anchor [tabindex="-1"] { scroll-margin-top: 110px; }
+.inquiry-form-anchor input::placeholder, .inquiry-form-anchor textarea::placeholder { color: #b4c0cb; opacity: 1; }
+.inquiry-form-anchor input:not([type="radio"]):not([type="checkbox"]), .inquiry-form-anchor textarea { border-color: #82919f; }
+.inquiry-form-anchor [aria-invalid="true"] { border-color: #e88d72; }
+@media (min-width: 700px) and (max-width: 979px) {
+  .mobile-nav { display: block; margin-left: auto; }
+}
+@media (max-width: 699px) {
+  .section-pad { padding-block: 64px; }
+  h2 { font-size: clamp(2.35rem, 10vw, 3.3rem); line-height: .98; letter-spacing: -.045em; }
+  .trust-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trust-grid article { padding: 22px 14px; }
+  .trust-grid article:last-child { grid-column: 1 / -1; }
+  .service-family-name h3 { font-size: clamp(2rem, 9vw, 3rem); line-height: 1; }
+  .pricing-hero { padding: 128px 0 48px; }
+  .pricing-hero-mark { display: none; }
+  .pricing-hero-grid { gap: 0; }
+  .pricing-doors { margin-top: 36px; }
+  .pricing-category { padding-block: 64px; }
+  .pricing-category-header { gap: 24px; padding-bottom: 36px; }
+  .pricing-service { padding-block: 32px 40px; }
+  .pricing-description { margin-top: 22px; }
+  .pricing-service-top { gap: 20px; }
+  .simple-hero-inner h1, .legal-content h1 { font-size: clamp(3rem, 12vw, 4.5rem); }
+}
+.hero-video-toggle { position: absolute; right: 32px; bottom: 32px; z-index: 3; min-height: 44px; padding: 10px 16px; border: 1px solid #fffaf1; border-radius: 8px; background: #0f2942; color: #fffaf1; font-size: .8rem; font-weight: 750; cursor: pointer; }

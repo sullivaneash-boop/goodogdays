@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteOrigin } from "@/lib/site-origin";
 import assets from "@/data/assets.json";
 import { siteConfig } from "@/data/site";
 
@@ -10,7 +11,7 @@ export const sharedPreviewImage = {
   alt: assets.websiteShareBanner.alt,
 };
 
-export const siteUrl = new URL(siteConfig.url);
+export const siteUrl = new URL(siteOrigin);
 
 export function absoluteUrl(path = "/") {
   return new URL(path, siteUrl).toString();

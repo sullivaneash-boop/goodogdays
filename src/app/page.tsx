@@ -16,10 +16,10 @@ import {
   safetyFacts,
   trustFacts,
 } from "@/data/site";
-import { organizationSchema } from "@/lib/schema";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: { absolute: "Dog Walking & In-Home Dog Care in Cumming, GA | Good Dog Days" },
+  title: { absolute: "Dog Walking & Pet Sitting in Cumming, GA | Good Dog Days" },
   alternates: { canonical: "/" },
 };
 
@@ -34,7 +34,7 @@ const processProof = [
   {
     label: "A plan that can adapt",
     title: "The dog in front of me sets the pace.",
-    body: "A session may mean walking, running, sniffing, play or simply some company. Different dog, different day.",
+    body: "Movement for their body. Sniffing and enrichment for their mind. We choose the activity that suits your dog, with room to slow down when they need it.",
     image: assets.processAdaptPhoto.src,
     alt: assets.processAdaptPhoto.alt,
   },
@@ -46,6 +46,7 @@ export default function Home() {
   return (
     <main>
       <JsonLd data={organizationSchema} />
+      <JsonLd data={websiteSchema} />
       <a className="skip-link" href="#main-content">Skip to content</a>
       <SiteHeader />
 
@@ -58,7 +59,7 @@ export default function Home() {
             fill
             priority
             loading="eager"
-            sizes="100vw"
+            sizes="(min-width: 980px) 60vw, 100vw"
           />
           <HeroMedia />
           <div className="hero-shade" />
@@ -75,7 +76,12 @@ export default function Home() {
             <p className="eyebrow">Walking, pet sitting + adventures / Cumming, GA</p>
             <h1 id="hero-title">Better days<br />for good dogs.</h1>
             <p className="hero-copy">
-              Walking + enrichment, in-home pet sitting and Good Dog Adventures—built around the dog in front of us.
+              A better workday for your dog. Peace of mind while you’re away. Dog walking, enrichment, in-home pet sitting and Adventures with Sully in Cumming and Forsyth County.
+            </p>
+            <p className="hero-prices">
+              <Link href="/services#everyday">Walks from $30</Link>
+              <Link href="/services#away">Sitting from $95/day</Link>
+              <Link href="/services#bigger-days">Adventures from $175</Link>
             </p>
             <div className="hero-actions">
               <a
@@ -252,7 +258,7 @@ export default function Home() {
             <div>
               <p className="section-index">Real days / real dogs</p>
               <h2 id="real-days-title">See Good Dog Days in action.</h2>
-              <p>Neighborhood walks, outdoor sessions and shelter Adventure Days show what can happen when a dog gets somewhere to go and something good to do.</p>
+              <p>{featuredStory.description}</p>
               <a
                 className="arrow-link"
                 href={featuredStory.href}
