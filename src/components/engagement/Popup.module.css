@@ -1,0 +1,139 @@
+/* Unlayered component styles intentionally outrank the site's global element
+   rules. Popup headings and actions must not inherit marketing-page sizing. */
+.surface {
+  color: #0f2942;
+  background: #fffaf1;
+  border: 1px solid #d5d9d7;
+  border-radius: 24px;
+  box-shadow: 0 20px 64px rgb(9 29 48 / 22%);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.offer {
+  position: fixed;
+  right: 16px;
+  bottom: calc(88px + env(safe-area-inset-bottom));
+  z-index: 65;
+  width: min(368px, calc(100vw - 32px));
+  max-height: calc(100dvh - 112px - env(safe-area-inset-bottom));
+  padding: 24px;
+  overflow-y: auto;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgb(9 29 48 / 70%);
+  backdrop-filter: blur(4px);
+}
+.dialog {
+  position: relative;
+  width: 100%;
+  max-width: 464px;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 28px;
+}
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: #46596b;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+.close:hover { background: #e8e7de; color: #0f2942; }
+.eyebrow {
+  margin: 0 36px 12px 0;
+  color: #586631;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.title {
+  margin: 0;
+  max-width: none;
+  color: #0f2942;
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -.025em;
+  text-transform: none;
+  overflow-wrap: break-word;
+}
+.offer .title { font-size: 24px; padding-right: 12px; }
+.body { margin: 14px 0 0; color: #46596b; font-size: 15px; line-height: 1.6; }
+.action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  max-width: 100%;
+  margin-top: 22px;
+  padding: 12px 20px;
+  border: 1px solid #0f2942;
+  border-radius: 12px;
+  background: #0f2942;
+  color: #fffaf1;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+.action:hover { background: #173b5d; color: #fffaf1; }
+.action:disabled { background: #46596b; border-color: #46596b; color: #fffaf1; cursor: wait; }
+.action:focus-visible, .close:focus-visible, .phone:focus-visible, .consent input:focus-visible {
+  outline: 3px solid #0f2942;
+  outline-offset: 3px;
+}
+.form { margin-top: 24px; }
+.label { display: block; margin-bottom: 8px; color: #0f2942; font-size: 14px; font-weight: 700; }
+.phone {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 14px;
+  border: 1px solid #75828b;
+  border-radius: 12px;
+  background: #fff;
+  color: #0f2942;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.phone::placeholder { color: #586875; opacity: 1; }
+.phone[aria-invalid="true"] { border-color: #a13f27; }
+.consent { display: flex; align-items: flex-start; gap: 12px; margin-top: 18px; color: #46596b; font-size: 13px; line-height: 1.6; cursor: pointer; }
+.consent input { flex: 0 0 18px; width: 18px; height: 18px; margin-top: 3px; accent-color: #0f2942; }
+.form .action { width: 100%; }
+.feedback { margin-top: 12px; }
+.error { margin: 0; color: #a13f27; font-size: 14px; line-height: 1.5; }
+.success { padding-top: 28px; }
+.successIcon { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 20px; border-radius: 50%; background: #f2c230; color: #0f2942; font-size: 24px; }
+@media (min-width: 640px) {
+  .offer { right: 24px; bottom: 24px; max-height: calc(100dvh - 48px); }
+  .dialog { padding: 32px; }
+  .dialog .title { font-size: 32px; }
+}

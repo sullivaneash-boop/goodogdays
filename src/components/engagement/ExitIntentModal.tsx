@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { m } from "framer-motion";
 import { submitToFormspree } from "@/lib/formspree";
 import { trackEvent } from "@/lib/analytics";
+import styles from "./Popup.module.css";
 
 type ExitIntentModalProps = {
   onDismiss: () => void;
@@ -17,6 +18,8 @@ export function ExitIntentModal({ onDismiss }: ExitIntentModalProps) {
   const [state, setState] = useState<CaptureState>("idle");
   const [error, setError] = useState("");
   const phoneRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
+  const doneRef = useRef<HTMLButtonElement>(null);
   const phoneIsValid = phone.replace(/\D/g, "").length >= 10;
   const canSubmit = phoneIsValid && confirmed && state !== "submitting";
 
@@ -33,7 +36,7 @@ export function ExitIntentModal({ onDismiss }: ExitIntentModalProps) {
       }
 
       if (event.key !== "Tab") return;
-      const dialog = phoneRef.current?.closest<HTMLElement>("[role='dialog']");
+      const dialog = dialogRef.current;
       const focusable = dialog?.querySelectorAll<HTMLElement>(
         "button:not([disabled]), input:not([disabled]), a[href], [tabindex]:not([tabindex='-1'])",
       );
@@ -57,6 +60,10 @@ export function ExitIntentModal({ onDismiss }: ExitIntentModalProps) {
       previouslyFocused?.focus();
     };
   }, [onDismiss]);
+
+  useEffect(() => {
+    if (state === "success") doneRef.current?.focus();
+  }, [state]);
 
   async function submitPriorityRequest(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -94,7 +101,7 @@ export function ExitIntentModal({ onDismiss }: ExitIntentModalProps) {
 
   return (
     <m.div
-      className="fixed inset-0 z-[90] grid place-items-center bg-[#091d30]/72 p-4 backdrop-blur-sm"
+      className={styles.overlay}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -104,62 +111,34 @@ export function ExitIntentModal({ onDismiss }: ExitIntentModalProps) {
       }}
     >
       <m.section
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="exit-intent-title"
-        initial={{ opacity: 0, y: 28, scale: 0.97 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 18, scale: 0.98 }}
-        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-        className="relative max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-[2rem] border border-white/15 bg-[#fffaf1] p-6 text-[#0f2942] shadow-[0_30px_120px_rgba(0,0,0,0.42)] sm:p-9"
+        aria-describedby="exit-intent-description"
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 16 }}
+        transition={{ duration: 0.24 }}
+        className={`${styles.surface} ${styles.dialog}`}
       >
-        <div className="absolute inset-x-0 top-0 h-1.5 bg-[#f2c230]" />
-        <button
-          type="button"
-          onClick={onDismiss}
-          aria-label="Close availability form"
-          className="absolute right-4 top-4 grid size-10 place-items-center rounded-full text-xl text-[#0f2942]/45 transition hover:bg-[#0f2942]/5 hover:text-[#0f2942] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0f2942]"
-        >
-          ×
-        </button>
-
+        <button type="button" onClick={onDismiss} aria-label="Close availability form" className={styles.close}>×</button>
         {state === "success" ? (
-          <div className="py-10" role="status">
-            <span className="grid size-14 place-items-center rounded-full bg-[#8fa768] text-xl font-black">✓</span>
-            <p className="mt-7 text-[0.65rem] font-black uppercase tracking-[0.15em] text-[#64753a]">
-              We’ve got your number
-            </p>
-            <h2 id="exit-intent-title" className="mt-2 max-w-[12ch] font-[var(--display)] text-4xl font-extrabold normal-case leading-[0.95] tracking-[-0.05em] sm:text-5xl">
-              We’ll text you about availability.
-            </h2>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-[#0f2942]/65">
-              We’ll start with a quick conversation and take it from there.
-            </p>
-            <button
-              type="button"
-              onClick={onDismiss}
-              className="mt-7 min-h-11 rounded-xl bg-[#0f2942] px-5 text-xs font-black uppercase tracking-[0.08em] text-white"
-            >
-              Done
-            </button>
+          <div className={styles.success} role="status">
+            <span className={styles.successIcon} aria-hidden="true">✓</span>
+            <p className={styles.eyebrow}>We’ve got your number</p>
+            <h2 id="exit-intent-title" className={styles.title}>We’ll text you about availability.</h2>
+            <p id="exit-intent-description" className={styles.body}>We’ll start with a quick conversation and take it from there.</p>
+            <button ref={doneRef} type="button" onClick={onDismiss} className={styles.action}>Done</button>
           </div>
         ) : (
           <>
-            <p className="pr-12 text-[0.65rem] font-black uppercase tracking-[0.15em] text-[#64753a]">
-              Pick this up later
-            </p>
-            <h2 id="exit-intent-title" className="mt-3 max-w-[13ch] font-[var(--display)] text-4xl font-extrabold normal-case leading-[0.95] tracking-[-0.05em] sm:text-5xl">
-              Want us to text you?
-            </h2>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-[#0f2942]/65 sm:text-base">
-              Leave your number and we’ll text you about availability. No full inquiry needed right now.
-            </p>
-
-            <form onSubmit={submitPriorityRequest} noValidate className="mt-7">
-              <label className="block">
-                <span className="mb-2 block text-[0.68rem] font-black uppercase tracking-[0.11em] text-[#0f2942]/60">
-                  Mobile number
-                </span>
+            <p className={styles.eyebrow}>Pick this up later</p>
+            <h2 id="exit-intent-title" className={styles.title}>Want us to text you?</h2>
+            <p id="exit-intent-description" className={styles.body}>Leave your number and we’ll text you about availability. No full inquiry needed right now.</p>
+            <form onSubmit={submitPriorityRequest} noValidate className={styles.form}>
+              <label>
+                <span className={styles.label}>Mobile number</span>
                 <input
                   ref={phoneRef}
                   value={phone}
@@ -169,33 +148,19 @@ export function ExitIntentModal({ onDismiss }: ExitIntentModalProps) {
                   autoComplete="tel"
                   placeholder="(770) 555-0123"
                   aria-invalid={Boolean(error) && !phoneIsValid}
-                  className={`min-h-14 w-full rounded-2xl border bg-white px-4 text-base outline-none transition focus:border-[#0f2942] focus:ring-4 focus:ring-[#0f2942]/10 ${
-                    phoneIsValid ? "border-[#8fa768] ring-1 ring-[#8fa768]/15" : "border-[#0f2942]/18"
-                  }`}
+                  aria-describedby={error ? "callback-error" : undefined}
+                  className={styles.phone}
                 />
               </label>
-
-              <label className="mt-4 flex cursor-pointer items-start gap-3 rounded-2xl border border-[#0f2942]/10 bg-white/65 p-3.5">
-                <input
-                  type="checkbox"
-                  checked={confirmed}
-                  onChange={(event) => setConfirmed(event.target.checked)}
-                  className="mt-0.5 size-4 accent-[#64753a]"
-                />
-                <span className="text-xs leading-relaxed text-[#0f2942]/65">
-                  Yes, Good Dog Days may text me about service availability. Message and data rates may apply.
-                </span>
+              <label className={styles.consent}>
+                <input type="checkbox" checked={confirmed} onChange={(event) => setConfirmed(event.target.checked)} />
+                <span>Yes, Good Dog Days may text me about service availability. Message and data rates may apply.</span>
               </label>
-
-              <button
-                type="submit"
-                disabled={state === "submitting"}
-                className="mt-5 flex min-h-13 w-full items-center justify-center rounded-xl bg-[#0f2942] px-5 text-xs font-black uppercase tracking-[0.08em] text-white transition hover:-translate-y-0.5 hover:bg-[#173b5d] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#f2c230]/50 disabled:cursor-wait disabled:translate-y-0 disabled:opacity-65"
-              >
+              <button type="submit" disabled={state === "submitting"} className={styles.action}>
                 {state === "submitting" ? "Sending…" : "Text me about availability"}
               </button>
-              <div className="mt-3 min-h-5" aria-live="polite">
-                {error ? <p role="alert" className="text-sm text-[#a13f27]">{error}</p> : null}
+              <div className={styles.feedback} aria-live="polite">
+                {error ? <p id="callback-error" role="alert" className={styles.error}>{error}</p> : null}
               </div>
             </form>
           </>
