@@ -1,3 +1,4 @@
+import { TextLink } from "@/components/TextLink";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -42,7 +43,10 @@ export default function ServicesPage() {
               <h1 id="pricing-title">Find their kind of good day.</h1>
               <p>Whether they need a walk while you’re at work, care while you’re away, or a bigger day outside, we’ll build the day around your dog.</p>
               <p className="pricing-reassurance">Not sure what to choose? That’s okay. Tell us about your dog and we’ll help you find the right fit.</p>
-              <Link className="button button-dark" href="/?service=not-sure#inquiry">Get Started</Link>
+              <div className="contact-actions">
+                <Link className="button button-dark" href="/?service=not-sure#inquiry">Get Started</Link>
+                <TextLink placement="services_hero" />
+              </div>
             </div>
             <Image
               className="pricing-hero-mark"
@@ -159,14 +163,17 @@ export default function ServicesPage() {
                       </div>
                       </details>
 
-                      <Link
-                        className="button button-dark"
-                        href={`/?service=${selectedService}#inquiry`}
-                        data-track-event="service_cta_click"
-                        data-track-label={service.id}
-                      >
-                        {service.ctaText}
-                      </Link>
+                      <div className="contact-actions">
+                        <Link
+                          className="button button-dark"
+                          href={`/?service=${selectedService}#inquiry`}
+                          data-track-event="service_cta_click"
+                          data-track-label={service.id}
+                        >
+                          {service.ctaText}
+                        </Link>
+                        <TextLink placement={`service_${service.id}`} service={category.id === "bigger-days" ? `a Good Dog Adventure (${service.duration})` : category.id === "away" ? service.shortName : `a ${service.shortName}`} />
+                      </div>
                     </article>
                   );
                 })}
@@ -193,7 +200,10 @@ export default function ServicesPage() {
           <div className="shell">
             <p>Not sure which one fits?</p>
             <h2>Tell me about your dog. We’ll figure it out together.</h2>
-            <Link className="button button-dark" href="/?service=not-sure#inquiry">Get Started</Link>
+            <div className="contact-actions">
+                <Link className="button button-dark" href="/?service=not-sure#inquiry">Get Started</Link>
+                <TextLink placement="services_final" />
+              </div>
           </div>
         </section>
       </div>

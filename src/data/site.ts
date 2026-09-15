@@ -2,6 +2,13 @@ import assets from "@/data/assets.json";
 
 export const siteConfig = {
   name: "Good Dog Days",
+  phone: "+17656218980",
+  phoneDisplay: "765-621-8980",
+  googleProfileUrl: "https://www.google.com/maps/place/Good+Dog+Days/data=!4m2!3m1!1s0x0:0x636515dd5223fc57",
+  socialProfiles: {
+    instagram: "https://www.instagram.com/goodogdays",
+    facebook: "https://www.facebook.com/profile.php?id=61594220222097",
+  },
   tagline: "Better days for good dogs.",
   location: "Cumming + Forsyth County, Georgia",
   serviceArea: "Cumming and select areas of Central, West and North Forsyth County",

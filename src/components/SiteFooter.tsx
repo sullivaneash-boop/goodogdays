@@ -1,3 +1,4 @@
+import { TextLink } from "@/components/TextLink";
 import Image from "next/image";
 import Link from "next/link";
 import assets from "@/data/assets.json";
@@ -20,7 +21,9 @@ export function SiteFooter() {
         </div>
         <div className="footer-contact">
           <p>{siteConfig.serviceArea}</p>
-          <Link href="/#inquiry">Get Started</Link>
+          <p><Link href="/#inquiry">Get Started</Link></p>
+          <p>Prefer to text? Reach me directly.<br /><TextLink placement="footer_phone" phoneNumber>{siteConfig.phoneDisplay}</TextLink></p>
+          <a href={siteConfig.googleProfileUrl} target="_blank" rel="noopener noreferrer" data-track-event="google_profile_click" data-track-label="footer">View Google Profile <span aria-hidden="true">↗</span></a>
         </div>
       </div>
       <div className="shell footer-bottom">

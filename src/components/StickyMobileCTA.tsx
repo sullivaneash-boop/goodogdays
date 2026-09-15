@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { TextLink } from "@/components/TextLink";
 import { usePathname } from "next/navigation";
 
 export function StickyMobileCTA() {
@@ -31,6 +32,7 @@ export function StickyMobileCTA() {
       >
         Get Started
       </Link>
+      <TextLink placement="sticky_mobile_text" />
     </aside>
   );
 }

@@ -29,10 +29,17 @@ export function Analytics() {
       if (!target) return;
       const href = target.getAttribute("href") ?? "";
       const inferredEvent = href.includes("#inquiry") ? "service_cta_click"
+        : href.startsWith("sms:") ? "sms_click"
         : href.startsWith("tel:") ? "phone_click"
         : href.startsWith("mailto:") ? "email_click" : null;
       const name = target.dataset.trackEvent as AnalyticsEvent | undefined ?? inferredEvent;
       if (!name) return;
+      if (name === "sms_click" && target.dataset.contactNumber === "true") {
+        trackEvent("phone_click", { label: target.dataset.trackLabel ?? "", method: "sms" });
+      }
+      if (href.includes("#inquiry")) {
+        trackEvent("get_started_click", { label: target.dataset.trackLabel ?? target.textContent?.trim() ?? "", destination: href });
+      }
       trackEvent(name, {
         label: target.dataset.trackLabel ?? target.textContent?.trim() ?? "",
         destination: href,

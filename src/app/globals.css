@@ -257,7 +257,7 @@ h1 { margin: 0; max-width: 9.5ch; font-family: var(--display); font-size: clamp(
 .pricing-final-cta { padding-block: clamp(88px, 11vw, 150px); background: var(--accent); color: var(--navy); text-align: center; }
 .pricing-final-cta p { margin: 0 0 18px; font-size: .78rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
 .pricing-final-cta h2 { max-width: 11ch; margin-inline: auto; }
-.pricing-final-cta .button { margin-top: 34px; }
+.pricing-final-cta .contact-actions { justify-content: center; margin-top: 34px; }
 
 .footer { padding: 66px 0 26px; border-top: 2px solid var(--navy); background: var(--cream); color: var(--navy); }
 .footer-top { display: flex; flex-direction: column; gap: 44px; justify-content: space-between; padding-bottom: 70px; }
@@ -422,7 +422,7 @@ body { padding-bottom: 62px; }
 .footer-contact p { margin: 0 0 12px; color: rgba(15,41,66,.7); line-height: 1.55; }
 .footer-contact a { font-weight: 800; border-bottom: 1px solid currentColor; }
 
-.mobile-cta { position: fixed; inset: auto 0 0; z-index: 60; padding: 8px 12px max(8px, env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,.28); background: var(--navy-deep); }
+.mobile-cta { display: grid; grid-template-columns: 1.2fr 1fr; gap: 8px; position: fixed; inset: auto 0 0; z-index: 60; padding: 8px 12px max(8px, env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,.28); background: var(--navy-deep); }
 .mobile-cta a { min-height: 46px; display: flex; align-items: center; justify-content: center; background: var(--accent); color: var(--navy); font-size: .72rem; font-weight: 900; letter-spacing: .055em; text-transform: uppercase; }
 
 .simple-hero { min-height: 82svh; display: flex; align-items: center; padding: 150px 0 100px; background: var(--navy); color: var(--white); }
@@ -538,3 +538,9 @@ body { padding-bottom: 62px; }
   .simple-hero-inner h1, .legal-content h1 { font-size: clamp(3rem, 12vw, 4.5rem); }
 }
 .hero-video-toggle { position: absolute; right: 32px; bottom: 32px; z-index: 3; min-height: 44px; padding: 10px 16px; border: 1px solid #fffaf1; border-radius: 8px; background: #0f2942; color: #fffaf1; font-size: .8rem; font-weight: 750; cursor: pointer; }
+
+/* Text is a secondary path; intake keeps the filled primary button. */
+.text-contact-link { display: inline-flex; align-items: center; min-height: 44px; color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.contact-alternative { margin-block: 24px; }
+.mobile-cta .text-contact-link { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,.5); text-decoration: none; }

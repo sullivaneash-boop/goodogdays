@@ -9,6 +9,15 @@ export const organizationSchema = {
   "@id": absoluteUrl("/#organization"),
   name: siteConfig.name,
   url: absoluteUrl("/"),
+  telephone: siteConfig.phone,
+  sameAs: [siteConfig.googleProfileUrl, ...Object.values(siteConfig.socialProfiles)],
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: siteConfig.phone,
+    contactType: "customer service",
+    description: "Questions? Text is the easiest way to reach Sully.",
+    availableLanguage: "English",
+  },
   logo: absoluteUrl(assets.organizationLogo.src),
   description:
     "Dog walking, enrichment visits, in-home pet sitting and dog adventures in Cumming and Forsyth County, Georgia.",

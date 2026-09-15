@@ -1,3 +1,5 @@
+import { TextLink } from "@/components/TextLink";
+import { siteConfig } from "@/data/site";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -97,6 +99,7 @@ export default function Home() {
               </Link>
             </div>
             <p className="hero-note">A few quick questions. No commitment.</p>
+            <TextLink placement="home_hero" className="text-contact-link light-link">Prefer to text? Text Sully</TextLink>
           </div>
           <p className="photo-label">Sully + Lylah / On the move</p>
         </section>
@@ -298,6 +301,7 @@ export default function Home() {
               <p className="section-index inverted">Tell us about your dog / 08</p>
               <h2 id="inquiry-title">Tell us about your dog.</h2>
               <p>Tell us about your dog and what you need. We’ll help you find the right fit, confirm availability, and arrange any introductions.</p>
+              <p className="contact-alternative">Questions? Text is the easiest way to reach me.<br /><TextLink placement="home_contact" phoneNumber>Text Sully · {siteConfig.phoneDisplay}</TextLink></p>
               <ol className="next-steps">
                 <li><span>1</span>Tell me what you need.</li>
                 <li><span>2</span>I check location + fit.</li>
