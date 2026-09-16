@@ -15,6 +15,7 @@ export function TextLink({ service, placement, phoneNumber = false, className = 
     className={className}
     data-track-event="sms_click"
     data-track-label={placement}
+    data-service-id={placement.startsWith("service_") ? placement.slice("service_".length) : undefined}
     data-contact-number={phoneNumber || undefined}
     onClick={(event) => {
       const apple = /iPad|iPhone|iPod/.test(navigator.userAgent)

@@ -25,7 +25,7 @@ import {
   stepFields,
   type PetProfileFormValues,
 } from "@/lib/intake/schema";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent, serviceNameForId } from "@/lib/analytics";
 
 const stepVariants: Variants = {
   enter: (direction: number) => ({
@@ -122,7 +122,7 @@ export function PetProfileForm() {
   function trackStart() {
     if (hasStarted.current) return;
     hasStarted.current = true;
-    trackEvent("inquiry_start", {
+    trackEvent("intake_start", {
       selected_service: requestedService ?? "inquiry",
     });
   }
@@ -173,7 +173,9 @@ export function PetProfileForm() {
         requestController.current.signal,
       );
 
-      trackEvent("inquiry_submit", {
+      const serviceName = serviceNameForId(requestedService && serviceInquiryDefaults[requestedService] === values.serviceNeed ? requestedService : values.serviceNeed);
+      trackEvent("intake_submit", {
+        ...(serviceName ? { service_name: serviceName } : {}),
         selected_service: values.serviceNeed,
         pet_size: values.size,
       });

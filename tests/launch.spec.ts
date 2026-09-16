@@ -22,8 +22,8 @@ test("analytics forwards queued and subsequent events to GA exactly once", () =>
     trackEvent("inquiry_submit", { selected_service: "bigger-day" });
     flushAnalyticsQueue();
     expect(calls).toEqual([
-      ["event", "inquiry_start", { selected_service: "bigger-day" }],
-      ["event", "inquiry_submit", { selected_service: "bigger-day" }],
+      ["event", "intake_start", { selected_service: "bigger-day" }],
+      ["event", "intake_submit", { selected_service: "bigger-day" }],
     ]);
   } finally {
     globalThis.window = original;

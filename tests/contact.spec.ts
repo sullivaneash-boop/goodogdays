@@ -17,7 +17,7 @@ for (const device of ["iPhone 13", "Pixel 7"]) {
     const href = await sticky.getAttribute("href");
     expect(href).toMatch(new RegExp(`^sms:\\+17656218980${device === "iPhone 13" ? "&" : "\\?"}body=`));
     expect(decodeURIComponent(href!.split("body=")[1])).toBe(defaultMessage);
-    await expect.poll(() => page.evaluate(() => window.dataLayer?.filter(e => e.event === "sms_click").length)).toBe(1);
+    await expect.poll(() => page.evaluate(() => window.dataLayer?.filter(e => e.event === "text_sully_click").length)).toBe(1);
     await page.locator('#inquiry').scrollIntoViewIfNeeded();
     await expect(page.locator('.mobile-cta')).toHaveCount(0);
     await page.goto("/services");
@@ -50,5 +50,5 @@ test("business identity, desktop contact and conversion events", async ({ page }
   await page.locator('footer a[data-track-event="google_profile_click"]').click();
   await page.locator('footer a[href="/#inquiry"]').click();
   const events = await page.evaluate(() => window.dataLayer?.map(e => e.event));
-  expect(events).toEqual(expect.arrayContaining(["sms_click", "phone_click", "google_profile_click", "get_started_click", "service_cta_click"]));
+  expect(events).toEqual(expect.arrayContaining(["text_sully_click", "phone_click", "google_profile_click", "get_started_click", "service_cta_click"]));
 });

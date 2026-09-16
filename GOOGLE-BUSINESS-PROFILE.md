@@ -10,7 +10,7 @@ Verified September 15, 2026 against the owner's confirmation and the public Goog
 - Number is visible and selectable in contact/footer areas. Number links open SMS, not calls.
 - Default and service-specific SMS bodies are percent-encoded. The click handler selects Apple Messages' `&body=` form on iOS/iPadOS; other devices use `?body=`.
 - The existing Organization JSON-LD includes name, production URL, logo, service area, primary telephone, ContactPoint, and Google Maps, Instagram, and Facebook `sameAs` references. No street address or unsupported reviews/ratings are published.
-- Analytics events: `sms_click` for all text CTAs; `phone_click` with `method: sms` additionally for displayed-number clicks; `google_profile_click`; `get_started_click` for intake-bound links. Existing `service_cta_click` is retained. Use labels to distinguish placements. Do not sum the overlapping events as separate leads.
+- Analytics events: `text_sully_click` for all text CTAs; `phone_click` with `method: sms` additionally for displayed-number clicks; `google_profile_click`; `get_started_click` for intake-bound links. Existing `service_cta_click` is retained. Use labels to distinguish placements. Do not sum the overlapping events as separate leads.
 
 ## Update manually in Google Business Profile
 
@@ -29,7 +29,7 @@ Open the official profile: https://www.google.com/maps/place/Good+Dog+Days/data=
 ## Launch and verification
 
 - Deploy these website changes through the normal deployment workflow; this task does not change the live deployment or GBP settings.
-- Ensure production `NEXT_PUBLIC_SITE_URL=https://www.goodogdays.com` and a valid `NEXT_PUBLIC_GA_MEASUREMENT_ID` are configured. The fetched production HTML did not contain a GA tag; verify the production setting rather than assuming events currently reach Google. Use GA4 DebugView/Realtime to confirm receipt after deployment and optionally mark `sms_click` or completed intake as a key event.
+- Ensure production `NEXT_PUBLIC_SITE_URL=https://www.goodogdays.com` and a valid `NEXT_PUBLIC_GA_MEASUREMENT_ID` are configured. The site now defaults to the owner-confirmed GA4 stream `G-2FFYPC1K8G`; see `GA4.md` for settings and verification after deployment. Use GA4 DebugView/Realtime to confirm receipt after deployment and optionally mark `text_sully_click` or completed intake as a key event.
 - Live production check: homepage HTTP 200, robots allows `/`, metadata says `index, follow`, canonical and sitemap use the custom www domain.
 - Local checks: 20 contact, services, and launch regression tests passed. JSON-LD is parsed and checked for identity, phone, logo, area, Maps URL and absence of an address. Lint and a Webpack production build pass. Turbopack could not bind its local worker port in this environment.
 - Before launch, tap Text Sully on a physical iPhone and Android phone: check recipient and the complete default/service-specific body, then dismiss the draft without sending. Emulated mobile tests verify URI construction and click handling, not native messaging apps.

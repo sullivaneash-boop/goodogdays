@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
-import { trackEvent, flushAnalyticsQueue, type AnalyticsEvent } from "@/lib/analytics";
+import { trackEvent, flushAnalyticsQueue, serviceNameForId, type AnalyticsEvent } from "@/lib/analytics";
 
-const configuredMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "";
+const configuredMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() || "G-2FFYPC1K8G";
 const measurementId = /^G-[A-Z0-9]+$/.test(configuredMeasurementId) && configuredMeasurementId !== "G-XXXXXXXXXX"
   ? configuredMeasurementId
   : undefined;
@@ -18,7 +18,7 @@ export function Analytics() {
   useEffect(() => {
     if (lastPage.current === pathname) return;
     lastPage.current = pathname;
-    trackEvent("page_view", { page_path: pathname });
+    trackEvent("page_view", { page_path: pathname, page_location: window.location.origin + pathname, page_title: document.title });
   }, [pathname]);
 
   useEffect(() => {
@@ -40,6 +40,9 @@ export function Analytics() {
       if (href.includes("#inquiry")) {
         trackEvent("get_started_click", { label: target.dataset.trackLabel ?? target.textContent?.trim() ?? "", destination: href });
       }
+      const serviceId = target.dataset.serviceId ?? new URL(href || "/", window.location.origin).searchParams.get("service") ?? "";
+      const serviceName = serviceNameForId(serviceId);
+      if (serviceName) trackEvent("service_interest", { service_name: serviceName, service_id: serviceId, label: target.dataset.trackLabel ?? "" });
       trackEvent(name, {
         label: target.dataset.trackLabel ?? target.textContent?.trim() ?? "",
         destination: href,

@@ -1,6 +1,7 @@
 "use client";
 
 import { Controller, useFormContext } from "react-hook-form";
+import { trackEvent, serviceNameForId } from "@/lib/analytics";
 import { inquiryServiceOptions } from "@/data/services";
 import type { PetProfileFormValues } from "@/lib/intake/schema";
 
@@ -37,7 +38,15 @@ export function ServiceNeedStep() {
                       name={field.name}
                       value={option.id}
                       checked={selected}
-                      onChange={() => field.onChange(option.id)}
+                      onChange={() => {
+                        field.onChange(option.id);
+                        const serviceName = serviceNameForId(option.id);
+                        trackEvent("service_interest", {
+                          service_category: option.name,
+                          ...(serviceName ? { service_name: serviceName } : {}),
+                          label: "intake_selection",
+                        });
+                      }}
                       onBlur={field.onBlur}
                       className="peer sr-only"
                     />
