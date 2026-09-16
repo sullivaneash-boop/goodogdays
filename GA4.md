@@ -18,7 +18,7 @@ The helper queues early events and forwards them once when the tag initializes. 
 | `google_profile_click` | Google Profile footer link |
 | `service_interest` | Service-specific intake/SMS CTA or an intake service-selection change |
 
-`service_interest` includes `service_name` when known: Neighborhood Walk, Good Dog Session, Pet Sitting, or Good Dog Adventure. The combined Walking + Enrichment intake choice uses `service_category` instead of guessing which service is intended. `label` identifies CTA placement, and service-specific links include `service_id`. Successful intake also includes a service name when known. No submitted personal details or free-text answers are sent by the helper.
+`service_interest` includes `service_name` when known: Neighborhood Walk, Good Dog Session, Pet Sitting, or Good Dog Adventure. The combined Walking + Enrichment intake choice uses `service_category` instead of guessing which service is intended. `label` identifies CTA placement, and service-specific links include `service_id`. Successful intake includes `form_name: good_dog_days_intake`, `service_name` (specific service, or the selected category as a fallback), `selected_service` (the category ID), and `pet_size` (a fixed size choice). A synchronous in-flight/completed guard prevents repeat submissions and duplicate success events; failed requests remain retryable. No submitted personal details or free-text answers are sent by the helper.
 
 Click events are queued synchronously before default navigation without delaying or preventing the SMS handoff. Delivery remains subject to connectivity, browser settings and blockers. Phone-number clicks produce both phone and text events intentionally; do not add these together as distinct leads.
 

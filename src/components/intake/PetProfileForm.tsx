@@ -17,7 +17,7 @@ import { FormSuccess } from "@/components/intake/FormSuccess";
 import { OwnerContactStep } from "@/components/intake/OwnerContactStep";
 import { ServiceNeedStep } from "@/components/intake/PetBasicsStep";
 import { StepProgress } from "@/components/intake/StepProgress";
-import { serviceInquiryDefaults } from "@/data/services";
+import { inquiryServiceOptions, serviceInquiryDefaults } from "@/data/services";
 import { submitToFormspree } from "@/lib/formspree";
 import {
   petProfileDefaults,
@@ -69,6 +69,8 @@ export function PetProfileForm() {
   const [serverError, setServerError] = useState("");
   const [success, setSuccess] = useState<SubmissionSuccess | null>(null);
   const hasStarted = useRef(false);
+  const submissionInFlight = useRef(false);
+  const submissionSucceeded = useRef(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const requestController = useRef<AbortController | null>(null);
   const form = useForm<PetProfileFormValues>({
@@ -143,7 +145,8 @@ export function PetProfileForm() {
   }
 
   async function submitProfile(values: PetProfileFormValues) {
-    if (values.company) return;
+    if (values.company || submissionInFlight.current || submissionSucceeded.current) return;
+    submissionInFlight.current = true;
 
     setServerError("");
     requestController.current?.abort();
@@ -173,8 +176,11 @@ export function PetProfileForm() {
         requestController.current.signal,
       );
 
-      const serviceName = serviceNameForId(requestedService && serviceInquiryDefaults[requestedService] === values.serviceNeed ? requestedService : values.serviceNeed);
+      submissionSucceeded.current = true;
+      const serviceName = serviceNameForId(requestedService && serviceInquiryDefaults[requestedService] === values.serviceNeed ? requestedService : values.serviceNeed)
+        ?? inquiryServiceOptions.find(option => option.id === values.serviceNeed)?.name;
       trackEvent("intake_submit", {
+        form_name: "good_dog_days_intake",
         ...(serviceName ? { service_name: serviceName } : {}),
         selected_service: values.serviceNeed,
         pet_size: values.size,
@@ -187,6 +193,8 @@ export function PetProfileForm() {
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") return;
       setServerError("That didn’t make it through. Please check your connection and try once more.");
+    } finally {
+      submissionInFlight.current = false;
     }
   }
 

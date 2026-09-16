@@ -7,7 +7,7 @@ test("production GA tag loads once and sends business events without form data",
   const errors: string[] = [];
   page.on("pageerror", error => errors.push(error.message));
   page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
-  await page.route(/https:\/\/[^/]*google-analytics\.com\/.*collect/, async route => {
+  await page.route(/https:\/\/(?:[^/]*google-analytics\.com|analytics\.google\.com)\/.*collect/, async route => {
     hits.push(route.request().url() + "&" + (route.request().postData() ?? ""));
     await route.fulfill({ status: 204 });
   });
@@ -16,7 +16,7 @@ test("production GA tag loads once and sends business events without form data",
   }));
   await page.goto("/");
   await expect(page.locator('script[src*="googletagmanager.com/gtag/js?id=G-2FFYPC1K8G"]')).toHaveCount(1);
-  await expect.poll(() => hits.some(hit => hit.includes("en=page_view"))).toBe(true);
+  await expect.poll(() => hits.some(hit => hit.includes("en=page_view")), { timeout: 15000 }).toBe(true);
   const commands = () => page.evaluate(() => (window.dataLayer ?? []).filter(item => item[0] === "config" && item[1] === "G-2FFYPC1K8G").length);
   expect(await commands()).toBe(1);
   await page.locator('footer a[data-contact-number]').click();
@@ -25,6 +25,9 @@ test("production GA tag loads once and sends business events without form data",
   await expect(page).toHaveURL(/\/services$/);
   await page.locator('#good-dog-session a[data-track-event="service_cta_click"]').click();
   await page.getByRole("button", { name: /Continue/ }).click();
+  expect(await page.evaluate(() => window.dataLayer?.filter(e => e.event === "intake_submit").length)).toBe(0);
+  await page.getByRole("button", { name: /Continue/ }).click();
+  expect(await page.evaluate(() => window.dataLayer?.filter(e => e.event === "intake_submit").length)).toBe(0);
   await page.getByLabel("Dog’s name", { exact: true }).fill("Analytics Test Dog");
   await page.getByLabel("Age or best guess").fill("3 years");
   await page.getByRole("button", { name: /Continue/ }).click();
@@ -48,7 +51,11 @@ test("production GA tag loads once and sends business events without form data",
     await expect.poll(() => hits.some(hit => hit.includes(`en=${event}`)), { timeout: 15000 }).toBe(true);
   }
   const events = await page.evaluate(() => (window.dataLayer ?? []).filter(e => typeof e.event === "string"));
-  expect(events.filter(e => e.event === "intake_submit")).toHaveLength(1);
+  expect(events.filter(e => e.event === "intake_submit")).toMatchObject([{ event: "intake_submit", form_name: "good_dog_days_intake", service_name: "Good Dog Session", selected_service: "regular-walk", pet_size: "medium" }]);
+  const submitHits = hits.flatMap(hit => hit.split("\n")).filter(hit => /(?:[?&]|^)en=intake_submit(?:&|$)/.test(hit));
+  expect(submitHits).toHaveLength(1);
+  expect(decodeURIComponent(submitHits[0])).toContain("ep.form_name=good_dog_days_intake");
+  expect(decodeURIComponent(submitHits[0])).toContain("ep.service_name=Good Dog Session");
   expect(events.filter(e => e.event === "intake_start")).toHaveLength(1);
   expect(events.find(e => e.event === "service_interest")).toMatchObject({ service_name: "Good Dog Session" });
   expect(await commands()).toBe(1);
@@ -59,3 +66,48 @@ test("production GA tag loads once and sends business events without form data",
   }
   expect(errors.filter(error => !expectedErrors.includes(error))).toEqual([]);
 });
+
+for (const [category, serviceName] of [["Walking + Enrichment", "Walking + Enrichment"], ["Not Sure / Help Me Choose", "Not Sure / Help Me Choose"], ["In-Home Pet Sitting", "Pet Sitting"]]) {
+  test(`intake success uses ${serviceName} and ignores repeat submits`, async ({ page }) => {
+    await page.route('https://www.googletagmanager.com/gtag/js*', route => route.fulfill({ contentType: 'application/javascript', body: '' }));
+    // Start with a specific service, then change category where requested.
+    await page.goto(category === "In-Home Pet Sitting" ? '/?service=good-dog-session#inquiry' : '/#inquiry');
+    await page.locator('#inquiry').getByText(category, { exact: true }).click();
+    await page.getByRole('button', { name: /Continue/ }).click();
+    await page.getByLabel('Dog’s name', { exact: true }).fill('Private Dog');
+    await page.getByLabel('Age or best guess').fill('4 years');
+    await page.getByRole('button', { name: /Continue/ }).click();
+    await page.getByLabel('When or how often do you need help?').selectOption('Not sure yet — help me plan');
+    await page.getByLabel('Your name', { exact: true }).fill('Private Owner');
+    await page.getByLabel('Email', { exact: true }).fill('private@example.com');
+    await page.getByLabel('Mobile number', { exact: true }).fill('7705550123');
+    await page.getByLabel('ZIP code', { exact: true }).fill('30040');
+    let requests = 0;
+    let release!: () => void;
+    const gate = new Promise<void>(resolve => { release = resolve; });
+    await page.route('https://formspree.io/f/xbgjqyyz', async route => {
+      requests++;
+      await gate;
+      await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
+    });
+    // Exercise same-tick submissions, including bypassing the disabled button.
+    await page.locator('#inquiry form').evaluate(form => {
+      (form as HTMLFormElement).requestSubmit();
+      (form as HTMLFormElement).requestSubmit();
+    });
+    await expect.poll(() => requests).toBe(1);
+    expect(await page.evaluate(() => window.dataLayer?.filter(e => e.event === 'intake_submit').length)).toBe(0);
+    release();
+    await expect(page.getByRole('heading', { name: 'Good things ahead for Private Dog.' })).toBeVisible();
+    expect(requests).toBe(1);
+    const submitted = await page.evaluate(() => window.dataLayer?.filter(e => e.event === 'intake_submit'));
+    expect(submitted).toHaveLength(1);
+    expect(submitted![0]).toMatchObject({ form_name: 'good_dog_days_intake', service_name: serviceName });
+    expect(Object.keys(submitted![0]).sort()).toEqual(['event', 'form_name', 'pet_size', 'selected_service', 'service_name']);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.locator('footer a[href="/services"]').click();
+    await page.locator('.pricing-hero a[href*="#inquiry"]').click();
+    await expect(page.locator('#inquiry form')).toBeVisible();
+    expect(await page.evaluate(() => window.dataLayer?.filter(e => e.event === 'intake_submit').length)).toBe(1);
+  });
+}
